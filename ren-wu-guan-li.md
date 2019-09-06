@@ -558,5 +558,323 @@ const TickType_t xDelay250ms = pdMS_TO_TICKS( 250 );
 
 ![&#x56FE; 18. &#x7C97;&#x7EBF;&#x8868;&#x793A;&#x7531;&#x793A;&#x4F8B; 4 &#x4E2D;&#x7684;&#x4EFB;&#x52A1;&#x6267;&#x884C;&#x7684;&#x72B6;&#x6001;&#x8F6C;&#x6362;](.gitbook/assets/wei-xin-jie-tu-20190905145306.png)
 
+### vTaskDelayUntil\(\) API 函数
 
+`vTaskDelayUntil()` 类似于 `vTaskDelay()`。 正如刚才演示的，`vTaskDelay()` 参数指定了调用`vTaskDelay()` 的任务与再次从阻塞状态过渡到正常状态的任务之间应该发生的滴动中断的数量。任务处于阻塞状态的时间长度由 `vTaskDelay()` 参数指定，但是任务离开阻塞状态的时间与调用 `vTaskDelay()` 的时间相关。
+
+相反，`vTaskDelayUntil()` 的参数指定调用任务应该从阻塞状态移动到就绪状态的精确计时计数值。`vTaskDelayUntil()` 是在需要固定执行期间（您希望任务以固定频率定期执行）时应使用的 API 函数，因为调用任务被解除阻塞的时间是绝对的，而不是相对于调用函数时（与 `vTaskDelay()` 的情况一样）。
+
+```c
+void vTaskDelayUntil( TickType_t* pxPreviousWakeTime, TickType_t xTimeIncrement );
+```
+
+清单 24. `vTaskDelayUntil()` API 函数原型
+
+表 10. `vTaskDelayUntil()` 的参数
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:left">&#x53C2;&#x6570;&#x540D;&#x79F0;</th>
+      <th style="text-align:left">&#x63CF;&#x8FF0;</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:left">pxPreviousWakeTime</td>
+      <td style="text-align:left">
+        <p>&#x6B64;&#x53C2;&#x6570;&#x7684;&#x547D;&#x540D;&#x662F;&#x57FA;&#x4E8E; <code>vTaskDelayUntil()</code> &#x7528;&#x4E8E;&#x5B9E;&#x73B0;&#x5B9A;&#x671F;&#x6267;&#x884C;&#x4E14;&#x5177;&#x6709;&#x56FA;&#x5B9A;&#x9891;&#x7387;&#x7684;&#x4EFB;&#x52A1;&#x3002;
+          &#x5728;&#x8FD9;&#x79CD;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;<code>pxPreviousWakeTime</code> &#x4FDD;&#x6301;&#x4EFB;&#x52A1;&#x6700;&#x540E;&#x4E00;&#x6B21;&#x79BB;&#x5F00;&#x963B;&#x585E;&#x72B6;&#x6001;&#x7684;&#x65F6;&#x95F4;&#xFF08;&#x88AB;
+          &apos;&#x5524;&#x9192;&apos;&#xFF09;&#x3002; &#x6B64;&#x65F6;&#x95F4;&#x7528;&#x4F5C;&#x53C2;&#x8003;&#x70B9;&#xFF0C;&#x7528;&#x4E8E;&#x8BA1;&#x7B97;&#x4EFB;&#x52A1;&#x4E0B;&#x6B21;&#x79BB;&#x5F00;&#x963B;&#x585E;&#x72B6;&#x6001;&#x7684;&#x65F6;&#x95F4;&#x3002;</p>
+        <p><code>pxPreviousWakeTime</code> &#x6307;&#x5411;&#x7684;&#x53D8;&#x91CF;&#x5728; <code>vTaskDelayUntil()</code>&#x51FD;&#x6570;&#x4E2D;&#x81EA;&#x52A8;&#x66F4;&#x65B0;&#xFF1B;&#x5B83;&#x901A;&#x5E38;&#x4E0D;&#x4F1A;&#x88AB;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x4EE3;&#x7801;&#x4FEE;&#x6539;&#xFF0C;&#x4F46;&#x5FC5;&#x987B;&#x5728;&#x7B2C;&#x4E00;&#x6B21;&#x4F7F;&#x7528;&#x4E4B;&#x524D;&#x521D;&#x59CB;&#x5316;&#x4E3A;&#x5F53;&#x524D;&#x7684;&#x6EF4;&#x7B54;&#x8BA1;&#x6570;&#x3002;
+          &#x6E05;&#x5355; 25 &#x6F14;&#x793A;&#x4E86;&#x5982;&#x4F55;&#x6267;&#x884C;&#x521D;&#x59CB;&#x5316;&#x3002;</p>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left">xTimeIncrement</td>
+      <td style="text-align:left">
+        <p>&#x6B64;&#x53C2;&#x6570;&#x7684;&#x547D;&#x540D;&#x4E5F;&#x662F;&#x57FA;&#x4E8E; <code>vTaskDelayUntil()</code> &#x7528;&#x4E8E;&#x5B9E;&#x73B0;&#x5B9A;&#x671F;&#x6267;&#x884C;&#x4E14;&#x5177;&#x6709;&#x56FA;&#x5B9A;&#x9891;&#x7387;&#x7684;&#x4EFB;&#x52A1;&#xFF0C;&#x9891;&#x7387;&#x7531; <code>xTimeIncrement</code> &#x503C;&#x8BBE;&#x7F6E;&#x3002;</p>
+        <p><code>xTimeIncrement</code> &#x5728; &apos;ticks&apos; &#x4E2D;&#x6307;&#x5B9A;&#x3002; <code>pdMS_TO_TICKS()</code>&#x5B8F;&#x53EF;&#x7528;&#x4E8E;&#x5C06;&#x6BEB;&#x79D2;&#x6307;&#x5B9A;&#x7684;&#x65F6;&#x95F4;&#x8F6C;&#x6362;&#x4E3A;&#x523B;&#x5EA6;&#x4E2D;&#x6307;&#x5B9A;&#x7684;&#x65F6;&#x95F4;&#x3002;</p>
+      </td>
+    </tr>
+  </tbody>
+</table>### 示例 5. 将示例任务转换为使用 vTaskDelayUntil\(\)
+
+示例 4 中创建的两个任务是周期性任务，但是使用 `vTaskDelay()` 并不保证它们运行的频率是固定的，因为任务离开阻塞状态的时间与它们调用 `vTaskDelay()` 的时间相关。 将任务转换为使用`vTaskDelayUntil()` 而不是 `vTaskDelay()` 可以解决这个潜在的问题。
+
+```c
+void vTaskFunction( void *pvParameters )
+{
+char *pcTaskName;
+TickType_t xLastWakeTime;
+
+    /* 要打印的字符串通过参数传入。将此转换为字符指针。 */
+    pcTaskName = ( char * ) pvParameters;
+    
+    /* 需要使用当前滴针计数初始化 xLastWakeTime 变量。注意，这是唯一一次显式地写入变量。
+    在此之后，xLastWakeTime 将在 vTaskDelayUntil() 中自动更新。 */
+    xLastWakeTime = xTaskGetTickCount();
+    
+    /* 对于大多数任务，都是在一个无限循环中实现的。 */
+    for( ;; )
+    {
+        /* 打印出此任务的名称。 */
+        vPrintString( pcTaskName );
+        
+        /* 这个任务应该精确地每 250 毫秒执行一次。根据 vTaskDelay() 函数，时间是以滴答为
+        单位度量的，pdMS_TO_TICKS() 宏用于将毫秒转换为滴答。xLastWakeTime 在 
+        vTaskDelayUntil() 中自动更新，因此任务不会显式地更新 xLastWakeTime。 */
+        vTaskDelayUntil( &xLastWakeTime, pdMS_TO_TICKS( 250 ));
+    }
+}
+```
+
+清单 25. 使用 `vTaskDelayUntil()` 实现示例任务
+
+示例 5 产生的输出与图 16 中的示例 4 所示的输出完全相同。
+
+### 示例 6. 组合阻塞和非阻塞任务
+
+前面的示例已经单独检查了轮询和阻塞任务的行为。 该示例通过在组合两个方案时演示执行序列来重新强制执行所述的预期系统行为，如下所述。
+
+1. 在优先级 1 创建两个任务。除了连续打印字符串之外，它们什么也不做。这些任务从不执行任何可能导致它们进入阻塞状态的 API 函数调用，因此总是处于就绪状态或运行状态。这种性质的任务称为连续处理任务，因为它们总是有工作要做\(尽管在本例中是相当琐碎的工作\)。连续处理任务的源如清单 26 所示。
+2. 然后在优先级 2 创建第三个任务，因此高于其他两个任务的优先级。第三个任务也只是打印出一个字符串，但这次是周期性的，所以使用 `vTaskDelayUntil()` API 函数在每次打印迭代之间将自己置于阻塞状态。
+
+这个周期性任务的源代码如清单 27 所示。
+
+```c
+void vContinuousProcessingTask( void *pvParameters )
+{
+char *pcTaskName;
+    
+    /* 要打印的字符串通过参数传入。将此转换为字符指针。 */
+    pcTaskName = ( char * ) pvParameters;
+    
+    /* 对于大多数任务，都务是在一个无限循环中实现的。 */
+    for( ;; )
+    {
+        /* 打印出此任务的名称。这个任务只是重复地做这件事，从不阻塞或延迟。 */
+        vPrintString( pcTaskName );
+    }
+}
+```
+
+清单 26. 示例 6 中使用的连续处理任务
+
+```c
+void vPeriodicTask( void *pvParameters )
+{
+TickType_t xLastWakeTime;
+const TickType_t xDelay3ms = pdMS_TO_TICKS( 3 );
+
+    /* 需要使用当前滴针计数初始化 xLastWakeTime 变量。注意，这是唯一一次显式地写入变量。
+    在此之后，xLastWakeTime 由 vTaskDelayUntil() API 函数自动管理。 */
+    xLastWakeTime = xTaskGetTickCount();
+    
+    /* 对于大多数任务，都务是在一个无限循环中实现的。 */
+    for( ;; )
+    {
+        /* 打印出此任务的名称。 */
+        vPrintString( "Periodic task is running\r\n" );
+        
+        /* 任务应该每 3 毫秒执行一次，在这个函数中可以看到 xDelay3ms 的声明。 */
+        vTaskDelayUntil( &xLastWakeTime, xDelay3ms);
+    }
+}
+```
+
+清单 27. 示例 6 中使用的周期性任务
+
+图 19 显示了示例 6 生成的输出，并通过图 20 中所示的执行顺序解释了观察到的行为。
+
+![&#x56FE; 19. &#x6267;&#x884C;&#x793A;&#x4F8B; 6 &#x65F6;&#x751F;&#x6210;&#x7684;&#x8F93;&#x51FA;](.gitbook/assets/wei-xin-jie-tu-20190906100757.png)
+
+![&#x56FE; 20.  &#x793A;&#x4F8B; 6 &#x7684;&#x6267;&#x884C;&#x6A21;&#x5F0F;](.gitbook/assets/wei-xin-jie-tu-20190906100911.png)
+
+## 空闲任务和空闲任务钩子
+
+示例 4 中创建的任务将大部分时间用于阻塞状态。在此状态下，它们无法运行，因此调度程序也无法选择它们。
+
+但必须始终至少有一个任务可以进入运行状态。 为确保这种情况，调用 `vTaskStartScheduler()` 时，调度程序会自动创建一个空闲任务。 空闲任务只是坐在一个循环中 —— 所以，就像原始第一个例子中的任务一样，它始终能够运行。
+
+空闲任务具有可能的最低优先级（优先级为零），以确保它永远不会阻止更高优先级的应用程序任务进入运行状态 —— 尽管没有什么可以阻止应用程序设计者创建任务，从而共享空闲任务优先级，如果在`FreeRTOSConfig.h` 中，`configIDLE_SHOULD_YIELD` 编译时间配置常量可用于防止空闲任务消耗更高效地分配给应用程序任务的处理时间。 `configIDLE_SHOULD_YIELD` 在第 3.12 节 “调度算法” 中描述。
+
+以最低优先级运行可确保只要优先级较高的任务进入就绪状态，空闲任务就会从运行状态转移出来。 这可以在图 17 中的时间点看到，其中空闲任务被立即换出以允许任务 2 在任务 2 离开被阻止状态的瞬间执行。 据说任务 2 已经抢占了空闲任务。 抢先自动发生，并且不知道任务被抢占。
+
+{% hint style="info" %}
+如果应用程序使用 `vTaskDelete()` API 函数，那么空闲任务就不会浪费处理时间。这是因为空闲任务负责在删除任务之后清理内核资源。
+{% endhint %}
+
+### 空闲任务钩子函数
+
+可以通过使用空闲钩子（或空闲回调）函数将应用程序特定功能直接添加到空闲任务中 —— 空闲任务循环每次迭代时由空闲任务自动调用的函数。
+
+空闲任务钩子的常见用途包括：
+
+* 执行低优先级，后台或连续处理功能。
+* 测量备用处理能力的数量。（当所有优先级较高的应用程序任务无法执行时，空闲任务将会运行；因此，测量分配给空闲任务的处理时间量可清楚地指示多少处理时间。）
+* 将处理器置于低功耗模式，在没有应用处理的情况下提供简单且自动的省电方法（虽然使用这种方法所能达到的省电比使用第 10 章低功耗支持中描述的无时钟空闲模式所能达到的省电要少）。
+
+### 对空闲任务钩子函数实现的限制
+
+空闲任务钩子函数必须遵循以下规则。
+
+1. 一个空闲的任务钩子函数决不能试图阻塞或挂起。
+2. 如果应用程序使用了 `vTaskDelete()` API函数，那么空闲任务钩子必须总是在合理的时间段内返回给调用者。这是因为空闲任务负责在删除任务之后清理内核资源。如果空闲任务永久地保留在空闲钩子函数中，则无法进行清理。
+
+{% hint style="info" %}
+以任何方式阻塞空闲任务都可能导致无法使用任何任务进入运行状态。
+{% endhint %}
+
+空闲任务钩子函数必须具有清单 28 所示的名称和原型。
+
+```c
+void vApplicationIdleHook( void );
+```
+
+清单 28. 空闲任务钩子函数名称和原型
+
+### 示例 7. 定义空闲任务钩子功能
+
+在执行空闲任务时，使用示例 4 中的阻塞 `vTaskDelay()` API调用会创建大量空闲时间，因为两个应用程序任务都处于阻塞状态。 示例 7 通过添加空闲挂钩函数来利用此空闲时间，其源代码如清单 29 所示。
+
+```c
+/* 声明一个将由钩子函数递增的变量。 */
+volatile uint32_tulIdleCycleCount = 0UL;
+
+/* 空闲钩子函数必须被称为 vApplicationIdleHook()，不带参数，并返回 void。 */
+void vApplicationIdleHook( void )
+{
+    /* 这个钩子函数除了递增计数器外什么都不做。 */
+    ulIdleCycleCount++;
+}
+```
+
+清单 29. 一个非常简单的空闲钩子函数
+
+`config_IDLE_HOOK` 必须在 `FreeRTOSConfig.h` 设置为  1  ，以便调用空闲钩子函数。
+
+稍微修改实现创建任务的函数以打印出 `ulIdleCycleCount` 值，如清单 30 所示。
+
+```c
+void vTaskFunction( void *pvParameters )
+{
+char *pcTaskName;
+const TickType_t xDelay250ms = pdMS_TO_TICKS( 250 );
+
+    /* 要打印的字符串通过参数传入。将此转换为字符指针。 */
+    pcTaskName = ( char * ) pvParameters;
+    
+    /* 与大多数任务一样，此任务在无限循环中实现。 */
+    for( ;; )
+    {
+        /* 打印出此任务的名称，并加入 ulIdleCycleCount 的次数。 */
+        vPrintStringAndNumber( pcTaskName, ulIdleCycleCount);
+        
+        /* 延迟 250 毫秒。 */
+        vTaskDelay( xDelay250ms);
+    }
+}
+```
+
+清单 30. 示例任务的源代码现在打印出 `ulIdleCycleCount` 值
+
+示例 7 产生的输出如图 21 所示。 因此，在应用任务的每次迭代之间，空闲任务钩子函数被调用大约 400 万次（迭代次数取决于演示执行的硬件的速度）。
+
+![&#x56FE; 21. &#x6267;&#x884C;&#x793A;&#x4F8B; 7 &#x65F6;&#x751F;&#x6210;&#x7684;&#x8F93;&#x51FA;](.gitbook/assets/wei-xin-jie-tu-20190906103633.png)
+
+## 更改任务的优先级
+
+### vTaskPrioritySet\(\) API 函数
+
+`vTaskPrioritySet()` API 函数可用于在调度程序启动后更改任何任务的优先级。请注意，当 `FreeRTOSConfig.h` 中的 `INCLUDE_vTaskPrioritySet` 设置为 1 时，`vTaskPrioritySet()` API 函数是可用的。
+
+```c
+void vTaskPrioritySet( TaskHandle_t pxTask, UBaseType_t uxNewPriority );
+```
+
+清单 31. `vTaskPrioritySet()` API 函数原型
+
+表 11. `vTaskPrioritySet()` 参数
+
+| 参数名称 | 描述 |
+| :--- | :--- |
+| pxTask | 正在修改其优先级的任务的句柄（主题任务）—— 有关获取任务句柄的信息，请参阅`xTaskCreate()` API函数的 `pxCreatedTask` 参数。任务可以通过传递 `NULL` 代替有效的任务句柄来更改自己的优先级。 |
+| uxNewPriority | 要设置主题任务的优先级。 这自动限制为（`configMAX_PRIORITIES - 1`）的最大可用优先级，其中 `configMAX_PRIORITIES` 是在 `FreeRTOSConfig.h` 头文件中设置编译时间常量。 |
+
+### uxTaskPriorityGet\(\) API 函数
+
+`uxTaskPriorityGet()` API 函数可用于查询任务的优先级。请注意，只有在 `FreeRTOSConfig.h` 中将`INCLUDE_uxTaskPriorityGet` 设置为 1 时，`uxTaskPriorityGet()` API 函数才可用。
+
+```c
+UBaseType_t uxTaskPriorityGet( TaskHandle_t pxTask );
+```
+
+清单 32. `uxTaskPriorityGet()` API 函数原型
+
+表 12. `uxTaskPriorityGet()`参数和返回值
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:left">&#x53C2;&#x6570;&#x540D;&#x79F0;/&#x8FD4;&#x56DE;&#x503C;</th>
+      <th style="text-align:left">&#x63CF;&#x8FF0;</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:left">pxTask</td>
+      <td style="text-align:left">
+        <p>&#x6B63;&#x5728;&#x67E5;&#x8BE2;&#x5176;&#x4F18;&#x5148;&#x7EA7;&#x7684;&#x4EFB;&#x52A1;&#x7684;&#x53E5;&#x67C4;&#xFF08;&#x4E3B;&#x9898;&#x4EFB;&#x52A1;&#xFF09;
+          - &#x8BF7;&#x53C2;&#x9605; <code>xTaskCreate()</code>API &#x51FD;&#x6570;&#x7684;<code>pxCreatedTask</code>&#x53C2;&#x6570;&#xFF0C;&#x4EE5;&#x83B7;&#x53D6;&#x6709;&#x5173;&#x83B7;&#x53D6;&#x4EFB;&#x52A1;&#x53E5;&#x67C4;&#x7684;&#x4FE1;&#x606F;&#x3002;</p>
+        <p>&#x4EFB;&#x52A1;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x4F20;&#x9012; <code>NULL</code> &#x4EE3;&#x66FF;&#x6709;&#x6548;&#x7684;&#x4EFB;&#x52A1;&#x53E5;&#x67C4;&#x6765;&#x67E5;&#x8BE2;&#x81EA;&#x5DF1;&#x7684;&#x4F18;&#x5148;&#x7EA7;&#x3002;</p>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left">&#x8FD4;&#x56DE;&#x503C;</td>
+      <td style="text-align:left">&#x5F53;&#x524D;&#x5206;&#x914D;&#x7ED9;&#x6B63;&#x5728;&#x67E5;&#x8BE2;&#x7684;&#x4EFB;&#x52A1;&#x7684;&#x4F18;&#x5148;&#x7EA7;&#x3002;</td>
+    </tr>
+  </tbody>
+</table>示例 8. 改变任务优先级
+
+调度程序将始终选择最高就绪状态任务作为进入运行状态的任务。示例 8 通过使用 `vTaskPrioritySet()` API 函数来更改两个任务相对于彼此的优先级来证明这一点。
+
+示例 8 以两个不同的优先级创建两个任务。 这两个任务都没有任何 API 函数调用可能导致它进入阻塞状态，因此无法处于就绪状态或运行状态。 因此，具有最高相对优先级的任务将始终是调度程序选择处于 “正在运行” 状态的任务。
+
+示例 8 行为如下：
+
+1. 创建任务 1（清单 33）具有最高优先级，因此保证首先运行。 任务 1 在将任务 2（清单 34）的优先级提高到高于其自己的优先级之前打印出几个字符串。
+2. 任务 2 一旦具有最高相对优先级就开始运行（进入运行状态）。 任何时候只有一个任务可以处于运行状态，因此当任务 2 处于运行状态时，任务 1 处于就绪状态。
+3. 任务 2 在将自己的优先级设置回低于任务 1 的优先级之前打印出一条消息。
+4. 任务 2 将其优先级降低意味着任务 1 再次成为优先级最高的任务，因此任务 1 进入运行状态，强制将任务 2 回到就绪状态。
+
+```c
+void vTask1( void *pvParameters )
+{
+UBaseType_t uxPriority;
+
+    /* 这个任务总是在任务2之前运行，因为它是用更高的优先级创建的。
+    Task 1和Task 2都不会阻塞，因此两者都将始终处于运行或就绪状态。 
+    
+    查询此任务正在运行的优先级——传入NULL意味着 “返回调用任务的权限”。 */
+    uxPriority = uxTaskPriorityGet( NULL );
+    
+    for( ;; )
+    {
+        /* 打印出此任务的名称。 */
+        vPrintString( "Task 1is running\r\n" );
+        
+        /* 将 Task 2 的优先级设置在 Task 1 的优先级之上，将导致 Task 2 立即开始运行
+        (因为此时 Task 2 的优先级将高于创建的两个任务)。注意在调用 vTaskPrioritySet() 
+        时使用 task 2 的句柄( xTask2Handle )。清单 35 显示了如何获得句柄。 */
+        vPrintString( "About to raise the Task 2priority\r\n" );
+        vTaskPrioritySet( xTask2Handle, ( uxPriority + 1 ) );
+        
+        /* 任务 1 只有在优先级高于任务 2 时才会运行。因此，要使此任务达到此点，
+        任务 2 必须已经执行，并将其优先级重新设置为低于此任务的优先级。 */
+    }
+}
+```
+
+清单 33. 示例 8 中任务 1 的实现
 
