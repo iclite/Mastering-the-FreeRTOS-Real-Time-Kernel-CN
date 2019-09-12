@@ -373,5 +373,326 @@ QueueHandle_txQueue;int main( void )
 
 发送到队列的两个任务都具有相同的优先级。 这导致两个发送任务依次将数据发送到队列。 例 10 中产生的输出如图 32 所示。
 
+![&#x56FE; 32. &#x6267;&#x884C;&#x793A;&#x4F8B; 10 &#x4EA7;&#x751F;&#x7684;&#x8F93;&#x51FA;](.gitbook/assets/wei-xin-jie-tu-20190912104313.png)
+
+图 33 展示了执行的顺序
+
+![&#x56FE; 33 .&#x793A;&#x4F8B; 10 &#x6267;&#x884C;&#x987A;&#x5E8F;](.gitbook/assets/wei-xin-jie-tu-20190912104434.png)
+
+## 从多个源接收数据
+
+FreeRTOS 设计中常见的任务是从多个源接收数据，所以接收任务需要知道数据来自何处以确定如何处理数据。 一个简单的设计解决方案是使用单个队列来传输具有数据值和结构域中包含的数据源的结构。 该方案如图 34 所示。
+
+![&#x56FE; 34. &#x53D1;&#x9001;&#x7ED3;&#x6784;&#x5230;&#x961F;&#x5217;&#x7684;&#x793A;&#x4F8B;&#x573A;&#x666F;](.gitbook/assets/wei-xin-jie-tu-20190912104738.png)
+
+图 34 参考：
+
+* 一个以 `Data_t` 结构创建的队列。这个结构成员允许包含数据值和一个枚举类型来指示一个消息发送到队列。
+* 中央的 Controller 任务用于执行主系统功能。 这必须对输入和对队列中与其通信的系统状态的更改作出反应。
+* 一个 CAN 总线任务用于封装 CAN 总线接口功能。当 CAN 总线任务接收并解码消息时，它将已解码的消息发送到 `Data_t` 结构中的 Controller 任务。 传输结构的 `eDataID` 成员用于让 Controller 任务知道数据是什么 —— 在描述中它是电机速度值。 传输结构的 `lDataValue` 成员用于让 Controller 任务知道实际的电机速度值。
+* 人机界面（HMI）任务用于封装所有 HMI 功能。机器操作员可能以多种方式输入命令和查询值，这些方式必须在 HMI 任务中检测和解释。输入新命令时，HMI 任务将命令以一个 `Data_t` 的结构发送到 Controller 任务。传输结构的 `eDataID` 成员用于让 Controller 任务知道数据是什么 —— 在描述中它是一个新的调定点的值。 传递结构的 `lDataValue` 成员用于让 Controller 任务知道实际调定点的值。
+
+### 示例 11. 发送到队列和发送队列结构时的阻塞
+
+示例 11 与示例 10 类似，但任务优先级相反，因此接收任务的优先级低于发送任务。 此外，队列用于传递结构，而不是整数。
+
+清单 48 显示了示例 11 使用的结构的定义。
+
+```c
+/* 定义用于标识数据源的枚举类型。 */
+typedef enum
+{
+    eSender1,
+    eSender2
+} DataSource_t;
+
+/* 定义将在队列上传递的结构类型。 */
+typedef struct
+{
+    uint8_t ucValue;
+    DataSource_t eDataSource;
+} Data_t;
+
+/* 声明两个将在队列中传递的 Data_t 类型的变量。 */
+static const Data_txStructsToSend[ 2 ] = 
+{
+    { 100, eSender1 }, /* 由 Sender1 使用。 */
+    { 200, eSender2 }  /* 由 Sender2 使用。 */
+};
+```
+
+清单 48. 要在队列上传递的结构的定义，以及由示例使用的两个变量的声明
+
+在示例 10 中，接收任务具有最高优先级，因此队列中永远不会存在多个元素。 这是因为一旦数据被放入队列中，接收任务就会抢占发送任务。 在示例 11 中，发送任务具有更高的优先级，因此队列通常是满的。 这是因为，一旦接收任务从队列中删除了一个项目，它就会被其中一个发送任务抢占，然后立即重新填充队列。 然后，发送任务重新进入阻塞状态，等待空间再次在队列中可用。
+
+清单 49 显示了发送任务的实现。 发送任务指定 100 毫秒的阻塞时间，因此每次队列变满时，它都会进入阻塞状态以等待由可用空间。当队列中有空间可用时，或者没有空间可用的情况下超过 100 毫秒时，它就会离开阻塞状态。在这个例子中，100 毫秒超时应该永不过期，因为接受任务通过从队列中删除元素来不断地腾出空间。
+
+```c
+static void vSenderTask( void *pvParameters )
+{
+BaseType_txStatus;
+const TickType_t xTicksToWait = pdMS_TO_TICKS( 100 );
+    
+    /* 对于大多数任务，这个任务是在一个无限循环中实现的。 */
+    for( ;; )
+    {
+        /* 发送到队列。
+        
+        第二个参数是正在发送的结构的地址。地址作为任务参数传入，因此直接使用 pvParameters。 
+        
+        第三个参数是阻塞时间 —— 如果队列已经满了，任务应该保持在阻塞状态，等待队列上的空间可用。
+        之所以指定阻塞时间，是因为发送任务的优先级高于接收任务，因此预计队列将满。当两个发送任
+        务都处于阻塞状态时，接收任务将从队列中删除元素。 */
+        xStatus = xQueueSendToBack( xQueue, pvParameters, xTicksToWait );
+        
+        if( xStatus != pdPASS )
+        {
+            /* 即使等待了 100ms，发送操作也无法完成。这一定是一个错误，因为一旦两个发送任务
+            都处于阻塞状态，接收任务就应该在队列中留出空间。 */
+            vPrintString( "Could not send to the queue.\r\n" );
+        }
+    }
+}
+```
+
+清单 49. 示例 11 发送任务的实现
+
+接收任务的优先级最低，所以只有当两个发送任务都处于阻塞状态时，接收任务才会运行。发送任务仅在队列满时才进入阻塞状态，因此接收任务仅在队列满时才会执行。因此，即使没有指定阻塞时间，它也总是期望接收数据。
+
+清单 50 显示了接收任务的实现。
+
+```c
+static void vReceiverTask( void *pvParameters )
+{
+/* 声明将保存从队列接收的值的结构。 */
+Data_t xReceivedStructure;
+BaseType_t xStatus;
+
+    /* 这个任务也是在一个无限循环中定义的。 */
+    for( ;; )
+    {
+        /* 因为它的优先级最低，所以只有当发送任务处于阻塞状态时，该任务才会运行。发送任务只
+        会在队列已满时进入阻塞状态，因此该任务总是期望队列中的项数等于队列长度，本例中为 3。*/
+        if( uxQueueMessagesWaiting( xQueue ) != 3 )
+        {
+            vPrintString( "Queue should have been full!\r\n" );
+        }
+        
+        /* 从队列中接收。
+        
+        第二个参数是将接收到的数据放置到其中的缓冲区。在这种情况下，缓冲区只是具有容纳接收结
+        构所需大小的变量的地址。
+        
+        最后一个参数是阻塞时间 —— 如果队列已经为空，任务将保持在阻塞状态等待数据可用的最长时
+        间。在当前情况下，不需要阻塞时间，因为此任务只在队列满时运行。 */
+        xStatus = xQueueReceive( xQueue, &xReceivedStructure, 0 );
+        
+        if( xStatus == pdPASS )
+        {
+            /* 从队列中成功接收到数据，打印出接收到的值和值的源。 */
+            if( xReceivedStructure.eDataSource== eSender1 )
+            {
+                vPrintStringAndNumber( "From Sender 1 = ", xReceivedStructure.ucValue );
+            }
+            else
+            {
+                vPrintStringAndNumber( "From Sender 2 = ", xReceivedStructure.ucValue );
+            }
+        }
+        else
+        {
+            /* 队列中没有收到任何东西。这一定是一个错误，因为该任务应该只在队列满时运行。 */
+            vPrintString( "Could not receive from the queue.\r\n" );
+        }
+    }
+}
+```
+
+清单 50. 示例 11 接收任务的定义
+
+`main()` 仅比前一个示例略有变化。 创建队列以容纳三个 `Data_t` 结构，并且发送和接收任务的优先级相反。 `main()` 的实现如清单 51 所示。
+
+```c
+int main( void )
+{
+    /* 创建队列以容纳最多 3 个 Data_t 类型的结构。 */
+    xQueue = xQueueCreate( 3, sizeof( Data_t) );
+    
+    if( xQueue != NULL )
+    {
+        /* 创建将写入队列的任务的两个实例。该参数用于传递任务将写入队列的结构，因此一个任务将持
+        续向队列发送 xStructsToSend[0]，而另一个任务将持续发送 xStructsToSend[1]。这两个任
+        务都是在优先级 2 创建的，优先级高于接收方的优先级。 */
+        xTaskCreate( vSenderTask, "Sender1", 1000, &( xStructsToSend[ 0 ] ), 2, NULL);
+        xTaskCreate( vSenderTask, "Sender2", 1000, &( xStructsToSend[ 1 ] ), 2, NULL);
+        
+        /* 创建将从队列中读取的任务。创建任务的优先级为 1，因此低于发送方任务的优先级。 */
+        xTaskCreate( vReceiverTask, "Receiver", 1000, NULL, 1, NULL );
+        
+        /* 启动调度程序，以便创建的任务开始执行。 */
+        vTaskStartScheduler();
+    }
+    else
+    {
+        /* 无法创建队列。 */
+    }
+    
+    /* 如果一切正常，那么 main() 将永远不会到达这里，因为调度程序现在将运行这些任务。如果 
+    main() 确实到达这里，那么很可能没有足够的堆内存来创建空闲任务。第 2 章提供了关于堆内存管
+    理的更多信息。 */
+    for( ;; );
+}
+```
+
+清单 51. 示例 11 `main()` 的实现
+
+示例 11 生成的输出如图 35 所示。
+
+![&#x56FE; 35. &#x793A;&#x4F8B; 11 &#x4EA7;&#x751F;&#x7684;&#x8F93;&#x51FA;](.gitbook/assets/wei-xin-jie-tu-20190912142501.png)
+
+图 36 显示了由于发送任务的优先级高于接收任务的优先级而导致的执行顺序。 表 22 提供了对图 36 的进一步说明，并描述了前四个消息是否来自同一任务。
+
+![&#x56FE; 36. &#x793A;&#x4F8B; 11 &#x7684;&#x6267;&#x884C;&#x987A;&#x5E8F;](.gitbook/assets/wei-xin-jie-tu-20190912142628.png)
+
+表 22. 图 36 的关键点
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:center">&#x65F6;&#x523B;</th>
+      <th style="text-align:left">&#x63CF;&#x8FF0;</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:center">t1</td>
+      <td style="text-align:left">&#x4EFB;&#x52A1;&#x53D1;&#x9001;&#x65B9; 1 &#x6267;&#x884C;&#x5E76;&#x5411;&#x961F;&#x5217;&#x53D1;&#x9001;
+        3 &#x4E2A;&#x6570;&#x636E;&#x9879;&#x3002;</td>
+    </tr>
+    <tr>
+      <td style="text-align:center">t2</td>
+      <td style="text-align:left">&#x961F;&#x5217;&#x5DF2;&#x6EE1;&#xFF0C;&#x56E0;&#x6B64;&#x53D1;&#x9001;&#x65B9;
+        1 &#x8FDB;&#x5165;&#x963B;&#x585E;&#x72B6;&#x6001;&#xFF0C;&#x7B49;&#x5F85;&#x4E0B;&#x4E00;&#x6B21;&#x53D1;&#x9001;&#x5B8C;&#x6210;&#x3002;&#x4EFB;&#x52A1;&#x53D1;&#x9001;&#x65B9;
+        2 &#x73B0;&#x5728;&#x662F;&#x80FD;&#x591F;&#x8FD0;&#x884C;&#x7684;&#x6700;&#x9AD8;&#x4F18;&#x5148;&#x7EA7;&#x4EFB;&#x52A1;&#xFF0C;&#x56E0;&#x6B64;&#x8FDB;&#x5165;&#x8FD0;&#x884C;&#x72B6;&#x6001;&#x3002;</td>
+    </tr>
+    <tr>
+      <td style="text-align:center">t3</td>
+      <td style="text-align:left">&#x4EFB;&#x52A1;&#x53D1;&#x9001;&#x8005; 2 &#x53D1;&#x73B0;&#x961F;&#x5217;&#x5DF2;&#x7ECF;&#x6EE1;&#x4E86;&#xFF0C;&#x56E0;&#x6B64;&#x8FDB;&#x5165;&#x963B;&#x585E;&#x72B6;&#x6001;&#xFF0C;&#x7B49;&#x5F85;&#x7B2C;&#x4E00;&#x6B21;&#x53D1;&#x9001;&#x5B8C;&#x6210;&#x3002;&#x4EFB;&#x52A1;&#x63A5;&#x6536;&#x8005;&#x73B0;&#x5728;&#x662F;&#x80FD;&#x591F;&#x8FD0;&#x884C;&#x7684;&#x6700;&#x9AD8;&#x4F18;&#x5148;&#x7EA7;&#x4EFB;&#x52A1;&#xFF0C;&#x56E0;&#x6B64;&#x8FDB;&#x5165;&#x8FD0;&#x884C;&#x72B6;&#x6001;&#x3002;</td>
+    </tr>
+    <tr>
+      <td style="text-align:center">t4</td>
+      <td style="text-align:left">&#x4F18;&#x5148;&#x7EA7;&#x9AD8;&#x4E8E;&#x63A5;&#x6536;&#x4EFB;&#x52A1;&#x4F18;&#x5148;&#x7EA7;&#x7684;&#x4E24;&#x4E2A;&#x4EFB;&#x52A1;&#x6B63;&#x5728;&#x7B49;&#x5F85;&#x961F;&#x5217;&#x4E2D;&#x7684;&#x7A7A;&#x95F4;&#x53EF;&#x7528;&#xFF0C;&#x4ECE;&#x800C;&#x5BFC;&#x81F4;&#x4EFB;&#x52A1;&#x63A5;&#x6536;&#x8005;&#x5728;&#x4ECE;&#x961F;&#x5217;&#x4E2D;&#x5220;&#x9664;&#x4E00;&#x4E2A;&#x9879;&#x76EE;&#x540E;&#x7ACB;&#x5373;&#x88AB;&#x62A2;&#x5360;&#x3002;
+        &#x4EFB;&#x52A1;&#x53D1;&#x9001;&#x8005; 1 &#x548C;&#x53D1;&#x9001;&#x8005;
+        2 &#x5177;&#x6709;&#x76F8;&#x540C;&#x7684;&#x4F18;&#x5148;&#x7EA7;&#xFF0C;&#x56E0;&#x6B64;&#x8C03;&#x5EA6;&#x7A0B;&#x5E8F;&#x9009;&#x62E9;&#x7B49;&#x5F85;&#x65F6;&#x95F4;&#x6700;&#x957F;&#x7684;&#x4EFB;&#x52A1;&#x4F5C;&#x4E3A;&#x5C06;&#x8FDB;&#x5165;&#x8FD0;&#x884C;&#x72B6;&#x6001;&#x7684;&#x4EFB;&#x52A1;
+        &#x2014;&#x2014; &#x5728;&#x8FD9;&#x79CD;&#x60C5;&#x51B5;&#x4E0B;&#x662F;&#x4EFB;&#x52A1;&#x53D1;&#x9001;&#x8005;
+        1&#x3002;</td>
+    </tr>
+    <tr>
+      <td style="text-align:center">t5</td>
+      <td style="text-align:left">
+        <p>&#x4EFB;&#x52A1;&#x53D1;&#x9001;&#x8005; 1 &#x5C06;&#x53E6;&#x4E00;&#x4E2A;&#x6570;&#x636E;&#x9879;&#x53D1;&#x9001;&#x5230;&#x961F;&#x5217;&#x3002;
+          &#x961F;&#x5217;&#x4E2D;&#x53EA;&#x6709;&#x4E00;&#x4E2A;&#x7A7A;&#x95F4;&#xFF0C;&#x56E0;&#x6B64;&#x4EFB;&#x52A1;&#x53D1;&#x9001;&#x8005;
+          1 &#x8FDB;&#x5165;&#x963B;&#x585E;&#x72B6;&#x6001;&#x4EE5;&#x7B49;&#x5F85;&#x4E0B;&#x4E00;&#x6B21;&#x53D1;&#x9001;&#x5B8C;&#x6210;&#x3002;
+          &#x4EFB;&#x52A1;&#x63A5;&#x6536;&#x5668;&#x518D;&#x6B21;&#x662F;&#x80FD;&#x591F;&#x8FD0;&#x884C;&#x7684;&#x6700;&#x9AD8;&#x4F18;&#x5148;&#x7EA7;&#x4EFB;&#x52A1;&#xFF0C;&#x56E0;&#x6B64;&#x8FDB;&#x5165;&#x8FD0;&#x884C;&#x72B6;&#x6001;&#x3002;</p>
+        <p>&#x4EFB;&#x52A1;&#x53D1;&#x9001;&#x8005; 1 &#x73B0;&#x5728;&#x5DF2;&#x5411;&#x961F;&#x5217;&#x53D1;&#x9001;&#x4E86;&#x56DB;&#x4E2A;&#x9879;&#x76EE;&#xFF0C;&#x4EFB;&#x52A1;&#x53D1;&#x9001;&#x8005;
+          2 &#x4ECD;&#x5728;&#x7B49;&#x5F85;&#x5C06;&#x5176;&#x7B2C;&#x4E00;&#x4E2A;&#x9879;&#x76EE;&#x53D1;&#x9001;&#x5230;&#x961F;&#x5217;&#x3002;</p>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:center">t6</td>
+      <td style="text-align:left">&#x4F18;&#x5148;&#x7EA7;&#x9AD8;&#x4E8E;&#x63A5;&#x6536;&#x4EFB;&#x52A1;&#x4F18;&#x5148;&#x7EA7;&#x7684;&#x4E24;&#x4E2A;&#x4EFB;&#x52A1;&#x6B63;&#x5728;&#x7B49;&#x5F85;&#x961F;&#x5217;&#x4E2D;&#x7684;&#x7A7A;&#x95F4;&#x53EF;&#x7528;&#xFF0C;&#x56E0;&#x6B64;&#x4EFB;&#x52A1;&#x63A5;&#x6536;&#x8005;&#x4E00;&#x65E6;&#x4ECE;&#x961F;&#x5217;&#x4E2D;&#x5220;&#x9664;&#x4E86;&#x4E00;&#x4E2A;&#x9879;&#x76EE;&#x5C31;&#x4F1A;&#x88AB;&#x62A2;&#x5360;&#x3002;
+        &#x6B64;&#x65F6;&#x53D1;&#x9001;&#x8005; 2 &#x7B49;&#x5F85;&#x7684;&#x65F6;&#x95F4;&#x6BD4;&#x53D1;&#x9001;&#x8005;
+        1 &#x957F;&#xFF0C;&#x56E0;&#x6B64;&#x53D1;&#x9001;&#x8005; 2 &#x8FDB;&#x5165;&#x8FD0;&#x884C;&#x72B6;&#x6001;&#x3002;</td>
+    </tr>
+    <tr>
+      <td style="text-align:center">t7</td>
+      <td style="text-align:left">&#x4EFB;&#x52A1;&#x53D1;&#x9001;&#x8005; 2 &#x5C06;&#x6570;&#x636E;&#x9879;&#x53D1;&#x9001;&#x5230;&#x961F;&#x5217;&#x3002;
+        &#x961F;&#x5217;&#x4E2D;&#x53EA;&#x6709;&#x4E00;&#x4E2A;&#x7A7A;&#x683C;&#xFF0C;&#x56E0;&#x6B64;&#x53D1;&#x4EF6;&#x4EBA;
+        2 &#x8FDB;&#x5165;&#x963B;&#x6B62;&#x72B6;&#x6001;&#x4EE5;&#x7B49;&#x5F85;&#x4E0B;&#x4E00;&#x6B21;&#x53D1;&#x9001;&#x5B8C;&#x6210;&#x3002;
+        &#x53D1;&#x9001;&#x8005; 1 &#x548C;&#x53D1;&#x9001;&#x8005; 2 &#x90FD;&#x5728;&#x7B49;&#x5F85;&#x961F;&#x5217;&#x4E2D;&#x7684;&#x7A7A;&#x95F4;&#x53EF;&#x7528;&#xFF0C;&#x56E0;&#x6B64;&#x4EFB;&#x52A1;&#x63A5;&#x6536;&#x8005;&#x662F;&#x552F;&#x4E00;&#x53EF;&#x4EE5;&#x8FDB;&#x5165;&#x8FD0;&#x884C;&#x72B6;&#x6001;&#x7684;&#x4EFB;&#x52A1;&#x3002;</td>
+    </tr>
+  </tbody>
+</table>## 使用大型或可变大小的数据
+
+### 排队指针
+
+如果存储在队列中的数据大小很大，则最好使用队列将指针传输到数据，而不是将数据本身逐字节地复制到队列中。 传输指针在处理时间和创建队列所需的 RAM 量方面都更有效。 但是，在队列指针时，必须特别注意确保：
+
+1. 指向的 RAM 的所有者是明确定义的。通过指针在任务之间共享内存时，必须确保两个任务不会同时修改内存内容，或采取任何其他可能导致内存内容无效或不一致的操作。 理想情况下，只允许发送任务访问存储器，直到指向存储器的指针已经排队，并且在从队列接收到指针之后，只允许接收任务访问存储器。
+2. 指向的 RAM 仍然有效。如果指向的内存是动态分配的，或者是从预先分配的缓冲区池中获取的，则完全一个任务应该负责释放内存。 任务完成后，任何任务都不应尝试访问内存。永远不应该使用指针来访问已在任务堆栈上分配的数据。 堆栈帧更改后，数据无效。
+
+举例来说，清单 52，清单 53 和清单 54 演示了如何使用队列从一个任务向另一个任务发送指向缓冲区的指针：
+
+* 清单 52 创建了一个最多可以容纳 5 个指针的队列。
+* 清单 53 分配缓冲区，将字符串写入缓冲区，然后将指向缓冲区的指针发送到队列。
+* 清单 54 从队列中接收指向缓冲区的指针，然后将包含在缓冲区中的字符串打印出来。
+
+```c
+/* 声明 QueueHandle_t 类型的变量以保存正在创建的队列的句柄。 */
+QueueHandle_t xPointerQueue;
+
+/* 创建一个最多可容纳 5 个指针的队列，在本例中为字符指针。 */
+xPointerQueue = xQueueCreate( 5, sizeof( char * ) );
+```
+
+清单 52. 创建一个包含指针的队列
+
+```c
+/* 获取缓冲区的任务，向缓冲区写入一个字符串，然后将缓冲区的地址发送到清单 52 中创建的队列。 */
+void vStringSendingTask( void *pvParameters )
+{
+char *pcStringToSend;
+const size_t xMaxStringLength = 50;
+BaseType_t xStringNumber = 0;
+    
+    for( ;; )
+    {
+        /* 获取至少为 xMaxStringLength 字符大的缓冲区。prvGetBuffer() 的实现没有显示，
+        它可能从预先分配的缓冲区池中获取缓冲区，或者只是动态地分配缓冲区。 */
+        pcStringToSend = ( char * ) prvGetBuffer( xMaxStringLength );
+        
+        /* 将字符串写入缓冲区。 */
+        snprintf( pcStringToSend, xMaxStringLength, "String number %d\r\n", xStringNumber );
+        
+        /* 增加计数器，使字符串在此任务的每次迭代中都不同。 */
+        xStringNumber++;
+        
+        /* 将缓冲区的地址发送到清单 52 中创建的队列。缓冲区的地址存储在 pcStringToSend 变量中。*/
+        xQueueSend( xPointerQueue,     /* 队列的句柄。 */
+                    &pcStringToSend,   /* 指向缓冲区的指针的地址。 */
+                    portMAX_DELAY );
+    }
+}
+```
+
+清单 53. 使用队列发送指向缓冲区的指针
+
+```c
+/* 从清单 52 中创建的队列中接收缓冲区地址并写入清单 53 中的任务。缓冲区包含一个字符串，
+该字符串被打印出来。 */
+void vStringReceivingTask( void *pvParameters )
+{
+char *pcReceivedString;
+
+    for( ;; )
+    {
+        /* 接收缓冲区的地址。 */
+        xQueueReceive( xPointerQueue,     /* 队列的句柄。 */
+                       &pcReceivedString, /* 将缓冲区地址存储在 pcReceivedString 中。 */
+                       portMAX_DELAY );   
+                       
+        /* 缓冲区保存一个字符串，将其打印出来。 */
+        vPrintString( pcReceivedString );
+        
+        /* 不再需要缓冲区 —— 释放它以便可以释放或重新使用它。 */
+        prvReleaseBuffer( pcReceivedString );
+    }
+}
+```
+
+清单 54. 使用队列接收指向缓冲区的指针
+
+### 使用队列发送不同类型和长度的数据
+
 
 
