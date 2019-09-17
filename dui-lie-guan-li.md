@@ -694,5 +694,148 @@ char *pcReceivedString;
 
 ### 使用队列发送不同类型和长度的数据
 
+前面几节已经证明了两个强大的设计模式：发送结构到一个队列，发送指针到一个队列。 组合这两个技术就可以允许一个任务使用一个队列接收来自任何数据源的任何数据类型。  FreeRTOS+TCP TCP/IP 协议栈的实现提供了如何这样实现的实际例子。
 
+在自己的任务中运行的 TCP/IP 协议栈必须处理许多来自不同源的事件。 不同的事件类型与不同类型和长度的数据相关联。 在 TCP/IP 任务之外发生的所有事件都由 `IPStackEvent_t` 类型的结构描述，并发送到队列上的 TCP/IP 任务。 `IPStackEvent_t` 结构如清单 55 所示，`IPStackEvent_t` 结构的 `pvData` 成员是一个指针，可用于直接保存值或指向缓冲区。
+
+```c
+/* 在 TCP/IP 堆栈中用于识别事件的枚举类型的子集。 */
+typedef enum
+{
+    eNetworkDownEvent = 0, /* 网络接口已丢失，或者需要（重新）连接。 */
+    eNetworkRxEvent,       /* 从网络接收到一个数据包。 */
+    eTCPAcceptEvent,       /* 调用 FreeRTOS_accept() 接受或等待新客户端。 */
+    
+    /* 其他事件类型会显示在此处，但不会显示在此列表中。 */
+    
+} eIPEvent_t;
+
+/* 描述事件并在队列中发送到TCP/IP任务的结构。 */
+typedef struct IP_TASK_COMMANDS
+{
+    /* 标识事件的枚举类型。请参见上面的 eIPEvent_t 定义。 */
+    eIPEvent_t eEventType;
+    
+    /* 可以保存值或指向缓冲区的通用指针。 */
+    void *pvData;
+    
+} IPStackEvent_t;
+```
+
+清单 55. 用于将事件发送到 FreeRTOS+TCP上的 TCP/IP 协议栈任务结构
+
+TCP/IP 事件及其相关数据的示例包括:
+
+* eNetworkRxEvent：数据的分组已经从网络接收到。从网络接收的数据使用类型为 `IPStackEvent_t` 的结构发送到 TCP/IP 任务，该结构的 `eEventType` 成员设置为 `eNetworkRxEvent`，该结构的 `pvData` 成员用于指向包含接收数据的缓冲区。清单 56 显示了一个伪代码示例。
+* eTCPAcceptEvent：套接字是接受或等待来自客户端的连接。接受事件是使用 `IPStackEvent_t` 类型的结构从调用 `FreeRTOS_accept()` 的任务发送到 TCP/IP 任务的。该结构的 `eEventType` 成员设置为 `eTCPAcceptEvent`，该结构的 `pvData` 成员设置为接受连接的套接字的句柄。清单 57 显示了一个伪代码示例。
+* eNetworkDownEvent：网络需要连接或重新连接。网络中断事件是使用 `IPStackEvent_t` 类型的结构从网络接口发送到 TCP/IP 任务的。该结构的 `eEventType` 成员设置为 `eNetworkDownEvent`。网络关闭事件不与任何数据相关联，因此不使用该结构的 `pvData` 成员。清单 58 显示了一个伪代码示例。
+
+```c
+void vSendRxDataToTheTCPTask( NetworkBufferDescriptor_t *pxRxedData )
+{
+IPStackEvent_t xEventStruct;
+
+    /* 完成 IPStackEvent_t 结构。接收到的数据存储在 pxRxedData。 */
+    xEventStruct.eEventType = eNetworkRxEvent;
+    xEventStruct.pvData = ( void * ) pxRxedData;
+    
+    /* 发送 IPStackEvent_t 结构到 TCP/IP 协议栈。 */
+    xSendEventStructToIPTask( &xEventStruct );
+    
+}
+```
+
+清单 56. 伪代码，显示如何使用 `IPStackEvent_t` 结构将从网络接收的数据发送到 TCP/IP 任务
+
+```c
+void vSendAcceptRequestToTheTCPTask( Socket_t xSocket )
+{
+IPStackEvent_t xEventStruct;
+
+    /* 完成 IPStackEvent_t 结构。 */
+    xEventStruct.eEventType = eTCPAcceptEvent;
+    xEventStruct.pvData = ( void * ) xSocket;
+    
+    /* 发送 IPStackEvent_t 结构以 TCP/IP 任务。*/
+    xSendEventStructToIPTask( &xEventStruct );
+}
+```
+
+清单 57. 伪代码，显示如何使用 `IPStackEvent_t` 结构发送接受到 TCP/IP 任务的连接的套接字句柄
+
+```c
+void vSendNetworkDownEventToTheTCPTask(Socket_t xSocket)
+{
+IPStackEvent_t xEventStruct;
+
+    /* 完成 IPStackEvent_t 结构。 */
+    xEventStruct.eEventType = eNetworkDownEvent;
+    xEventStruct.pvData = NULL; /* 未使用，但设置为 NULL 保证完整性。 */
+    
+    /* 发送 IPStackEvent_t 类型的结构体到 TCP/IP 任务。*/
+    xSendEventStructToIPTask( &xEventStruct );
+}
+```
+
+清单 58. 伪代码，显示如何使用 `IPStackEvent_t` 结构向 TCP 发送网络关闭事件
+
+清单 59 中显示了在 TCP/IP 任务中接收和处理这些事件的代码。可以看出，从队列接收的 `IPStackEvent_t`结构的 `eEventType` 成员用于确定如何解释 `pvData` 成员。
+
+```c
+IPStackEvent_t xReceivedEvent;
+
+    /* 阻止网络事件队列，直到接收到事件，或者 xNextIPSleep 滴答通过而没有接收到事件。
+    如果对 xQueueReceive() 的调用返回是因为超时，而不是因为接收到事件，则将 eEventType 
+    设置为 eNoEvent。 */
+    xReceivedEvent.eEventType = eNoEvent;
+    xQueueReceive( xNetworkEventQueue, &xReceivedEvent, xNextIPSleep );
+    
+    /* 收到了哪个事件(如果有)？ */
+    switch( xReceivedEvent.eEventType )
+    {
+        case eNetworkDownEvent :
+            /* 尝试(重新)建立连接。此事件与任何数据都没有关联。 */
+            prvProcessNetworkDownEvent();
+            break;
+        case eNetworkRxEvent:
+            /* 网络接口收到了一个新数据包。指向接收到的数据的指针存储在接收到的 
+            IPStackEvent_t 结构的 pvData 成员中。处理接收到的数据。*/
+            prvHandleEthernetPacket( ( NetworkBufferDescriptor_t * )( xReceivedEvent.pvData ) );
+            break;
+        case eTCPAcceptEvent:
+            /* 调用了 FreeRTOS_accept() API函数。接受连接的套接字句柄存储在
+            接收到的 IPStackEvent_t 结构的 pvData 成员中。 */
+            xSocket = ( FreeRTOS_Socket_t * ) ( xReceivedEvent.pvData );
+            xTCPCheckNewClient( pxSocket );
+            break;
+        
+        /* 其他事件类型以相同的方式处理，但在此不显示。 */
+    }
+```
+
+清单 59. 显示如何接收和处理 IPStackEvent\_t 结构的伪代码
+
+## 从多个队列接收
+
+### 队列集
+
+应用程序设计通常需要单个任务来接收不同大小的数据、不同含义的数据以及来自不同来源的数据。上一节演示了如何使用接收结构的单个队列以简洁高效的方式实现这一点。然而，有时应用程序的设计者正在使用限制其设计选择的约束，这就需要对某些数据源使用单独的队列。例如，集成到设计中的第三方代码可能假设存在专用队列。在这种情况下，可以使用 “队列集”。
+
+队列设置允许所有任务从多个队列接收数据，而无需任务依次轮询每个队列以确定哪个队列\(如果有\)包含数据。
+
+与使用接收结构的单个队列实现相同功能的设计相比，使用队列集从多个源接收数据的设计不那么整洁，效率也较低。因此，建议仅在设计约束绝对必要时才使用队列集。
+
+以下部分描述了如何使用由以下人员设置的队列：
+
+1. 创建队列集。
+2. 向集合中添加队列。信号量也可以添加到队列集中。信号量将在本书后面描述。
+3. 从队列集中读取数据，以确定队列集中哪些队列包含数据。当作为队列集合成员的队列接收数据时，接收队列的句柄被发送到队列集合，当任务调用从队列集合读取的函数时返回。因此，如果从队列集中返回队列句柄，那么句柄引用的队列就知道包含数据，然后任务就可以直接从队列中读取。
+
+{% hint style="info" %}
+如果队列是队列集的成员，那么不要从队列中读取数据，除非队列的句柄已经首先从队列集中读取。
+{% endhint %}
+
+队列集功能是通过在 `FreeRTOSConfig.h` 中将 `configUSE_QUEUE_SETS` 编译时配置常数设置为 1 来启用的。
+
+### xQueueCreateSet\(\) API函数
 
