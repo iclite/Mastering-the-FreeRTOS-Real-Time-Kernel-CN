@@ -839,3 +839,15 @@ IPStackEvent_t xReceivedEvent;
 
 ### xQueueCreateSet\(\) API函数
 
+必须先显式创建队列集，然后才能使用它。
+
+队列集由句柄引用，句柄是 `QueueSetHandle_t` 类型的变量。`xQueueCreateSet()` API 函数创建一个队列集，并返回一个引用它创建的队列集的 `QueueSetHandle_t`。
+
+```c
+QueueSetHandle_t xQueueCreateSet(const UBaseType_t uxEventQueueLength);
+```
+
+清单 60. `xQueueCreateSet()` 函数原型
+
+
+
