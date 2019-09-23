@@ -849,5 +849,484 @@ QueueSetHandle_t xQueueCreateSet(const UBaseType_t uxEventQueueLength);
 
 清单 60. `xQueueCreateSet()` 函数原型
 
+表格 23. `xQueueCreateSet()` 参数与返回值
 
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:left">&#x53C2;&#x6570;&#x540D;</th>
+      <th style="text-align:left">&#x63CF;&#x8FF0;</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:left">uxEventQueueLength</td>
+      <td style="text-align:left">
+        <p>&#x5F53;&#x961F;&#x5217;&#x96C6;&#x5408;&#x4E2D;&#x7684;&#x4E00;&#x4E2A;&#x961F;&#x5217;&#x63A5;&#x6536;&#x6570;&#x636E;&#x65F6;&#xFF0C;&#x63A5;&#x6536;&#x961F;&#x5217;&#x7684;&#x53E5;&#x67C4;&#x88AB;&#x53D1;&#x9001;&#x5230;&#x961F;&#x5217;&#x96C6;&#x5408;&#x3002; <code>uxEventQueueLength</code> &#x5B9A;&#x4E49;&#x4E86;&#x6B63;&#x5728;&#x521B;&#x5EFA;&#x7684;&#x961F;&#x5217;&#x96C6;&#x5728;&#x4EFB;&#x4F55;&#x65F6;&#x5019;&#x53EF;&#x4EE5;&#x5BB9;&#x7EB3;&#x7684;&#x961F;&#x5217;&#x53E5;&#x67C4;&#x7684;&#x6700;&#x5927;&#x6570;&#x91CF;&#x3002;</p>
+        <p>&#x961F;&#x5217;&#x53E5;&#x67C4;&#x4EC5;&#x5728;&#x961F;&#x5217;&#x96C6;&#x4E2D;&#x7684;&#x961F;&#x5217;&#x63A5;&#x6536;&#x6570;&#x636E;&#x65F6;&#x53D1;&#x9001;&#x7ED9;&#x961F;&#x5217;&#x96C6;&#x3002;&#x5982;&#x679C;&#x961F;&#x5217;&#x5DF2;&#x6EE1;&#xFF0C;&#x5219;&#x65E0;&#x6CD5;&#x63A5;&#x6536;&#x6570;&#x636E;&#xFF0C;&#x56E0;&#x6B64;&#x5982;&#x679C;&#x961F;&#x5217;&#x96C6;&#x4E2D;&#x7684;&#x6240;&#x6709;&#x961F;&#x5217;&#x90FD;&#x5DF2;&#x6EE1;&#xFF0C;&#x5219;&#x65E0;&#x6CD5;&#x5411;&#x961F;&#x5217;&#x96C6;&#x53D1;&#x9001;&#x961F;&#x5217;&#x53E5;&#x67C4;&#x3002;&#x56E0;&#x6B64;&#xFF0C;&#x961F;&#x5217;&#x96C6;&#x4E2D;&#x4E00;&#x6B21;&#x5FC5;&#x987B;&#x5BB9;&#x7EB3;&#x7684;&#x6700;&#x5927;&#x9879;&#x76EE;&#x6570;&#x662F;&#x8BE5;&#x7EC4;&#x4E2D;&#x6BCF;&#x4E2A;&#x961F;&#x5217;&#x957F;&#x5EA6;&#x7684;&#x603B;&#x548C;&#x3002;</p>
+        <p>&#x4F8B;&#x5982;&#xFF0C;&#x5982;&#x679C;&#x96C6;&#x5408;&#x4E2D;&#x6709;&#x4E09;&#x4E2A;&#x7A7A;&#x961F;&#x5217;&#xFF0C;&#x6BCF;&#x4E2A;&#x961F;&#x5217;&#x7684;&#x957F;&#x5EA6;&#x4E3A;&#x4E94;&#xFF0C;&#x90A3;&#x4E48;&#x96C6;&#x5408;&#x4E2D;&#x7684;&#x961F;&#x5217;&#x603B;&#x5171;&#x53EF;&#x4EE5;&#x5728;&#x96C6;&#x5408;&#x4E2D;&#x7684;&#x6240;&#x6709;&#x961F;&#x5217;&#x90FD;&#x6EE1;&#x4E4B;&#x524D;&#x63A5;&#x6536;&#x5341;&#x4E94;&#x4E2A;&#x9879;&#x76EE;(&#x4E09;&#x4E2A;&#x961F;&#x5217;&#x4E58;&#x4EE5;&#x4E94;&#x4E2A;&#x9879;&#x76EE;)&#x3002;&#x5728;&#x8BE5;&#x793A;&#x4F8B;&#x4E2D;&#xFF0C;<code>uxEventQueueLength</code> &#x5FC5;&#x987B;&#x8BBE;&#x7F6E;&#x4E3A;
+          15&#xFF0C;&#x4EE5;&#x4FDD;&#x8BC1;&#x961F;&#x5217;&#x96C6;&#x53EF;&#x4EE5;&#x63A5;&#x6536;&#x53D1;&#x9001;&#x7ED9;&#x5B83;&#x7684;&#x6BCF;&#x4E2A;&#x9879;&#x76EE;&#x3002;</p>
+        <p>&#x4FE1;&#x53F7;&#x91CF;&#x4E5F;&#x53EF;&#x4EE5;&#x6DFB;&#x52A0;&#x5230;&#x961F;&#x5217;&#x96C6;&#x4E2D;&#x3002;&#x4E8C;&#x8FDB;&#x5236;&#x548C;&#x8BA1;&#x6570;&#x4FE1;&#x53F7;&#x91CF;&#x5C06;&#x5728;&#x672C;&#x4E66;&#x540E;&#x9762;&#x4ECB;&#x7ECD;&#x3002;&#x4E3A;&#x4E86;&#x8BA1;&#x7B97;&#x5FC5;&#x8981;&#x7684;uxEventQueueLength&#xFF0C;&#x4E8C;&#x8FDB;&#x5236;&#x4FE1;&#x53F7;&#x91CF;&#x7684;&#x957F;&#x5EA6;&#x4E3A;
+          1&#xFF0C;&#x8BA1;&#x6570;&#x4FE1;&#x53F7;&#x91CF;&#x7684;&#x957F;&#x5EA6;&#x7531;&#x4FE1;&#x53F7;&#x91CF;&#x7684;&#x6700;&#x5927;&#x8BA1;&#x6570;&#x503C;&#x7ED9;&#x51FA;&#x3002;</p>
+        <p>&#x4F5C;&#x4E3A;&#x53E6;&#x4E00;&#x4E2A;&#x4F8B;&#x5B50;&#xFF0C;&#x5982;&#x679C;&#x961F;&#x5217;&#x96C6;&#x5C06;&#x5305;&#x542B;&#x957F;&#x5EA6;&#x4E3A;
+          3 &#x7684;&#x961F;&#x5217;&#x548C;&#x957F;&#x5EA6;&#x4E3A; 1 &#x7684;&#x4E8C;&#x8FDB;&#x5236;&#x4FE1;&#x53F7;&#x91CF;&#xFF0C;<code>uxEventQueueLength</code> &#x5FC5;&#x987B;&#x8BBE;&#x7F6E;&#x4E3A;
+          4 (3+1)&#x3002;</p>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left">&#x8FD4;&#x56DE;&#x503C;</td>
+      <td style="text-align:left">
+        <p>&#x5982;&#x679C;&#x8FD4;&#x56DE;&#x7A7A;&#x503C;&#xFF0C;&#x5219;&#x65E0;&#x6CD5;&#x521B;&#x5EFA;&#x961F;&#x5217;&#x96C6;&#xFF0C;&#x56E0;&#x4E3A;&#x7A7A;&#x95F2;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x6CA1;&#x6709;&#x8DB3;&#x591F;&#x7684;&#x5806;&#x5185;&#x5B58;&#x6765;&#x5206;&#x914D;&#x961F;&#x5217;&#x96C6;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x548C;&#x5B58;&#x50A8;&#x533A;&#x57DF;&#x3002;</p>
+        <p>&#x8FD4;&#x56DE;&#x7684;&#x975E;&#x7A7A;&#x503C;&#x8868;&#x793A;&#x961F;&#x5217;&#x96C6;&#x5DF2;&#x6210;&#x529F;&#x521B;&#x5EFA;&#x3002;&#x8FD4;&#x56DE;&#x503C;&#x5E94;&#x8BE5;&#x5B58;&#x50A8;&#x4E3A;&#x521B;&#x5EFA;&#x7684;&#x961F;&#x5217;&#x96C6;&#x7684;&#x53E5;&#x67C4;&#x3002;</p>
+      </td>
+    </tr>
+  </tbody>
+</table>### xQueueAddToSet\(\) API 函数
+
+`xQueueAddToSet()` 将队列或信号量添加到队列集中。信号量将在本书后面描述。
+
+```c
+BaseType_t xQueueAddToSet( QueueSetMemberHandle_t xQueueOrSemaphore, 
+                           QueueSetHandle_t xQueueSet );
+```
+
+清单 61. `xQueueAddToSet()` API 函数原型
+
+表格 24. `xQueueAddToSet()` 参数与返回值
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:left">&#x53C2;&#x6570;&#x540D;</th>
+      <th style="text-align:left">&#x63CF;&#x8FF0;</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:left">xQueueOrSemaphore</td>
+      <td style="text-align:left">
+        <p>&#x6B63;&#x5728;&#x6DFB;&#x52A0;&#x5230;&#x961F;&#x5217;&#x96C6;&#x4E2D;&#x7684;&#x961F;&#x5217;&#x6216;&#x4FE1;&#x53F7;&#x91CF;&#x7684;&#x53E5;&#x67C4;&#x3002;</p>
+        <p>&#x961F;&#x5217;&#x53E5;&#x67C4;&#x548C;&#x4FE1;&#x53F7;&#x91CF;&#x53E5;&#x67C4;&#x90FD;&#x53EF;&#x4EE5;&#x8F6C;&#x6362;&#x4E3A; <code>QueueSetMemberHandle_t</code> &#x7C7B;&#x578B;&#x3002;</p>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left">xQueueSet</td>
+      <td style="text-align:left">&#x8981;&#x6DFB;&#x52A0;&#x961F;&#x5217;&#x6216;&#x4FE1;&#x53F7;&#x91CF;&#x7684;&#x961F;&#x5217;&#x96C6;&#x7684;&#x53E5;&#x67C4;&#x3002;</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">&#x8FD4;&#x56DE;&#x503C;</td>
+      <td style="text-align:left">
+        <p>&#x6709;&#x4E24;&#x79CD;&#x53EF;&#x80FD;&#x7684;&#x8FD4;&#x56DE;&#x503C;:</p>
+        <ol>
+          <li>pdPASS: &#x53EA;&#x6709;&#x5F53;&#x961F;&#x5217;&#x6216;&#x4FE1;&#x53F7;&#x91CF;&#x6210;&#x529F;&#x6DFB;&#x52A0;&#x5230;&#x961F;&#x5217;&#x96C6;&#x4E2D;&#x65F6;&#xFF0C;&#x624D;&#x4F1A;&#x8FD4;&#x56DE;
+            pdPASS&#x3002;</li>
+          <li>pdFAIL: &#x5982;&#x679C;&#x961F;&#x5217;&#x6216;&#x4FE1;&#x53F7;&#x91CF;&#x65E0;&#x6CD5;&#x6DFB;&#x52A0;&#x5230;&#x961F;&#x5217;&#x96C6;&#x4E2D;&#xFF0C;&#x5C06;&#x8FD4;&#x56DE;
+            pdFAIL&#x3002;&#x961F;&#x5217;&#x548C;&#x4E8C;&#x8FDB;&#x5236;&#x4FE1;&#x53F7;&#x91CF;&#x53EA;&#x6709;&#x5728;&#x4E3A;&#x7A7A;&#x65F6;&#x624D;&#x80FD;&#x6DFB;&#x52A0;&#x5230;&#x96C6;&#x5408;&#x4E2D;&#x3002;&#x8BA1;&#x6570;&#x4FE1;&#x53F7;&#x91CF;&#x53EA;&#x80FD;&#x5728;&#x5176;&#x8BA1;&#x6570;&#x4E3A;&#x96F6;&#x65F6;&#x6DFB;&#x52A0;&#x5230;&#x96C6;&#x5408;&#x4E2D;&#x3002;&#x961F;&#x5217;&#x548C;&#x4FE1;&#x53F7;&#x91CF;&#x4E00;&#x6B21;&#x53EA;&#x80FD;&#x662F;&#x4E00;&#x4E2A;&#x96C6;&#x5408;&#x7684;&#x6210;&#x5458;&#x3002;</li>
+        </ol>
+      </td>
+    </tr>
+  </tbody>
+</table>### xQueueSelectFromSet\(\) API 函数
+
+`xQueueSelectFromSet()` 从队列集中读取队列句柄。
+
+当作为集合成员的队列或信号量接收数据时，接收队列或信号量的句柄被发送到队列集合，并在任务调用 `xQueueSelectFromSet()` 时返回。如果从对 `xQueueSelectFromSet()` 的调用中返回句柄，则句柄引用的队列或信号量已知包含数据，然后调用任务必须直接从队列或信号量中读取。
+
+{% hint style="info" %}
+注意: 除非队列或信号量的句柄是从对 `xQueueSelectFromSet()` 的调用中首先返回的，否则不要从属于集合成员的队列或信号量中读取数据。每次调用 `xQueueSelectFromSet()` 返回队列句柄或信号量句柄时，只从队列或信号量中读取一个项目。
+{% endhint %}
+
+```c
+QueueSetMemberHandle_t xQueueSelectFromSet( QueueSetHandle_t xQueueSet,
+                                            const TickType_t xTicksToWait );
+```
+
+清单 62. `xQueueSelectFromSet()` API 函数原型
+
+表格 25. `xQueueSelectFromSet()` 参数与返回值
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:left">&#x53C2;&#x6570;&#x540D;</th>
+      <th style="text-align:left">&#x63CF;&#x8FF0;</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:left">xQueueSet</td>
+      <td style="text-align:left">&#x961F;&#x5217;&#x96C6;&#x7684;&#x53E5;&#x67C4;&#xFF0C;&#x4ECE;&#x4E2D;&#x63A5;&#x6536;(&#x8BFB;&#x53D6;)&#x961F;&#x5217;&#x53E5;&#x67C4;&#x6216;&#x4FE1;&#x53F7;&#x91CF;&#x53E5;&#x67C4;&#x3002;&#x5BF9;&#x7528;&#x4E8E;&#x521B;&#x5EFA;&#x961F;&#x5217;&#x96C6;&#x7684; <code>xQueueCreateSet()</code> &#x7684;&#x8C03;&#x7528;&#x5C06;&#x8FD4;&#x56DE;&#x961F;&#x5217;&#x96C6;&#x53E5;&#x67C4;&#x3002;</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">xTicksToWait</td>
+      <td style="text-align:left">
+        <p>&#x5982;&#x679C;&#x961F;&#x5217;&#x96C6;&#x4E2D;&#x7684;&#x6240;&#x6709;&#x961F;&#x5217;&#x548C;&#x4FE1;&#x53F7;&#x91CF;&#x90FD;&#x4E3A;&#x7A7A;&#xFF0C;&#x5219;&#x8C03;&#x7528;&#x4EFB;&#x52A1;&#x5E94;&#x4FDD;&#x6301;&#x5728;&#x963B;&#x585E;&#x72B6;&#x6001;&#x4EE5;&#x7B49;&#x5F85;&#x4ECE;&#x961F;&#x5217;&#x96C6;&#x4E2D;&#x63A5;&#x6536;&#x961F;&#x5217;&#x6216;&#x4FE1;&#x53F7;&#x91CF;&#x53E5;&#x67C4;&#x7684;&#x6700;&#x957F;&#x65F6;&#x95F4;&#x3002;&#x5982;&#x679C; <code>xTicksToWait</code> &#x4E3A;&#x96F6;&#xFF0C;&#x90A3;&#x4E48;&#x5982;&#x679C;&#x96C6;&#x5408;&#x4E2D;&#x7684;&#x6240;&#x6709;&#x961F;&#x5217;&#x548C;&#x4FE1;&#x53F7;&#x91CF;&#x90FD;&#x4E3A;&#x7A7A;&#xFF0C;<code>xQueueSelectFromSet()</code> &#x5C06;&#x7ACB;&#x5373;&#x8FD4;&#x56DE;&#x3002;</p>
+        <p>&#x963B;&#x585E;&#x65F6;&#x95F4;&#x4EE5;&#x523B;&#x5EA6;&#x5468;&#x671F;&#x6307;&#x5B9A;&#xFF0C;&#x56E0;&#x6B64;&#x5B83;&#x8868;&#x793A;&#x7684;&#x7EDD;&#x5BF9;&#x65F6;&#x95F4;&#x53D6;&#x51B3;&#x4E8E;&#x523B;&#x5EA6;&#x9891;&#x7387;&#x3002;&#x5B8F; <code>pdMS_TO_TICKS()</code> &#x53EF;&#x7528;&#x4E8E;&#x5C06;&#x4EE5;&#x6BEB;&#x79D2;&#x4E3A;&#x5355;&#x4F4D;&#x6307;&#x5B9A;&#x7684;&#x65F6;&#x95F4;&#x8F6C;&#x6362;&#x4E3A;&#x4EE5;&#x523B;&#x5EA6;&#x4E3A;&#x5355;&#x4F4D;&#x6307;&#x5B9A;&#x7684;&#x65F6;&#x95F4;&#x3002;</p>
+        <p>&#x5C06; <code>xTicksToWait</code> &#x8BBE;&#x7F6E;&#x4E3A; <code>portMAXDELAY</code> &#x5C06;&#x5BFC;&#x81F4;&#x4EFB;&#x52A1;&#x65E0;&#x9650;&#x671F;&#x7B49;&#x5F85;(&#x65E0;&#x8D85;&#x65F6;)&#xFF0C;&#x524D;&#x63D0;&#x662F;&#x5728; <code>FreeRTOSConfig.h</code> &#x4E2D;&#x5C06; <code>INCLUDE_vTaskSuspend</code> &#x8BBE;&#x7F6E;&#x4E3A;
+          1&#x3002;</p>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left">&#x8FD4;&#x56DE;&#x503C;</td>
+      <td style="text-align:left">
+        <p>&#x975E;&#x7A7A;&#x7684;&#x8FD4;&#x56DE;&#x503C;&#x5C06;&#x662F;&#x5DF2;&#x77E5;&#x5305;&#x542B;&#x6570;&#x636E;&#x7684;&#x961F;&#x5217;&#x6216;&#x4FE1;&#x53F7;&#x91CF;&#x7684;&#x53E5;&#x67C4;&#x3002;&#x5982;&#x679C;&#x6307;&#x5B9A;&#x4E86;&#x963B;&#x585E;&#x65F6;&#x95F4;(<code>xTicksToWait</code> &#x4E0D;&#x4E3A;&#x96F6;)&#xFF0C;&#x90A3;&#x4E48;&#x8C03;&#x7528;&#x4EFB;&#x52A1;&#x53EF;&#x80FD;&#x88AB;&#x7F6E;&#x4E8E;&#x963B;&#x585E;&#x72B6;&#x6001;&#xFF0C;&#x4EE5;&#x7B49;&#x5F85;&#x6570;&#x636E;&#x4ECE;&#x96C6;&#x5408;&#x4E2D;&#x7684;&#x961F;&#x5217;&#x6216;&#x4FE1;&#x53F7;&#x91CF;&#x53D8;&#x5F97;&#x53EF;&#x7528;&#xFF0C;&#x4F46;&#x662F;&#x5728;&#x963B;&#x585E;&#x65F6;&#x95F4;&#x5230;&#x671F;&#x4E4B;&#x524D;&#xFF0C;&#x4ECE;&#x961F;&#x5217;&#x96C6;&#x5408;&#x4E2D;&#x6210;&#x529F;&#x8BFB;&#x53D6;&#x4E86;&#x53E5;&#x67C4;&#x3002;&#x53E5;&#x67C4;&#x4EE5; <code>QueueSetMemberHandle_t</code> &#x7C7B;&#x578B;&#x8FD4;&#x56DE;&#xFF0C;&#x53EF;&#x4EE5;&#x8F6C;&#x6362;&#x4E3A; <code>QueueHandle_t</code> &#x7C7B;&#x578B;&#x6216; <code>SemaphoreHandle_t</code> &#x7C7B;&#x578B;&#x3002;</p>
+        <p>&#x5982;&#x679C;&#x8FD4;&#x56DE;&#x503C;&#x4E3A;&#x7A7A;&#xFF0C;&#x5219;&#x65E0;&#x6CD5;&#x4ECE;&#x961F;&#x5217;&#x96C6;&#x4E2D;&#x8BFB;&#x53D6;&#x53E5;&#x67C4;&#x3002;&#x5982;&#x679C;&#x6307;&#x5B9A;&#x4E86;&#x963B;&#x585E;&#x65F6;&#x95F4;(<code>xTicksToWait</code> &#x4E0D;&#x4E3A;&#x96F6;)&#xFF0C;&#x5219;&#x8C03;&#x7528;&#x4EFB;&#x52A1;&#x5C06;&#x88AB;&#x7F6E;&#x4E8E;&#x963B;&#x585E;&#x72B6;&#x6001;&#xFF0C;&#x4EE5;&#x7B49;&#x5F85;&#x53E6;&#x4E00;&#x4E2A;&#x4EFB;&#x52A1;&#x6216;&#x4E2D;&#x65AD;&#x5411;&#x96C6;&#x5408;&#x4E2D;&#x7684;&#x4E00;&#x4E2A;&#x6216;&#x591A;&#x4E2A;&#x4FE1;&#x53F7;&#x91CF;&#x53D1;&#x9001;&#x6570;&#x636E;&#xFF0C;&#x4F46;&#x963B;&#x585E;&#x65F6;&#x95F4;&#x5728;&#x6B64;&#x4E4B;&#x524D;&#x5DF2;&#x7ECF;&#x8FC7;&#x671F;&#x3002;</p>
+      </td>
+    </tr>
+  </tbody>
+</table>### 示例 12. 使用队列集
+
+本示例创建两个发送任务和一个接收任务。发送任务通过两个独立的队列向接收任务发送数据，每个任务一个队列。这两个队列被添加到队列集中，接收任务从队列集中读取以确定这两个队列中的哪一个包含数据。
+
+任务、队列和队列集都是在 `main()` 中创建的，请参见清单 63 了解其实现。
+
+```c
+/* 声明两个队列句柄类型的变量。两个队列都被添加到同一个队列集中。 */
+static QueueHandle_t xQueue1 = NULL, xQueue2 = NULL;
+
+/* 声明 QueueSetHandle_t 类型的变量。这是将两个队列添加到的队列集。 */
+static QueueSetHandle_t xQueueSet = NULL;
+
+int main( void )
+{
+    /* 创建两个队列，这两个队列都发送字符指针。接收任务的优先级高于发送任务的优先级，
+    因此队列中任何时候都不会有一个以上的项目*/
+    xQueue1 = xQueueCreate( 1, sizeof( char * ) );
+    xQueue2 = xQueueCreate( 1, sizeof( char * ) );
+    
+    /* 创建队列集。两个队列将被添加到该组中，每个队列可以包含 1 个项目，因此该队列组一次
+    最多只能容纳 2 个队列(每个队列 2 个队列乘以 1 个项目)。 */
+    xQueueSet = xQueueCreateSet( 1 * 2 );
+    
+    /* 将两个队列添加到集合中。 */
+    xQueueAddToSet( xQueue1, xQueueSet );
+    xQueueAddToSet( xQueue2, xQueueSet );
+    
+    /* 创建发送到队列的任务。 */
+    xTaskCreate( vSenderTask1, "Sender1", 1000, NULL, 1, NULL );
+    xTaskCreate( vSenderTask2, "Sender2", 1000, NULL, 1, NULL );
+    
+    /* 创建从队列集中读取的任务，以确定两个队列中哪个包含数据。 */
+    xTaskCreate( vReceiverTask, "Receiver", 1000, NULL, 2, NULL );
+    
+    /* 启动调度程序，以便创建的任务开始执行。 */
+    vTaskStartScheduler();
+    
+    /* 正常情况下，vTaskStartScheduler() 不应该返回，因此下面几行永远不会执行。 */
+    for( ;; );
+    return 0;
+}
+```
+
+清单 63. 示例 12 `main()` 实现
+
+第一个发送任务使用 `xQueue1` 每 100 毫秒向接收任务发送一个字符指针。第二个发送任务使用 `xQueue2`每 200 毫秒向接收任务发送一个字符指针。字符指针被设置为指向标识发送任务的字符串。清单 64 显示了两个发送任务的实现。
+
+```c
+void vSenderTask1( void *pvParameters )
+{
+const TickType_t xBlockTime = pdMS_TO_TICKS( 100 );
+const char * const pcMessage = "Message from vSenderTask1\r\n";
+
+    /* 根据大多数任务，这个任务是在无限循环中实现的。 */
+    for( ;; )
+    {
+        /* 阻塞 100ms. */
+        vTaskDelay( xBlockTime );
+        
+        /* 将此任务的字符串发送到 xQueue1。没有必要使用阻塞时间，即使队列只能容纳一个
+        项目。这是因为从队列中读取的任务的优先级高于该任务的优先级；一旦该任务写入队列，
+        它将被从队列中读取的任务占用，因此当对 xQueueSend() 的调用返回时，队列已经再次
+        为空。阻止时间设置为 0。 */
+        xQueueSend( xQueue1, &pcMessage, 0 );
+    }
+}
+/*-----------------------------------------------------------*/
+
+void vSenderTask2( void *pvParameters )
+{
+const TickType_t xBlockTime = pdMS_TO_TICKS( 200 );
+const char * const pcMessage = "Message from vSenderTask2\r\n";
+
+    /* 根据大多数任务，这个任务是在无限循环中实现的。 */
+    for( ;; )
+    {
+        /* 阻塞 200ms. */
+        vTaskDelay( xBlockTime );
+        
+        /* 将此任务的字符串发送到 xQueue2。没有必要使用阻塞时间，即使队列只能容纳一个
+        项目。这是因为从队列中读取的任务的优先级高于该任务的优先级；一旦该任务写入队列，
+        它将被从队列中读取的任务占用，因此当对 xQueueSend() 的调用返回时，队列已经再次
+        为空。阻止时间设置为 0。 */
+        xQueueSend( xQueue2, &pcMessage, 0 );
+    }
+}
+```
+
+清单 64. 示例 12 中使用的发送任务
+
+发送任务写入的队列是同一队列集的成员。每次任务发送到其中一个队列时，队列的句柄都会被发送到队列集中。接收任务调用 `xQueueSelectFromSet()` 从队列集中读取队列句柄。接收任务从集合中接收到队列句柄后，它知道接收句柄引用的队列包含数据，因此直接从队列中读取数据。它从队列中读取的数据是指向字符串的指针，接收任务将打印出该字符串。
+
+如果对 `xQueueSelectFromSet()` 的调用超时，则它将返回空值。在示例 12 中，`xQueueSelectFromSet()` 是以不确定的块时间调用的，因此永远不会超时，并且只能返回有效的队列句柄。因此，在使用返回值之前，接收任务不需要检查 `xQueueSelectFromSet()` 是否返回空值。
+
+`xQueueSelectFromSet()` 只有在句柄引用的队列包含数据时才会返回队列句柄，因此从队列中读取时没有必要使用块时间。
+
+清单 65 显示了接收任务的实现。
+
+```c
+void vReceiverTask( void *pvParameters )
+{
+QueueHandle_t xQueueThatContainsData;
+char *pcReceivedString;
+    
+    /* 根据大多数任务，这个任务是在无限循环中实现的。 */
+    for( ;; )
+    {
+        /* 阻止队列集中的一个队列包含数据。将从 xQueueSelectFromSet() 返回的 
+        QueueSetMemberHandle_t 值转换为 QueueHandle_t，因为已知该集的所有成员都是队列
+        (队列集不包含任何信号量)。*/
+        xQueueThatContainsData = ( QueueHandle_t ) xQueueSelectFromSet( xQueueSet,
+                                                                        portMAX_DELAY );
+        
+        /* 读取队列集时使用了不确定的阻塞时间，因此除非队列集中的一个队列包含数据，否则 
+        xQueueSelectFromSet() 不会返回，并且 xQueueThatContainsData 不能为空。从队
+        列中读取。没有必要指定阻塞时间，因为已知队列包含数据。阻止时间设置为 0。 */
+        xQueueReceive( xQueueThatContainsData, &pcReceivedString, 0 );
+        
+        /* 打印从队列接收到的字符串。 */
+        vPrintString( pcReceivedString );
+    }
+}
+```
+
+清单 65. 示例 12 使用的接受任务
+
+图 37 显示了示例 12 产生的输出。可以看出，接收任务从两个发送任务接收字符串。`vSenderTask1()` 使用的阻塞时间是 `vSenderTask2()` 使用的块时间的一半，导致 `vSenderTask1()` 发送的字符串打印频率是 `vSenderTask2()` 发送的字符串的两倍。
+
+![&#x56FE; 37. &#x6267;&#x884C;&#x793A;&#x4F8B; 12 &#x65F6;&#x4EA7;&#x751F;&#x7684;&#x8F93;&#x51FA;](.gitbook/assets/wei-xin-jie-tu-20190923154009.png)
+
+### 更实际的队列集用例
+
+例 12 展示了一个非常简单的例子；队列集只包含队列，它包含的两个队列都用于发送字符指针。在真实的应用程序中，队列集可能包含队列和信号量，并且队列可能不都包含相同的数据类型。在这种情况下，在使用返回值之前，有必要测试 `xQueueSelectFromSet()` 返回的值。清单 66 演示了当集合具有以下成员时，如何使用从 `xQueueSelectFromSet()` 返回的值:
+
+1. 二进制信号量。
+2. 从中读取字符指针的队列。
+3. 从中读取 `uint32_t` 值的队列。
+
+清单 66 假设队列和信号量已经被创建并添加到队列集中。
+
+```c
+/* 从中接收字符指针的队列句柄。 */
+QueueHandle_t xCharPointerQueue;
+
+/* 接收 uint32_t 值的队列句柄。 */
+QueueHandle_t xUint32tQueue;
+
+/* 二进制信号量的句柄。 */
+SemaphoreHandle_t xBinarySemaphore;
+
+/* 两个队列和二进制信号量所属的队列集。 */
+QueueSetHandle_t xQueueSet;
+
+void vAMoreRealisticReceiverTask( void *pvParameters )
+{
+QueueSetMemberHandle_t xHandle;
+char *pcReceivedString;
+uint32_t ulRecievedValue;
+const TickType_t xDelay100ms = pdMS_TO_TICKS( 100 );
+    
+    for( ;; )
+    {
+        /* 在队列集中阻塞最长100毫秒，以等待队列集中的一个成员包含数据。*/
+         xHandle = xQueueSelectFromSet( xQueueSet, xDelay100ms);
+         
+         /* 测试从 xQueueSelectFromSet() 返回的值。如果返回值为空，则对 
+         xQueueSelectFromSet() 的调用超时。如果返回值不为空，则返回值将是集合成员之一的句柄。
+         QueueSetMemberHandle_t 值可以转换为 QueueHandle_t 或 SemaphoreHandle_t。是否需
+         要显式转换取决于编译器。 */
+         
+         if( xHandle == NULL )
+         {
+             /* 对 xQueueSelectFromSet() 的调用超时。 */
+         }
+         else if( xHandle == ( QueueSetMemberHandle_t ) xCharPointerQueue )
+         {
+             /* 对 xQueueSelectFromSet() 的调用返回了接收字符指针的队列句柄。从队列中读取。已
+             知队列包含数据，因此使用阻塞时间 0。*/
+             xQueueReceive(xCharPointerQueue, &pcReceivedString, 0 );
+             
+             /* 这里可以处理接收到的字符指针... */
+         }
+         else if( xHandle == ( QueueSetMemberHandle_t ) xUint32tQueue )
+         {
+             /* 对 xQueueSelectFromSet() 的调用返回了接收 uint32_t 类型的队列句柄。从队列中
+             读取。已知队列包含数据，因此使用 0 的阻塞时间。 */
+             xQueueReceive(xUint32tQueue, &ulRecievedValue, 0 );
+             
+             /* 接收到的值可以在这里处理... */
+         }
+         else if( xHandle == ( QueueSetMemberHandle_t ) xBinarySemaphore )
+         {
+             /* 对 xQueueSelectFromSet() 的调用返回了二进制信号量的句柄。现在拿旗语。信号量已知
+             可用，因此使用 0 的阻塞时间。*/
+             xSemaphoreTake(xBinarySemaphore, 0 );
+             
+             /* 获取信号量时需要的任何处理都可以在这里执行... */
+         }
+     }
+ }
+```
+
+清单 66. 使用包含队列和信号量的队列集
+
+## 使用队列创建邮箱
+
+嵌入式社区内部对术语没有共识，“邮箱”在不同的实时操作系统中将有不同的含义。在这本书里，术语邮箱是指一个长度为1的队列。队列之所以被描述为邮箱，是因为它在应用程序中的使用方式，而不是因为它与队列的功能不同:
+
+* 队列用于将数据从一个任务发送到另一个任务，或者从中断服务例程发送到一个任务。发送方在队列中放置一个条目，接收方从队列中移除该条目。数据通过队列从发送方传递到接收方。
+* 邮箱用于保存任何任务或任何中断服务例程都可以读取的数据。数据不会通过邮箱，而是保留在邮箱中，直到被覆盖。发件人会覆盖邮箱中的值。接收器从邮箱中读取该值，但不从邮箱中删除该值。
+
+本章描述了允许队列用作邮箱的两个队列应用编程接口函数。
+
+清单 67 显示了一个被创建用作邮箱的队列。
+
+```c
+/* 邮箱可以容纳固定大小的数据项。创建邮箱(队列)时设置数据项的大小。在本例中，创建邮箱是为了
+保存示例结构。Example_t 包含一个时间戳，允许邮箱中保存的数据记录邮箱上次更新的时间。本例中使用的
+时间戳仅用于演示目的——邮箱可以保存应用程序作者想要的任何数据，并且数据不需要包含时间戳。 */
+typedef struct xExampleStructure
+{
+    TickType_t xTimeStamp;
+    uint32_t ulValue;
+} Example_t;
+
+/* 邮箱是一个队列，因此它的句柄存储在 QueueHandle_t 类型的变量中。*/
+QueueHandle_t xMailbox;
+
+void vAFunction( void )
+{
+    /* 创建将用作邮箱的队列。队列的长度为1，允许它与xQueueOverwrite()应用编程接口函数一起
+    使用，如下所述。 */
+    xMailbox = xQueueCreate( 1, sizeof( Example_t ) );
+}
+```
+
+清单 67. 正在创建用作邮箱的队列
+
+### xQueueOverwrite\(\) API 函数
+
+像 `xQueueSendToBack()` 应用编程接口函数一样，`xQueueOverwrite()` 应用编程接口函数向队列发送数据。与 `xQueueSendToBack()` 不同，如果队列已经满了，那么 `xQueueOverwrite()` 将覆盖队列中已经存在的数据。
+
+`xQueueOverwrite()` 只能用于长度为1的队列。这种限制避免了函数的实现在队列已满时任意决定要覆盖队列中的哪个项目。
+
+{% hint style="info" %}
+注意: 永远不要从中断服务例程调用 `xQueueOverwrite()`。应该使用中断安全版本`xQueueOverwriteFromISR()` 来代替它。
+{% endhint %}
+
+```c
+BaseType_t xQueueOverwrite( QueueHandle_t xQueue, const void * pvItemToQueue );
+```
+
+清单 68. `xQueueOverwrite()` API 函数原型
+
+表 26. `xQueueOverwrite()` 参数和返回值
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:left">&#x53C2;&#x6570;&#x540D;/&#x8FD4;&#x56DE;&#x503C;</th>
+      <th style="text-align:left">&#x63CF;&#x8FF0;</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:left">xQueue</td>
+      <td style="text-align:left">&#x6570;&#x636E;&#x88AB;&#x53D1;&#x9001;(&#x5199;&#x5165;)&#x5230;&#x7684;&#x961F;&#x5217;&#x7684;&#x53E5;&#x67C4;&#x3002;&#x961F;&#x5217;&#x53E5;&#x67C4;&#x5C06;&#x4ECE;&#x7528;&#x4E8E;&#x521B;&#x5EFA;&#x961F;&#x5217;&#x7684; <code>xQueueCreate()</code> &#x8C03;&#x7528;&#x4E2D;&#x8FD4;&#x56DE;&#x3002;</td>
+    </tr>
+    <tr>
+      <td style="text-align:left">pvItemToQueue</td>
+      <td style="text-align:left">
+        <p>&#x6307;&#x5411;&#x8981;&#x590D;&#x5236;&#x5230;&#x961F;&#x5217;&#x4E2D;&#x7684;&#x6570;&#x636E;&#x7684;&#x6307;&#x9488;&#x3002;</p>
+        <p>&#x961F;&#x5217;&#x53EF;&#x4EE5;&#x5BB9;&#x7EB3;&#x7684;&#x6BCF;&#x4E2A;&#x9879;&#x76EE;&#x7684;&#x5927;&#x5C0F;&#x662F;&#x5728;&#x521B;&#x5EFA;&#x961F;&#x5217;&#x65F6;&#x8BBE;&#x7F6E;&#x7684;&#xFF0C;&#x56E0;&#x6B64;&#x8FD9;&#x4E9B;&#x5B57;&#x8282;&#x5C06;&#x4ECE; <code>pvItemToQueue</code> &#x590D;&#x5236;&#x5230;&#x961F;&#x5217;&#x5B58;&#x50A8;&#x533A;&#x57DF;&#x3002;</p>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left">&#x8FD4;&#x56DE;&#x503C;</td>
+      <td style="text-align:left"><code>xQueueOverwrite()</code> &#x5C06;&#x5199;&#x5165;&#x961F;&#x5217;&#xFF0C;&#x5373;&#x4F7F;&#x961F;&#x5217;&#x5DF2;&#x6EE1;&#xFF0C;&#x56E0;&#x6B64; <code>pdPASS</code> &#x662F;&#x552F;&#x4E00;&#x53EF;&#x80FD;&#x7684;&#x8FD4;&#x56DE;&#x503C;&#x3002;</td>
+    </tr>
+  </tbody>
+</table>清单 69 显示了 `xQueueOverwrite()` 用于写入清单 67 中创建的邮箱\(队列\)。
+
+```c
+void vUpdateMailbox( uint32_t ulNewValue )
+{
+/* 清单 67 中定义了 Example_t */
+Example_t xData;
+
+    /* 新数据写入到Example_t结构。*/
+    xData.ulValue = ulNewValue;
+    
+    /* 使用RTOS滴答计数作为Example_t结构中存储的时间戳。 */
+    xData.xTimeStamp = xTaskGetTickCount();
+    
+    /* 发送结构邮箱 - 覆盖已在信箱中的任何数据。 */
+    xQueueOverwrite( xMailbox, &xData );
+}
+```
+
+清单 69. 使用 xQueueOverwrite\(\) API 函数
+
+### xQueuePeek\(\) API 函数
+
+`xQueuePeek()` 用于从队列中接收\(读取\)项目，而不从队列中移除项目。`xQueuePeek()` 从队列头接收数据，而不修改存储在队列中的数据或数据在队列中的存储顺序。
+
+{% hint style="info" %}
+注意: 永远不要从中断服务例程调用 `xQueuePeek()`。应该使用中断安全版本 `xQueuePeekFromISR()` 来代替它。
+{% endhint %}
+
+`xQueuePeek()` 具有与 `xQueueReceive()` 相同的函数参数和返回值。
+
+```c
+BaseType_txQueuePeek( QueueHandle_t xQueue,
+                      void *const pvBuffer,
+                      TickType_t xTicksToWait );
+```
+
+清单 70. `xQueuePeek()` API 函数原型
+
+清单 71 显示了 xQueuePeek\(\) 用于接收发布到清单 69 中邮箱\(队列\)的项目
+
+```c
+BaseType_t vReadMailbox( Example_t *pxData )
+{
+TickType_t xPreviousTimeStamp;
+BaseType_t xDataUpdated;
+    
+    /* 此函数使用从邮箱收到的最新值更新 Example_t 结构。 记录 *pxData 中已经包含的时间戳记，
+    然后再用新数据覆盖它。 */
+    xPreviousTimeStamp = pxData->xTimeStamp;
+    
+    /* 使用邮箱中包含的数据更新 pxData 指向的 Example_t 结构。 如果在此处使用
+    xQueueReceive()，则邮箱将保留为空，然后其他任何任务都无法读取数据。 使用
+    xQueuePeek() 而不是 xQueueReceive() 可以确保数据保留在邮箱中。已指定阻止时间，
+    因此如果邮箱为空，则调用任务将被置于 阻塞状态以等待邮箱包含数据。 由于使用了无限的
+    阻塞时间，因此不必检查从 xQueuePeek() 返回的值，因为 xQueuePeek() 仅在有数据时
+    才返回。 */
+    xQueuePeek( xMailbox, pxData, portMAX_DELAY );
+    
+    /* 返回 pdTRUE 如果从邮箱中读取的值已更新，因为该功能被称为最后。 否则返回 pdFALSE。 */
+    if( pxData->xTimeStamp > xPreviousTimeStamp )
+    {
+        xDataUpdated = pdTRUE;
+    }
+    else
+    {
+        xDataUpdated = pdFALSE;
+    }
+    
+    return xDataUpdated;
+}
+```
+
+清单71. 使用 xQueuePeek\(\) API 函数
 
