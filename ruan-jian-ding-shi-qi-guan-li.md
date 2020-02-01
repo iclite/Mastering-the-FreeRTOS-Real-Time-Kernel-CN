@@ -50,7 +50,30 @@ void ATimerCallback( TimerHandle_t xTimer );
 <img src = https://github.com/VulcanLIU/Mastering-the-FreeRTOS-Real-Time-Kernel-CN/blob/master/.gitbook/assets/Figure%2038.png>
 
 **图38一次性软件计时器和自动重新加载软件计时器之间的行为差异**
+参考图38：
+* 计时器1
+定时器1是具有6个滴答周期的一次性定时器。它在时间t1启动，因此它的回调函数在6个刻度之后，即时间t7执行。由于定时器1是一次性定时器，其回调函数不会再次执行。
 
+* 计时器2
+定时器2是具有5个滴答周期的自动重新加载定时器。它在时间t1启动，因此它的回调函数在时间t1之后每5个节拍执行一次。在图38中，这是时间t6、t11和t16。
+**软件计时器状态**
+软件计时器可以处于以下两种状态之一：
+ * 休眠
+ 存在休眠的软件计时器，可以由其句柄引用，但不在运行，因此其回调函数将不会执行。
+ * 运行
+ 正在运行的软件定时器，将在自该软件定时器进入运行状态，或自该软件定时器上次被重置以来经过与其周期相等的时间之后执行其回调功能。
+ 
+ 图39和图40分别显示了自动重新加载定时器和单次定时器在休眠和运行状态之间可能的转换。这两个图的关键区别在于定时器到期后进入的状态；自动重新加载定时器执行其回调函数，然后重新进入运行状态，一次性定时器执行其回调函数，然后进入休眠状态。
+
+xTimerDelete()接口函数的作用是：删除计时器。可以随时删除计时器。
+
+<img src = https://github.com/VulcanLIU/Mastering-the-FreeRTOS-Real-Time-Kernel-CN/blob/master/.gitbook/assets/Figure%2039.png>
+
+**图39自动重新加载软件计时器状态和转换**
+
+<img src = https://github.com/VulcanLIU/Mastering-the-FreeRTOS-Real-Time-Kernel-CN/blob/master/.gitbook/assets/Figure%2040.png>
+
+**图40一次性软件定时器状态和转换**
 ## 5.4 软件定时器的上下文
 
 ## 5.5 创建和开始一个软件定时器
