@@ -47,7 +47,7 @@ void ATimerCallback( TimerHandle_t xTimer );
 2. 自动重新加载计时器
 一旦启动，自动重新加载计时器将在每次到期时重新启动，从而定期执行其回调函数。
 
-<img src = https://github.com/VulcanLIU/Mastering-the-FreeRTOS-Real-Time-Kernel-CN/blob/master/.gitbook/assets/Figure%2038.png>
+<img src = https://github.com/PYGC/Mastering-the-FreeRTOS-Real-Time-Kernel-CN/blob/master/.gitbook/assets/Figure%2038.png>
 
 **图38一次性软件计时器和自动重新加载软件计时器之间的行为差异**
 参考图38：
@@ -67,11 +67,11 @@ void ATimerCallback( TimerHandle_t xTimer );
 
 xTimerDelete()接口函数的作用是：删除计时器。可以随时删除计时器。
 
-<img src = https://github.com/VulcanLIU/Mastering-the-FreeRTOS-Real-Time-Kernel-CN/blob/master/.gitbook/assets/Figure%2039.png>
+<img src = https://github.com/PYGC/Mastering-the-FreeRTOS-Real-Time-Kernel-CN/blob/master/.gitbook/assets/Figure%2039.png>
 
 **图39自动重新加载软件计时器状态和转换**
 
-<img src = https://github.com/VulcanLIU/Mastering-the-FreeRTOS-Real-Time-Kernel-CN/blob/master/.gitbook/assets/Figure%2040.png>
+<img src = https://github.com/PYGC/Mastering-the-FreeRTOS-Real-Time-Kernel-CN/blob/master/.gitbook/assets/Figure%2040.png>
 
 **图40一次性软件定时器状态和转换**
 ## 5.4 软件定时器的上下文
