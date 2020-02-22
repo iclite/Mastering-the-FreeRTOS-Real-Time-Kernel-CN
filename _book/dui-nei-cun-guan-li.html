@@ -1,0 +1,674 @@
+
+<!DOCTYPE HTML>
+<html lang="" >
+    <head>
+        <meta charset="UTF-8">
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <title>堆内存管理 · GitBook</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="description" content="">
+        <meta name="generator" content="GitBook 3.2.3">
+        
+        
+        
+    
+    <link rel="stylesheet" href="gitbook/style.css">
+
+    
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-highlight/website.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-search/search.css">
+                
+            
+                
+                <link rel="stylesheet" href="gitbook/gitbook-plugin-fontsettings/website.css">
+                
+            
+        
+
+    
+
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+
+        
+    
+    
+    <meta name="HandheldFriendly" content="true"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="gitbook/images/apple-touch-icon-precomposed-152.png">
+    <link rel="shortcut icon" href="gitbook/images/favicon.ico" type="image/x-icon">
+
+    
+    <link rel="next" href="ren-wu-guan-li.html" />
+    
+    
+    <link rel="prev" href="freertos-de-fa-hang.html" />
+    
+
+    </head>
+    <body>
+        
+<div class="book">
+    <div class="book-summary">
+        
+            
+<div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search" />
+</div>
+
+            
+                <nav role="navigation">
+                
+
+
+<ul class="summary">
+    
+    
+
+    
+
+    
+        
+        
+    
+        <li class="chapter " data-level="1.1" data-path="./">
+            
+                <a href="./">
+            
+                    
+                    掌握 FreeROTS™ 实时内核
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.2" data-path="qian-yan.html">
+            
+                <a href="qian-yan.html">
+            
+                    
+                    前言
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.3" data-path="freertos-de-fa-hang.html">
+            
+                <a href="freertos-de-fa-hang.html">
+            
+                    
+                    FreeRTOS 的发行
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter active" data-level="1.4" data-path="dui-nei-cun-guan-li.html">
+            
+                <a href="dui-nei-cun-guan-li.html">
+            
+                    
+                    堆内存管理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.5" data-path="ren-wu-guan-li.html">
+            
+                <a href="ren-wu-guan-li.html">
+            
+                    
+                    任务管理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.6" data-path="dui-lie-guan-li.html">
+            
+                <a href="dui-lie-guan-li.html">
+            
+                    
+                    队列管理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.7" data-path="ruan-jian-ding-shi-qi-guan-li.html">
+            
+                <a href="ruan-jian-ding-shi-qi-guan-li.html">
+            
+                    
+                    软件定时器管理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.8" data-path="zhong-duan-guan-li.html">
+            
+                <a href="zhong-duan-guan-li.html">
+            
+                    
+                    中断管理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.9" data-path="zi-yuan-guan-li.html">
+            
+                <a href="zi-yuan-guan-li.html">
+            
+                    
+                    资源管理
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.10" data-path="shi-jian-zu.html">
+            
+                <a href="shi-jian-zu.html">
+            
+                    
+                    事件组
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.11" data-path="ren-wu-tong-zhi.html">
+            
+                <a href="ren-wu-tong-zhi.html">
+            
+                    
+                    任务通知
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.12" data-path="di-gong-hao-zhi-chi.html">
+            
+                <a href="di-gong-hao-zhi-chi.html">
+            
+                    
+                    低功耗支持
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.13" data-path="kai-fa-zhe-zhi-chi.html">
+            
+                <a href="kai-fa-zhe-zhi-chi.html">
+            
+                    
+                    开发者支持
+            
+                </a>
+            
+
+            
+        </li>
+    
+        <li class="chapter " data-level="1.14" data-path="gu-zhang-pai-chu.html">
+            
+                <a href="gu-zhang-pai-chu.html">
+            
+                    
+                    故障排除
+            
+                </a>
+            
+
+            
+        </li>
+    
+
+    
+
+    <li class="divider"></li>
+
+    <li>
+        <a href="https://www.gitbook.com" target="blank" class="gitbook-link">
+            Published with GitBook
+        </a>
+    </li>
+</ul>
+
+
+                </nav>
+            
+        
+    </div>
+
+    <div class="book-body">
+        
+            <div class="body-inner">
+                
+                    
+
+<div class="book-header" role="navigation">
+    
+
+    <!-- Title -->
+    <h1>
+        <i class="fa fa-circle-o-notch fa-spin"></i>
+        <a href="." >堆内存管理</a>
+    </h1>
+</div>
+
+
+
+
+                    <div class="page-wrapper" tabindex="-1" role="main">
+                        <div class="page-inner">
+                            
+<div id="book-search-results">
+    <div class="search-noresults">
+    
+                                <section class="normal markdown-section">
+                                
+                                <h1 id="&#x5806;&#x5185;&#x5B58;&#x7BA1;&#x7406;">&#x5806;&#x5185;&#x5B58;&#x7BA1;&#x7406;</h1>
+<p>&#x4ECE; FreeRTOS V9.0.0 &#x5F00;&#x59CB; FreeRTOS &#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x53EF;&#x4EE5;&#x5B8C;&#x5168;&#x9759;&#x6001;&#x5206;&#x914D;&#xFF0C;&#x65E0;&#x9700;&#x5305;&#x542B;&#x5806;&#x5185;&#x5B58;&#x7BA1;&#x7406;&#x5668;&#x3002;</p>
+<h2 id="&#x5F15;&#x8A00;&#x4E0E;&#x8303;&#x56F4;">&#x5F15;&#x8A00;&#x4E0E;&#x8303;&#x56F4;</h2>
+<h3 id="&#x5148;&#x51B3;&#x6761;&#x4EF6;">&#x5148;&#x51B3;&#x6761;&#x4EF6;</h3>
+<p>FreeRTOS &#x662F;&#x4F5C;&#x4E3A;&#x4E00;&#x7EC4; C &#x6E90;&#x6587;&#x4EF6;&#x63D0;&#x4F9B;&#x7684;&#xFF0C;&#x56E0;&#x6B64;&#x4F5C;&#x4E3A;&#x4E00;&#x540D;&#x79F0;&#x804C;&#x7684; C &#x7A0B;&#x5E8F;&#x5458;&#x662F;&#x4F7F;&#x7528; FreeRTOS &#x7684;&#x5148;&#x51B3;&#x6761;&#x4EF6;&#xFF0C;&#x56E0;&#x6B64;&#x672C;&#x7AE0;&#x5047;&#x5B9A;&#x8BFB;&#x8005;&#x719F;&#x6089;&#x4EE5;&#x4E0B;&#x6982;&#x5FF5;&#xFF1A;</p>
+<ul>
+<li>&#x5982;&#x4F55;&#x6784;&#x5EFA;C&#x9879;&#x76EE;&#xFF0C;&#x5305;&#x62EC;&#x4E0D;&#x540C;&#x7684;&#x7F16;&#x8BD1;&#x548C;&#x94FE;&#x63A5;&#x9636;&#x6BB5;&#x3002;</li>
+<li>&#x6808;&#x548C;&#x5806;&#x662F;&#x4EC0;&#x4E48;.</li>
+<li>&#x6807;&#x51C6; C &#x5E93; <code>malloc()</code> &#x548C; <code>free()</code> &#x51FD;&#x6570;&#x3002;</li>
+</ul>
+<h3 id="&#x52A8;&#x6001;&#x5185;&#x5B58;&#x5206;&#x914D;&#x53CA;&#x5176;&#x4E0E;-freertos-&#x7684;&#x76F8;&#x5173;&#x6027;">&#x52A8;&#x6001;&#x5185;&#x5B58;&#x5206;&#x914D;&#x53CA;&#x5176;&#x4E0E; FreeRTOS &#x7684;&#x76F8;&#x5173;&#x6027;</h3>
+<p>&#x4ECE; FreeRTOS V9.0.0 &#x5F00;&#x59CB;&#xFF0C;&#x5185;&#x6838;&#x5BF9;&#x8C61;&#x53EF;&#x4EE5;&#x5728;&#x7F16;&#x8BD1;&#x65F6;&#x9759;&#x6001;&#x5206;&#x914D;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x5728;&#x8FD0;&#x884C;&#x65F6;&#x52A8;&#x6001;&#x5206;&#x914D;&#xFF1A;&#x672C;&#x4E66;&#x7684;&#x540E;&#x7EED;&#x7AE0;&#x8282;&#x5C06;&#x4ECB;&#x7ECD;&#x5185;&#x6838;&#x5BF9;&#x8C61;&#xFF0C;&#x5982;&#x4EFB;&#x52A1;&#xFF0C;&#x961F;&#x5217;&#xFF0C;&#x4FE1;&#x53F7;&#x91CF;&#x548C;&#x4E8B;&#x4EF6;&#x7EC4;&#x3002; &#x4E3A;&#x4E86;&#x4F7F; FreeRTOS &#x5C3D;&#x53EF;&#x80FD;&#x6613;&#x4E8E;&#x4F7F;&#x7528;&#xFF0C;&#x8FD9;&#x4E9B;&#x5185;&#x6838;&#x5BF9;&#x8C61;&#x5728;&#x7F16;&#x8BD1;&#x65F6;&#x4E0D;&#x662F;&#x5206;&#x914D;&#x7684;&#xFF0C;&#x800C;&#x662F;&#x5728;&#x8FD0;&#x884C;&#x65F6;&#x52A8;&#x6001;&#x5206;&#x914D;&#x7684;; &#x6BCF;&#x6B21;&#x521B;&#x5EFA;&#x5185;&#x6838;&#x5BF9;&#x8C61;&#x65F6;&#xFF0C;FreeRTOS &#x90FD;&#x4F1A;&#x5206;&#x914D; RAM&#xFF0C;&#x5E76;&#x5728;&#x6BCF;&#x6B21;&#x5220;&#x9664;&#x5185;&#x6838;&#x5BF9;&#x8C61;&#x65F6;&#x91CA;&#x653E; RAM&#x3002; &#x6B64;&#x7B56;&#x7565;&#x51CF;&#x5C11;&#x4E86;&#x8BBE;&#x8BA1;&#x548C;&#x8BA1;&#x5212;&#x5DE5;&#x4F5C;&#xFF0C;&#x7B80;&#x5316;&#x4E86; API&#xFF0C;&#x5E76;&#x6700;&#x5927;&#x9650;&#x5EA6;&#x5730;&#x51CF;&#x5C11;&#x4E86; RAM &#x5360;&#x7528;&#x7A7A;&#x95F4;&#x3002;</p>
+<p>&#x672C;&#x7AE0;&#x8BA8;&#x8BBA;&#x52A8;&#x6001;&#x5185;&#x5B58;&#x5206;&#x914D;&#x3002; &#x52A8;&#x6001;&#x5185;&#x5B58;&#x5206;&#x914D;&#x662F;&#x4E00;&#x79CD; C &#x7F16;&#x7A0B;&#x6982;&#x5FF5;&#xFF0C;&#x800C;&#x4E0D;&#x662F; FreeRTOS &#x6216;&#x591A;&#x4EFB;&#x52A1;&#x7279;&#x6709;&#x7684;&#x6982;&#x5FF5;&#x3002; &#x5B83;&#x4E0E; FreeRTOS &#x76F8;&#x5173;&#xFF0C;&#x56E0;&#x4E3A;&#x5185;&#x6838;&#x5BF9;&#x8C61;&#x662F;&#x52A8;&#x6001;&#x5206;&#x914D;&#x7684;&#xFF0C;&#x800C;&#x901A;&#x7528;&#x7F16;&#x8BD1;&#x5668;&#x63D0;&#x4F9B;&#x7684;&#x52A8;&#x6001;&#x5185;&#x5B58;&#x5206;&#x914D;&#x65B9;&#x6848;&#x5E76;&#x4E0D;&#x603B;&#x662F;&#x9002;&#x7528;&#x4E8E;&#x5B9E;&#x65F6;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x3002;</p>
+<p>&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x6807;&#x51C6; C &#x5E93;&#x4E2D;&#x7684; <code>malloc()</code> &#x548C; <code>free()</code> &#x51FD;&#x6570;&#x5206;&#x914D;&#x5185;&#x5B58;&#xFF0C;&#x4F46;&#x662F;&#x7531;&#x4E8E;&#x4EE5;&#x4E0B;&#x4E00;&#x4E2A;&#x6216;&#x591A;&#x4E2A;&#x539F;&#x56E0;&#xFF0C;&#x5B83;&#x4EEC;&#x53EF;&#x80FD;&#x4E0D;&#x5408;&#x9002;&#xFF1A;</p>
+<ul>
+<li>&#x5B83;&#x4EEC;&#x5728;&#x5C0F;&#x578B;&#x5D4C;&#x5165;&#x5F0F;&#x7CFB;&#x7EDF;&#x4E2D;&#x5E76;&#x4E0D;&#x603B;&#x662F;&#x53EF;&#x7528;&#x3002;</li>
+<li>&#x5B83;&#x4EEC;&#x7684;&#x5B9E;&#x73B0;&#x53EF;&#x80FD;&#x76F8;&#x5BF9;&#x8F83;&#x5927;&#xFF0C;&#x5360;&#x7528;&#x4E86;&#x5B9D;&#x8D35;&#x7684;&#x4EE3;&#x7801;&#x7A7A;&#x95F4;&#x3002;</li>
+<li>&#x5B83;&#x4EEC;&#x5F88;&#x5C11;&#x662F;&#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x7684;&#x3002;</li>
+<li>&#x5B83;&#x4EEC;&#x4E0D;&#x662F;&#x786E;&#x5B9A;&#x6027;&#x7684;; &#x6267;&#x884C;&#x529F;&#x80FD;&#x6240;&#x82B1;&#x8D39;&#x7684;&#x65F6;&#x95F4;&#x56E0;&#x547C;&#x53EB;&#x800C;&#x5F02;&#x3002;</li>
+<li>&#x5B83;&#x4EEC;&#x53EF;&#x80FD;&#x4F1A;&#x906D;&#x53D7;&#x788E;&#x7247;&#x7684;&#x6298;&#x78E8;&#x3002;</li>
+<li>&#x5B83;&#x4EEC;&#x4F1A;&#x4F7F;&#x94FE;&#x63A5;&#x5668;&#x914D;&#x7F6E;&#x590D;&#x6742;&#x5316;&#x3002;</li>
+<li>&#x5982;&#x679C;&#x5141;&#x8BB8;&#x5806;&#x7A7A;&#x95F4;&#x589E;&#x957F;&#x5230;&#x5176;&#x4ED6;&#x53D8;&#x91CF;&#x4F7F;&#x7528;&#x7684;&#x5185;&#x5B58;&#xFF0C;&#x5B83;&#x4EEC;&#x53EF;&#x80FD;&#x662F;&#x96BE;&#x4EE5;&#x8C03;&#x8BD5;&#x51FA;&#x6765;&#x7684;&#x9519;&#x8BEF;&#x6765;&#x6E90;&#x3002;</li>
+</ul>
+<h3 id="&#x52A8;&#x6001;&#x5185;&#x5B58;&#x5206;&#x914D;&#x7684;&#x9009;&#x9879;">&#x52A8;&#x6001;&#x5185;&#x5B58;&#x5206;&#x914D;&#x7684;&#x9009;&#x9879;</h3>
+<p>&#x4ECE; FreeRTOS V9.0.0 &#x5F00;&#x59CB;&#xFF0C;&#x5185;&#x6838;&#x5BF9;&#x8C61;&#x53EF;&#x4EE5;&#x5728;&#x7F16;&#x8BD1;&#x65F6;&#x9759;&#x6001;&#x5206;&#x914D;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x5728;&#x8FD0;&#x884C;&#x65F6;&#x52A8;&#x6001;&#x5206;&#x914D;&#xFF1A;&#x65E9;&#x671F;&#x7248;&#x672C;&#x7684;FreeRTOS &#x4F7F;&#x7528;&#x5185;&#x5B58;&#x6C60;&#x5206;&#x914D;&#x65B9;&#x6848;&#xFF0C;&#x4ECE;&#x800C;&#x5728;&#x7F16;&#x8BD1;&#x65F6;&#x9884;&#x5148;&#x5206;&#x914D;&#x4E0D;&#x540C;&#x5927;&#x5C0F;&#x7684;&#x5185;&#x5B58;&#x5757;&#x6C60;&#xFF0C;&#x7136;&#x540E;&#x7531;&#x5185;&#x5B58;&#x5206;&#x914D;&#x529F;&#x80FD;&#x3002; &#x867D;&#x7136;&#x8FD9;&#x662F;&#x5728;&#x5B9E;&#x65F6;&#x7CFB;&#x7EDF;&#x4E2D;&#x4F7F;&#x7528;&#x7684;&#x5E38;&#x89C1;&#x65B9;&#x6848;&#xFF0C;&#x4F46;&#x5B83;&#x88AB;&#x8BC1;&#x660E;&#x662F;&#x8BB8;&#x591A;&#x652F;&#x6301;&#x8BF7;&#x6C42;&#x7684;&#x6765;&#x6E90;&#xFF0C;&#x4E3B;&#x8981;&#x662F;&#x56E0;&#x4E3A;&#x5B83;&#x65E0;&#x6CD5;&#x6709;&#x6548;&#x5730;&#x4F7F;&#x7528; RAM &#x4EE5;&#x4F7F;&#x5176;&#x9002;&#x7528;&#x4E8E;&#x975E;&#x5E38;&#x5C0F;&#x7684;&#x5D4C;&#x5165;&#x5F0F;&#x7CFB;&#x7EDF;&#xFF0C;&#x56E0;&#x6B64;&#x8BE5;&#x65B9;&#x6848;&#x88AB;&#x653E;&#x5F03;&#x3002;</p>
+<p>FreeRTOS &#x73B0;&#x5728;&#x5C06;&#x5185;&#x5B58;&#x5206;&#x914D;&#x89C6;&#x4E3A;&#x53EF;&#x79FB;&#x690D;&#x5C42;&#x7684;&#x4E00;&#x90E8;&#x5206;&#xFF08;&#x800C;&#x4E0D;&#x662F;&#x6838;&#x5FC3;&#x4EE3;&#x7801;&#x5E93;&#x7684;&#x4E00;&#x90E8;&#x5206;&#xFF09;&#x3002; &#x8FD9;&#x662F;&#x56E0;&#x4E3A;&#x4E0D;&#x540C;&#x7684;&#x5D4C;&#x5165;&#x5F0F;&#x7CFB;&#x7EDF;&#x5177;&#x6709;&#x4E0D;&#x540C;&#x7684;&#x52A8;&#x6001;&#x5B58;&#x50A8;&#x5668;&#x5206;&#x914D;&#x548C;&#x65F6;&#x5E8F;&#x8981;&#x6C42;&#xFF0C;&#x56E0;&#x6B64;&#x5355;&#x4E2A;&#x52A8;&#x6001;&#x5B58;&#x50A8;&#x5668;&#x5206;&#x914D;&#x7B97;&#x6CD5;&#x5C06;&#x4EC5;&#x9002;&#x7528;&#x4E8E;&#x5E94;&#x7528;&#x7684;&#x5B50;&#x96C6;&#x3002; &#x6B64;&#x5916;&#xFF0C;&#x4ECE;&#x6838;&#x5FC3;&#x4EE3;&#x7801;&#x5E93;&#x4E2D;&#x5220;&#x9664;&#x52A8;&#x6001;&#x5185;&#x5B58;&#x5206;&#x914D;&#x4F7F;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x7F16;&#x5199;&#x8005;&#x80FD;&#x591F;&#x5728;&#x9002;&#x5F53;&#x65F6;&#x63D0;&#x4F9B;&#x81EA;&#x5DF1;&#x7684;&#x7279;&#x5B9A;&#x5B9E;&#x73B0;&#x3002;</p>
+<p>&#x5F53; FreeRTOS &#x9700;&#x8981; RAM &#x65F6;&#xFF0C;&#x5B83;&#x8C03;&#x7528; <code>pvPortMalloc()</code>&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x8C03;&#x7528; <code>malloc()</code>&#x3002; &#x5F53;&#x91CA;&#x653E; RAM &#x65F6;&#xFF0C;&#x5185;&#x6838;&#x8C03;&#x7528; <code>vPortFree()</code> &#x800C;&#x4E0D;&#x662F;&#x8C03;&#x7528; <code>free()</code>&#x3002; <code>pvPortMalloc()</code> &#x4E0E;&#x6807;&#x51C6; C &#x5E93; <code>malloc()</code> &#x51FD;&#x6570;&#x5177;&#x6709;&#x76F8;&#x540C;&#x7684;&#x539F;&#x578B;&#xFF0C;&#x800C; <code>vPortFree()</code> &#x4E0E;&#x6807;&#x51C6; C &#x5E93; <code>free()</code> &#x51FD;&#x6570;&#x5177;&#x6709;&#x76F8;&#x540C;&#x7684;&#x539F;&#x578B;&#x3002;</p>
+<p><code>pvPortMalloc()</code> &#x548C; <code>vPortFree()</code> &#x662F;&#x516C;&#x5171;&#x51FD;&#x6570;&#xFF0C;&#x56E0;&#x6B64;&#x4E5F;&#x53EF;&#x4EE5;&#x4ECE;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x4EE3;&#x7801;&#x4E2D;&#x8C03;&#x7528;&#x5B83;&#x4EEC;&#x3002;</p>
+<p>&#x4ECE; FreeRTOS V9.0.0 &#x5F00;&#x59CB;&#xFF0C;&#x5185;&#x6838;&#x5BF9;&#x8C61;&#x53EF;&#x4EE5;&#x5728;&#x7F16;&#x8BD1;&#x65F6;&#x9759;&#x6001;&#x5206;&#x914D;&#xFF0C;&#x4E5F;&#x53EF;&#x4EE5;&#x5728;&#x8FD0;&#x884C;&#x65F6;&#x52A8;&#x6001;&#x5206;&#x914D;&#xFF1A;FreeRTOS &#x5E26;&#x6709;<code>pvPortMalloc()</code> &#x548C; <code>vPortFree()</code> &#x7684;&#x4E94;&#x4E2A;&#x793A;&#x4F8B;&#x5B9E;&#x73B0;&#xFF0C;&#x6240;&#x6709;&#x8FD9;&#x4E9B;&#x90FD;&#x5728;&#x672C;&#x7AE0;&#x4E2D;&#x8BB0;&#x5F55;&#x3002;FreeRTOS &#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x5176;&#x4E2D;&#x4E00;&#x4E2A;&#x793A;&#x4F8B;&#x5B9E;&#x73B0;&#xFF0C;&#x6216;&#x63D0;&#x4F9B;&#x81EA;&#x5DF1;&#x7684;&#x3002;</p>
+<p>&#x8FD9;&#x4E94;&#x4E2A;&#x793A;&#x4F8B;&#x5206;&#x522B;&#x5728; <code>heap_1.c</code>&#xFF0C;<code>heap_2.c</code>&#xFF0C;<code>heap_3.c</code>&#xFF0C;<code>heap_4.c</code> &#x548C; <code>heap_5.c</code> &#x6E90;&#x6587;&#x4EF6;&#x4E2D;&#x5B9A;&#x4E49;&#xFF0C;&#x6240;&#x6709;&#x8FD9;&#x4E9B;&#x6587;&#x4EF6;&#x90FD;&#x4F4D;&#x4E8E; <code>FreeRTOS/Source/portable/MemMang</code> &#x76EE;&#x5F55;&#x4E2D;&#x3002;</p>
+<h3 id="&#x8303;&#x56F4;">&#x8303;&#x56F4;</h3>
+<p>&#x672C;&#x7AE0;&#x7684;&#x76EE;&#x7684;&#x662F;&#x8BA9;&#x8BFB;&#x8005;&#x66F4;&#x597D;&#x5730;&#x7406;&#x89E3;&#xFF1A;</p>
+<ul>
+<li>&#x4EC0;&#x4E48;&#x65F6;&#x5019; FreeRTOS &#x5206;&#x914D;RAM&#x3002;</li>
+<li>FreeRTOS &#x63D0;&#x4F9B;&#x7684; 5 &#x4E2A;&#x5185;&#x5B58;&#x5206;&#x914D;&#x65B9;&#x6848;&#x793A;&#x4F8B;&#x3002;</li>
+<li>&#x9009;&#x62E9;&#x54EA;&#x79CD;&#x5185;&#x5B58;&#x5206;&#x914D;&#x65B9;&#x6848;&#x3002;</li>
+</ul>
+<h2 id="&#x5185;&#x5B58;&#x5206;&#x914D;&#x65B9;&#x6848;&#x793A;&#x4F8B;">&#x5185;&#x5B58;&#x5206;&#x914D;&#x65B9;&#x6848;&#x793A;&#x4F8B;</h2>
+<p>&#x4ECE; FreeRTOS V9.0.0 &#x53EF;&#x4EE5;&#x5B8C;&#x5168;&#x9759;&#x6001;&#x5206;&#x914D; FreeRTOS &#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#xFF0C;&#x65E0;&#x9700;&#x5305;&#x542B;&#x5806;&#x5185;&#x5B58;&#x7BA1;&#x7406;&#x5668;&#x3002;</p>
+<h3 id="heap1">Heap_1</h3>
+<p>&#x5C0F;&#x578B;&#x4E13;&#x7528;&#x5D4C;&#x5165;&#x5F0F;&#x7CFB;&#x7EDF;&#x901A;&#x5E38;&#x53EA;&#x5728;&#x8C03;&#x5EA6;&#x7A0B;&#x5E8F;&#x542F;&#x52A8;&#x4E4B;&#x524D;&#x521B;&#x5EFA;&#x4EFB;&#x52A1;&#x548C;&#x5176;&#x4ED6;&#x5185;&#x6838;&#x5BF9;&#x8C61;&#x3002; &#x5728;&#x8FD9;&#x79CD;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x5185;&#x5B58;&#x4EC5;&#x5728;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x5F00;&#x59CB;&#x6267;&#x884C;&#x4EFB;&#x4F55;&#x5B9E;&#x65F6;&#x529F;&#x80FD;&#x4E4B;&#x524D;&#x7531;&#x5185;&#x6838;&#x52A8;&#x6001;&#x5206;&#x914D;&#xFF0C;&#x5E76;&#x4E14;&#x5185;&#x5B58;&#x5728;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x7684;&#x751F;&#x547D;&#x5468;&#x671F;&#x5185;&#x4FDD;&#x6301;&#x5206;&#x914D;&#x3002; &#x8FD9;&#x610F;&#x5473;&#x7740;&#x6240;&#x9009;&#x62E9;&#x7684;&#x5206;&#x914D;&#x65B9;&#x6848;&#x4E0D;&#x5FC5;&#x8003;&#x8651;&#x4EFB;&#x4F55;&#x66F4;&#x590D;&#x6742;&#x7684;&#x5185;&#x5B58;&#x5206;&#x914D;&#x95EE;&#x9898;&#xFF0C;&#x4F8B;&#x5982;&#x786E;&#x5B9A;&#x6027;&#x548C;&#x5206;&#x6BB5;&#xFF0C;&#x800C;&#x53EA;&#x9700;&#x8003;&#x8651;&#x4EE3;&#x7801;&#x5927;&#x5C0F;&#x548C;&#x7B80;&#x5355;&#x6027;&#x7B49;&#x5C5E;&#x6027;&#x3002;</p>
+<p><code>heap_1.c</code> &#x5B9E;&#x73B0;&#x4E86; <code>pvPortMalloc()</code> &#x7684;&#x4E00;&#x4E2A;&#x975E;&#x5E38;&#x57FA;&#x672C;&#x7684;&#x7248;&#x672C;&#xFF0C;&#x5E76;&#x6CA1;&#x6709;&#x5B9E;&#x73B0; <code>vPortFree()</code>&#x3002; &#x6C38;&#x8FDC;&#x4E0D;&#x4F1A;&#x5220;&#x9664;&#x4EFB;&#x52A1;&#x6216;&#x5176;&#x4ED6;&#x5185;&#x6838;&#x5BF9;&#x8C61;&#x7684;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x53EF;&#x80FD;&#x4F1A;&#x4F7F;&#x7528; <code>heap_1</code>&#x3002;</p>
+<p>&#x4E00;&#x4E9B;&#x7981;&#x6B62;&#x4F7F;&#x7528;&#x52A8;&#x6001;&#x5185;&#x5B58;&#x5206;&#x914D;&#x7684;&#x5546;&#x4E1A;&#x5173;&#x952E;&#x7CFB;&#x7EDF;&#x548C;&#x5B89;&#x5168;&#x5173;&#x952E;&#x7CFB;&#x7EDF;&#x4E5F;&#x53EF;&#x80FD;&#x4F7F;&#x7528; <code>heap_1</code>&#x3002;&#x7531;&#x4E8E;&#x4E0E;&#x975E;&#x786E;&#x5B9A;&#x6027;&#x3001;&#x5185;&#x5B58;&#x788E;&#x7247;&#x548C;&#x5931;&#x8D25;&#x7684;&#x5206;&#x914D;&#x76F8;&#x5173;&#x7684;&#x4E0D;&#x786E;&#x5B9A;&#x6027;&#xFF0C;&#x5173;&#x952E;&#x7CFB;&#x7EDF;&#x901A;&#x5E38;&#x7981;&#x6B62;&#x52A8;&#x6001;&#x5185;&#x5B58;&#x5206;&#x914D;&#xFF0C;&#x4F46;&#x662F;<code>heap_1</code>&#x603B;&#x662F;&#x786E;&#x5B9A;&#x6027;&#x7684;&#xFF0C;&#x5E76;&#x4E14;&#x4E0D;&#x80FD;&#x5206;&#x5272;&#x5185;&#x5B58;&#x3002;</p>
+<p><code>heap_1</code> &#x5206;&#x914D;&#x65B9;&#x6848;&#x5C06;&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x6570;&#x7EC4;&#x7EC6;&#x5206;&#x4E3A;&#x66F4;&#x5C0F;&#x7684;&#x5757;&#xFF0C;&#x56E0;&#x4E3A;&#x8C03;&#x7528;&#x4E86; <code>pvPortMalloc()</code> &#x3002; &#x8BE5;&#x6570;&#x7EC4;&#x79F0;&#x4E3A;FreeRTOS heap&#x3002;</p>
+<p>&#x6570;&#x7EC4;&#x7684;&#x603B;&#x5927;&#x5C0F;&#xFF08;&#x4EE5;&#x5B57;&#x8282;&#x4E3A;&#x5355;&#x4F4D;&#xFF09;&#x7531; <code>FreeRTOSConfig.h</code> &#x4E2D;&#x7684; <code>configTOTAL_HEAP_SIZE</code> &#x5B9A;&#x4E49;&#x8BBE;&#x7F6E;&#x3002; &#x4EE5;&#x8FD9;&#x79CD;&#x65B9;&#x5F0F;&#x5B9A;&#x4E49;&#x5927;&#x578B;&#x6570;&#x7EC4;&#x53EF;&#x80FD;&#x4F1A;&#x4F7F;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x770B;&#x8D77;&#x6765;&#x6D88;&#x8017;&#x5927;&#x91CF; RAM &#xFF0C;&#x751A;&#x81F3;&#x5728;&#x4ECE;&#x6570;&#x7EC4;&#x5206;&#x914D;&#x4EFB;&#x4F55;&#x5185;&#x5B58;&#x4E4B;&#x524D;&#x3002;</p>
+<p>&#x6BCF;&#x4E2A;&#x521B;&#x5EFA;&#x7684;&#x4EFB;&#x52A1;&#x90FD;&#x9700;&#x8981;&#x4E00;&#x4E2A;&#x4EFB;&#x52A1;&#x63A7;&#x5236;&#x5757;&#xFF08;TCB&#xFF09;&#x548C;&#x4E00;&#x4E2A;&#x4ECE;&#x5806;&#x4E2D;&#x5206;&#x914D;&#x7684;&#x6808;&#x3002; &#x56FE; 5 &#x6F14;&#x793A;&#x4E86;&#x5728;&#x521B;&#x5EFA;&#x4EFB;&#x52A1;&#x65F6; <code>heap_1</code> &#x5982;&#x4F55;&#x7EC6;&#x5206;&#x7B80;&#x5355;&#x6570;&#x7EC4;&#x3002;</p>
+<p>&#x53C2;&#x8003;&#x56FE; 5&#xFF1A;</p>
+<ul>
+<li>A &#x663E;&#x793A;&#x4E86;&#x5728;&#x521B;&#x5EFA;&#x4EFB;&#x4F55;&#x4EFB;&#x52A1;&#x4E4B;&#x524D;&#x7684;&#x6570;&#x7EC4;&#xFF1A;&#x6574;&#x4E2A;&#x6570;&#x7EC4;&#x662F;&#x7A7A;&#x95F2;&#x7684;&#x3002;</li>
+<li>B &#x663E;&#x793A;&#x4E86;&#x5728;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x4EFB;&#x52A1;&#x4E4B;&#x540E;&#x7684;&#x6570;&#x7EC4;&#x3002;</li>
+<li>C &#x663E;&#x793A;&#x4E86;&#x5B50;&#x554A;&#x8239;&#x8230;&#x4E86;&#x4E09;&#x4E2A;&#x4EFB;&#x52A1;&#x4E4B;&#x540E;&#x7684;&#x6570;&#x7EC4;&#x3002;</li>
+</ul>
+<p><img src=".gitbook/assets/wei-xin-jie-tu-20190904140941.png" alt="&#x56FE;5. &#x6BCF;&#x6B21;&#x521B;&#x5EFA;&#x4EFB;&#x52A1;&#x65F6;&#x4ECE; heap\_1 &#x9635;&#x5217;&#x5206;&#x914D;&#x7684; RAM"></p>
+<h3 id="heap2">Heap_2</h3>
+<p><code>heap_2</code> &#x4FDD;&#x7559;&#x5728; FreeRTOS &#x53D1;&#x884C;&#x7248;&#x4E2D;&#x4EE5;&#x5B9E;&#x73B0;&#x5411;&#x540E;&#x517C;&#x5BB9;&#xFF0C;&#x4F46;&#x4E0D;&#x5EFA;&#x8BAE;&#x5C06;&#x5176;&#x7528;&#x4E8E;&#x65B0;&#x8BBE;&#x8BA1;&#x3002; &#x8003;&#x8651;&#x4F7F;&#x7528; <code>heap_4</code> &#x800C;&#x4E0D;&#x662F;<code>heap_2</code>&#xFF0C;&#x56E0;&#x4E3A; <code>heap_4</code> &#x63D0;&#x4F9B;&#x4E86;&#x589E;&#x5F3A;&#x7684;&#x529F;&#x80FD;&#x3002;</p>
+<p><code>heap_2.c</code> &#x4E5F;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x7EC6;&#x5206;&#x7531; <code>configTOTAL_HEAP_SIZE</code> &#x6807;&#x6CE8;&#x7684;&#x6570;&#x7EC4;&#x6765;&#x5DE5;&#x4F5C;&#x3002; &#x5B83;&#x4F7F;&#x7528;&#x6700;&#x5408;&#x9002;&#x7684;&#x7B97;&#x6CD5;&#x6765;&#x5206;&#x914D;&#x5185;&#x5B58;&#xFF0C;&#x4E0E; <code>heap_1</code> &#x4E0D;&#x540C;&#xFF0C;&#x5B83;&#x5141;&#x8BB8;&#x91CA;&#x653E;&#x5185;&#x5B58;&#x3002; &#x540C;&#x6837;&#xFF0C;&#x6570;&#x7EC4;&#x662F;&#x9759;&#x6001;&#x58F0;&#x660E;&#x7684;&#xFF0C;&#x56E0;&#x6B64;&#x5373;&#x4F7F;&#x5728;&#x5206;&#x914D;&#x4E86;&#x9635;&#x5217;&#x4E2D;&#x7684;&#x4EFB;&#x4F55;&#x5185;&#x5B58;&#x4E4B;&#x524D;&#xFF0C;&#x4E5F;&#x4F1A;&#x4F7F;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x770B;&#x8D77;&#x6765;&#x6D88;&#x8017;&#x5927;&#x91CF; RAM&#x3002;</p>
+<p>&#x6700;&#x5408;&#x9002;&#x7684;&#x7B97;&#x6CD5;&#x786E;&#x4FDD; <code>pvPortMalloc()</code> &#x4F7F;&#x7528;&#x4E0E;&#x6240;&#x8BF7;&#x6C42;&#x7684;&#x5B57;&#x8282;&#x6570;&#x6700;&#x63A5;&#x8FD1;&#x7684;&#x7A7A;&#x95F2;&#x5185;&#x5B58;&#x5757;&#x3002; &#x4F8B;&#x5982;&#xFF0C;&#x8003;&#x8651;&#x573A;&#x666F;&#xFF1A;</p>
+<ul>
+<li>&#x5806;&#x5305;&#x542B;&#x4E09;&#x4E2A;&#x53EF;&#x7528;&#x5185;&#x5B58;&#x5757;&#xFF0C;&#x5206;&#x522B;&#x4E3A; 5 &#x4E2A;&#x5B57;&#x8282;&#xFF0C;25 &#x4E2A;&#x5B57;&#x8282;&#x548C; 100 &#x4E2A;&#x5B57;&#x8282;&#x3002;</li>
+<li>&#x8C03;&#x7528; <code>pvPortMalloc()</code> &#x6765;&#x8BF7;&#x6C42; 20 &#x4E2A;&#x5B57;&#x8282;&#x7684; RAM&#x3002;</li>
+</ul>
+<p>&#x6240;&#x8BF7;&#x6C42;&#x7684;&#x5B57;&#x8282;&#x6570;&#x9002;&#x5408;&#x7684;&#x6700;&#x5C0F;&#x7A7A;&#x95F2; RAM &#x5757;&#x662F; 25 &#x5B57;&#x8282;&#x5757;&#xFF0C;&#x56E0;&#x6B64; <code>pvPortMalloc()</code> &#x5C06; 25 &#x5B57;&#x8282;&#x5757;&#x62C6;&#x5206;&#x4E3A;&#x4E00;&#x4E2A; 20 &#x5B57;&#x8282;&#x7684;&#x5757;&#x548C;&#x4E00;&#x4E2A; 5 &#x5B57;&#x8282;&#x7684;&#x5757;&#xFF0C;&#x7136;&#x540E;&#x8FD4;&#x56DE;&#x6307;&#x9488; 20 &#x5B57;&#x8282;&#x7684;&#x5757;&#x3002; &#x65B0;&#x7684; 5 &#x5B57;&#x8282;&#x5757;&#x4ECD;&#x53EF;&#x7528;&#x4E8E;&#x5C06;&#x6765;&#x8C03;&#x7528; <code>pvPortMalloc()</code>&#x3002;</p>
+<p>&#x4E0E; <code>heap_4</code> &#x4E0D;&#x540C;&#xFF0C;<code>heap_2</code> &#x4E0D;&#x4F1A;&#x5C06;&#x76F8;&#x90BB;&#x7684;&#x7A7A;&#x95F2;&#x5757;&#x7EC4;&#x5408;&#x6210;&#x4E00;&#x4E2A;&#x66F4;&#x5927;&#x7684;&#x5757;&#xFF0C;&#x56E0;&#x6B64;&#x66F4;&#x5BB9;&#x6613;&#x51FA;&#x73B0;&#x788E;&#x7247;&#x3002; &#x4F46;&#x662F;&#xFF0C;&#x5982;&#x679C;&#x5206;&#x914D;&#x5E76;&#x968F;&#x540E;&#x91CA;&#x653E;&#x7684;&#x5757;&#x603B;&#x662F;&#x5927;&#x5C0F;&#x76F8;&#x540C;&#xFF0C;&#x5219;&#x788E;&#x7247;&#x4E0D;&#x662F;&#x95EE;&#x9898;&#x3002; <code>heap_2</code> &#x9002;&#x7528;&#x4E8E;&#x91CD;&#x590D;&#x521B;&#x5EFA;&#x548C;&#x5220;&#x9664;&#x4EFB;&#x52A1;&#x7684;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#xFF0C;&#x524D;&#x63D0;&#x662F;&#x5206;&#x914D;&#x7ED9;&#x521B;&#x5EFA;&#x7684;&#x4EFB;&#x52A1;&#x7684;&#x5806;&#x6808;&#x5927;&#x5C0F;&#x4E0D;&#x4F1A;&#x66F4;&#x6539;&#x3002;</p>
+<p><img src=".gitbook/assets/wei-xin-jie-tu-20190904142156.png" alt="&#x56FE; 6. &#x5728;&#x521B;&#x5EFA;&#x548C;&#x5220;&#x9664;&#x4EFB;&#x52A1;&#x65F6;&#xFF0C;&#x6B63;&#x5728;&#x5206;&#x914D;&#x548C;&#x91CA;&#x653E;&#x6765;&#x81EA; heap\_2 &#x6570;&#x7EC4;&#x7684; RAM"></p>
+<p>&#x56FE; 6 &#x5C55;&#x793A;&#x4E86;&#x521B;&#x5EFA;&#xFF0C;&#x5220;&#x9664;&#x7136;&#x540E;&#x518D;&#x521B;&#x5EFA;&#x4EFB;&#x52A1;&#x65F6;&#x6700;&#x4F73;&#x62DF;&#x5408;&#x7B97;&#x6CD5;&#x7684;&#x5DE5;&#x4F5C;&#x539F;&#x7406;&#x3002; &#x53C2;&#x8003;&#x56FE;6&#xFF1A;</p>
+<ol>
+<li>A &#x663E;&#x793A;&#x4E86;&#x521B;&#x5EFA;&#x4E86;&#x4E09;&#x4E2A;&#x4EFB;&#x52A1;&#x4E4B;&#x540E;&#x7684;&#x6570;&#x7EC4;&#x3002;&#x4E00;&#x4E2A;&#x5927;&#x7684;&#x81EA;&#x7531;&#x5757;&#x4ECD;&#x5728;&#x6570;&#x7EC4;&#x9876;&#x90E8;&#x3002;</li>
+<li><p>B &#x663E;&#x793A;&#x4E86;&#x4E00;&#x4E2A;&#x4EFB;&#x52A1;&#x88AB;&#x5220;&#x9664;&#x4E4B;&#x540E;&#x7684;&#x6570;&#x7EC4;&#x3002;&#x6570;&#x7EC4;&#x9876;&#x90E8;&#x7684;&#x5927;&#x578B;&#x81EA;&#x7531;&#x5757;&#x4ECD;&#x7136;&#x5B58;&#x5728;&#x3002; &#x73B0;&#x5728;&#x8FD8;&#x6709;&#x4E24;&#x4E2A;&#x8F83;&#x5C0F;&#x7684;&#x7A7A;&#x95F2;&#x5757;</p>
+<p>&#xFF0C;&#x8FD9;&#x662F;&#x5148;&#x524D;&#x5DF2;&#x5206;&#x914D;&#x7ED9; TCB &#x548C;&#x6808;&#x7684;&#x4EFB;&#x52A1;&#xFF0C;&#x800C;&#x73B0;&#x5728;&#x5DF2;&#x88AB;&#x5220;&#x9664;&#x3002;</p>
+</li>
+<li><p>C &#x663E;&#x793A;&#x4E86;&#x5728;&#x521B;&#x5EFA;&#x53E6;&#x4E00;&#x4E2A;&#x4EFB;&#x52A1;&#x540E;&#x7684;&#x60C5;&#x51B5;&#x3002; &#x521B;&#x5EFA;&#x4EFB;&#x52A1;&#x5BFC;&#x81F4;&#x4E24;&#x6B21;&#x8C03;&#x7528; <code>pvPortMalloc()</code>&#xFF0C;&#x4E00;&#x6B21;&#x5206;&#x914D;&#x65B0; TCB&#xFF0C;&#x53E6;&#x4E00;&#x6B21;&#x5206;&#x914D;&#x4EFB;&#x52A1;&#x5806;&#x6808;&#x3002;&#x4F7F;&#x7528; <code>xTaskCreate()</code> API &#x51FD;&#x6570;&#x521B;&#x5EFA;&#x4EFB;&#x52A1;&#xFF0C;&#x5982; 3.4 &#x8282;&#x6240;&#x8FF0;&#x3002; &#x5BF9; <code>pvPortMalloc()</code> &#x7684;&#x8C03;&#x7528;&#x5728; <code>xTaskCreate()</code>&#x5185;&#x90E8;&#x53D1;&#x751F;&#x3002;&#x6BCF;&#x4E2A; TCB &#x7684;&#x5927;&#x5C0F;&#x5B8C;&#x5168;&#x76F8;&#x540C;&#xFF0C;&#x56E0;&#x6B64;&#x6700;&#x5408;&#x9002;&#x7684;&#x7B97;&#x6CD5;&#x786E;&#x4FDD;&#x5148;&#x524D;&#x5206;&#x914D;&#x7ED9;&#x5DF2;&#x5220;&#x9664;&#x4EFB;&#x52A1;&#x7684; TCB &#x7684; RAM &#x5757;&#x88AB;&#x91CD;&#x7528;&#x4EE5;&#x5206;&#x914D;&#x65B0;&#x4EFB;&#x52A1;&#x7684; TCB&#x3002;&#x5206;&#x914D;&#x7ED9;&#x65B0;&#x521B;&#x5EFA;&#x7684;&#x4EFB;&#x52A1;&#x7684;&#x5806;&#x6808;&#x5927;&#x5C0F;&#x4E0E;&#x5206;&#x914D;&#x7ED9;&#x5148;&#x524D;&#x5220;&#x9664;&#x7684;&#x76F8;&#x540C;&#xFF0C;&#x56E0;&#x6B64;&#x6700;&#x5408;&#x9002;&#x7684;&#x7B97;&#x6CD5;&#x786E;&#x4FDD;&#x5148;&#x524D;&#x5206;&#x914D;&#x7ED9;&#x5DF2;&#x5220;&#x9664;&#x4EFB;&#x52A1;&#x5806;&#x6808;&#x7684; RAM &#x5757;&#x88AB;&#x91CD;&#x7528;&#x4EE5;&#x5206;&#x914D;&#x65B0;&#x4EFB;&#x52A1;&#x7684;&#x5806;&#x6808;&#x3002;&#x6570;&#x7EC4;&#x9876;&#x90E8;&#x8F83;&#x5927;&#x7684;&#x672A;&#x5206;&#x914D;&#x5757;&#x4FDD;&#x6301;&#x4E0D;&#x53D8;&#x3002;</p>
+</li>
+</ol>
+<p><code>heap_2</code> &#x4E0D;&#x662F;&#x786E;&#x5B9A;&#x6027;&#x7684;&#xFF0C;&#x4F46;&#x6BD4; <code>malloc()</code> &#x548C; <code>free()</code> &#x7684;&#x5927;&#x591A;&#x6570;&#x6807;&#x51C6;&#x5E93;&#x5B9E;&#x73B0;&#x66F4;&#x5FEB;&#x3002;</p>
+<h3 id="heap3">Heap_3</h3>
+<p><code>heap_3.c</code> &#x4F7F;&#x7528;&#x6807;&#x51C6;&#x5E93; <code>malloc()</code> &#x548C; <code>free()</code> &#x51FD;&#x6570;&#xFF0C;&#x56E0;&#x6B64;&#x5806;&#x7684;&#x5927;&#x5C0F;&#x7531;&#x94FE;&#x63A5;&#x5668;&#x914D;&#x7F6E;&#x5B9A;&#x4E49;&#xFF0C;&#x800C; <code>configTOTAL_HEAP_SIZE</code> &#x8BBE;&#x7F6E;&#x6CA1;&#x6709;&#x5F71;&#x54CD;&#x3002;<code>heap_3</code> &#x4F7F; <code>malloc()</code> &#x548C; <code>free()</code> &#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x6682;&#x65F6;&#x6302;&#x8D77; FreeRTOS &#x8C03;&#x5EA6;&#x7A0B;&#x5E8F;&#x3002; &#x7EBF;&#x7A0B;&#x5B89;&#x5168;&#x548C;&#x8C03;&#x5EA6;&#x7A0B;&#x5E8F;&#x6682;&#x505C;&#x90FD;&#x662F;&#x7B2C; 7 &#x7AE0;&#x8D44;&#x6E90;&#x7BA1;&#x7406;&#x4E2D;&#x4ECB;&#x7ECD;&#x7684;&#x4E3B;&#x9898;&#x3002;</p>
+<h3 id="heap4">Heap_4</h3>
+<p>&#x4E0E; <code>heap_1</code> &#x548C; <code>heap_2</code> &#x7C7B;&#x4F3C;&#xFF0C;&#x901A;&#x8FC7;&#x5C06;&#x6570;&#x7EC4;&#x7EC6;&#x5206;&#x4E3A;&#x8F83;&#x5C0F;&#x7684;&#x5757;&#x6765;&#x5B9E;&#x73B0; <code>heap_4</code>&#x3002; &#x548C;&#x4EE5;&#x524D;&#x4E00;&#x6837;&#xFF0C;&#x6570;&#x7EC4;&#x662F;&#x9759;&#x6001;&#x58F0;&#x660E;&#x7684;&#xFF0C;&#x5E76;&#x4E14;&#x7531; <code>configTOTAL_HEAP_SIZE</code> &#x6807;&#x6CE8;&#xFF0C;&#x56E0;&#x6B64;&#x5373;&#x4F7F;&#x5728;&#x5B9E;&#x9645;&#x4ECE;&#x6570;&#x7EC4;&#x4E2D;&#x5206;&#x914D;&#x4EFB;&#x4F55;&#x5185;&#x5B58;&#x4E4B;&#x524D;&#xFF0C;&#x4E5F;&#x4F1A;&#x4F7F;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x770B;&#x8D77;&#x6765;&#x6D88;&#x8017;&#x5927;&#x91CF; RAM&#x3002;</p>
+<p><code>heap_4</code> &#x4F7F;&#x7528;&#x9996;&#x6B21;&#x62DF;&#x5408;&#x7B97;&#x6CD5;&#x6765;&#x5206;&#x914D;&#x5185;&#x5B58;&#x3002; &#x4E0E; <code>heap_2</code> &#x4E0D;&#x540C;&#xFF0C;<code>heap_4</code> &#x5C06;&#x76F8;&#x90BB;&#x7684;&#x7A7A;&#x95F2;&#x5185;&#x5B58;&#x5757;&#xFF08;&#x5408;&#x5E76;&#xFF09;&#x7EC4;&#x5408;&#x6210;&#x4E00;&#x4E2A;&#x66F4;&#x5927;&#x7684;&#x5757;&#xFF0C;&#x4ECE;&#x800C;&#x6700;&#x5927;&#x9650;&#x5EA6;&#x5730;&#x964D;&#x4F4E;&#x4E86;&#x5185;&#x5B58;&#x788E;&#x7247;&#x7684;&#x98CE;&#x9669;&#x3002;</p>
+<p>&#x7B2C;&#x4E00;&#x9002;&#x5408;&#x7B97;&#x6CD5;&#x786E;&#x4FDD; <code>pvPortMalloc()</code>&#x4F7F;&#x7528;&#x8DB3;&#x591F;&#x5927;&#x7684;&#x7B2C;&#x4E00;&#x4E2A;&#x7A7A;&#x95F2;&#x5185;&#x5B58;&#x5757;&#x6765;&#x4FDD;&#x5B58;&#x8BF7;&#x6C42;&#x7684;&#x5B57;&#x8282;&#x6570;&#x3002; &#x4F8B;&#x5982;&#xFF0C;&#x8003;&#x8651;&#x4EE5;&#x4E0B;&#x60C5;&#x51B5;&#xFF1A;</p>
+<ul>
+<li>&#x5806;&#x5305;&#x542B;&#x4E09;&#x4E2A;&#x53EF;&#x7528;&#x5185;&#x5B58;&#x5757;&#xFF0C;&#x5B83;&#x4EEC;&#x6309;&#x7167;&#x5B83;&#x4EEC;&#x5728;&#x6570;&#x7EC4;&#x4E2D;&#x51FA;&#x73B0;&#x7684;&#x987A;&#x5E8F;&#x5206;&#x522B;&#x4E3A; 5 &#x4E2A;&#x5B57;&#x8282;&#xFF0C;200 &#x4E2A;&#x5B57;&#x8282;&#x548C; 100 &#x4E2A;&#x5B57;&#x8282;&#x3002;</li>
+<li>&#x8C03;&#x7528; <code>pvPortMalloc()</code> &#x6765;&#x8BF7;&#x6C42; 20 &#x4E2A;&#x5B57;&#x8282;&#x7684; RAM&#x3002;</li>
+</ul>
+<p>&#x8BF7;&#x6C42;&#x7684;&#x5B57;&#x8282;&#x6570;&#x9002;&#x5408;&#x7684;&#x7B2C;&#x4E00;&#x4E2A;RAM&#x5757;&#x662F; 200 &#x5B57;&#x8282;&#x5757;&#xFF0C;&#x56E0;&#x6B64; <code>pvPortMalloc()</code> &#x5C06; 200 &#x5B57;&#x8282;&#x5757;&#x62C6;&#x5206;&#x4E3A;&#x4E00;&#x4E2A; 20 &#x5B57;&#x8282;&#x7684;&#x5757;&#xFF0C;&#x4EE5;&#x53CA;&#x4E00;&#x4E2A;&#x5757; 180 &#x4E2A;&#x5B57;&#x8282;&#xFF0C;&#x7136;&#x540E;&#x8FD4;&#x56DE;&#x6307;&#x5411; 20 &#x7684;&#x5B57;&#x8282;&#x5757;&#x3002; &#x65B0;&#x7684; 180 &#x5B57;&#x8282;&#x5757;&#x4ECD;&#x53EF;&#x7528;&#x4E8E;&#x5C06;&#x6765;&#x8C03;&#x7528; <code>pvPortMalloc()</code>&#x3002;</p>
+<p><code>heap_4</code> &#x5C06;&#x76F8;&#x90BB;&#x7A7A;&#x95F2;&#x5757;&#x7684;&#xFF08;&#x5408;&#x5E76;&#xFF09;&#x7EC4;&#x5408;&#x6210;&#x4E00;&#x4E2A;&#x66F4;&#x5927;&#x7684;&#x5757;&#xFF0C;&#x6700;&#x5927;&#x9650;&#x5EA6;&#x5730;&#x964D;&#x4F4E;&#x4E86;&#x788E;&#x7247;&#x7684;&#x98CE;&#x9669;&#xFF0C;&#x5E76;&#x4F7F;&#x5176;&#x9002;&#x7528;&#x4E8E;&#x91CD;&#x590D;&#x5206;&#x914D;&#x548C;&#x91CA;&#x653E;&#x4E0D;&#x540C;&#x5927;&#x5C0F;&#x7684; RAM &#x5757;&#x7684;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x3002;</p>
+<p><img src=".gitbook/assets/wei-xin-jie-tu-20190904144813.png" alt="&#x56FE; 7. &#x6B63;&#x5728;&#x5206;&#x914D;&#x5E76;&#x4ECE; heap\_4 &#x6570;&#x7EC4;&#x4E2D;&#x91CA;&#x653E;&#x7684; RAM"></p>
+<p>&#x56FE; 7 &#x6F14;&#x793A;&#x4E86;&#x5982;&#x4F55;&#x5206;&#x914D;&#x548C;&#x91CA;&#x653E;&#x5177;&#x6709;&#x5185;&#x5B58;&#x5408;&#x5E76;&#x5DE5;&#x4F5C;&#x7684; heap_4 &#x9996;&#x6B21;&#x62DF;&#x5408;&#x7B97;&#x6CD5;&#x3002; &#x53C2;&#x8003;&#x56FE; 7&#xFF1A;</p>
+<ol>
+<li>A &#x663E;&#x793A;&#x4E86;&#x521B;&#x5EFA;&#x4E09;&#x4E2A;&#x4EFB;&#x52A1;&#x540E;&#x7684;&#x6570;&#x7EC4;&#x3002; &#x4E00;&#x4E2A;&#x5927;&#x7684;&#x81EA;&#x7531;&#x5757;&#x4FDD;&#x7559;&#x5728;&#x6570;&#x7EC4;&#x7684;&#x9876;&#x90E8;&#x3002;</li>
+<li>B &#x663E;&#x793A;&#x4E86;&#x5220;&#x9664;&#x4E00;&#x4E2A;&#x4EFB;&#x52A1;&#x540E;&#x7684;&#x6570;&#x7EC4;&#x3002;&#x5DE8;&#x5927;&#x7684;&#x81EA;&#x7531;&#x5757;&#x4ECD;&#x5728;&#x6570;&#x7EC4;&#x9876;&#x90E8;&#x3002;&#x8FD8;&#x6709;&#x4E00;&#x4E2A;&#x7A7A;&#x95F2;&#x5757;&#xFF0C;&#x662F;&#x5148;&#x524D;&#x5DF2;&#x5206;&#x914D;&#x4EFB;&#x52A1; TCB &#x548C;&#x5806;&#x6808;&#xFF0C;&#x73B0;&#x5728;&#x5DF2;&#x7ECF;&#x5220;&#x9664;&#x3002; &#x8BF7;&#x6CE8;&#x610F;&#xFF0C;&#x4E0E;&#x6F14;&#x793A; heap_2 &#x65F6;&#x4E0D;&#x540C;&#xFF0C;&#x5220;&#x9664; TCB &#x65F6;&#x91CA;&#x653E;&#x7684;&#x5185;&#x5B58;&#x4EE5;&#x53CA;&#x5220;&#x9664;&#x5806;&#x6808;&#x65F6;&#x91CA;&#x653E;&#x7684;&#x5185;&#x5B58;&#x4E0D;&#x4F1A;&#x4FDD;&#x7559;&#x4E3A;&#x4E24;&#x4E2A;&#x5355;&#x72EC;&#x7684;&#x7A7A;&#x95F2;&#x5757;&#xFF0C;&#x800C;&#x662F;&#x7EC4;&#x5408;&#x8D77;&#x6765;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x66F4;&#x5927;&#x7684;&#x5355;&#x4E2A;&#x7A7A;&#x95F2;&#x5757;&#x3002;</li>
+<li>C &#x663E;&#x793A;&#x521B;&#x5EFA; FreeRTOS &#x961F;&#x5217;&#x540E;&#x7684;&#x60C5;&#x51B5;&#x3002; &#x961F;&#x5217;&#x662F;&#x4F7F;&#x7528; <code>xQueueCreate()</code> API &#x51FD;&#x6570;&#x521B;&#x5EFA;&#x7684;&#xFF0C;&#x8BE5;&#x51FD;&#x6570;&#x5728; 4.3 &#x8282;&#x4E2D;&#x63CF;&#x8FF0;&#x3002; <code>xQueueCreate()</code> &#x8C03;&#x7528; <code>pvPortMalloc()</code> &#x6765;&#x5206;&#x914D;&#x961F;&#x5217;&#x4F7F;&#x7528;&#x7684; RAM&#x3002; &#x7531;&#x4E8E; <code>heap_4</code> &#x4F7F;&#x7528;&#x7B2C;&#x4E00;&#x9002;&#x5408;&#x7B97;&#x6CD5;&#xFF0C;<code>pvPortMalloc()</code> &#x5C06;&#x4ECE;&#x7B2C;&#x4E00;&#x4E2A;&#x7A7A;&#x95F2; RAM &#x5757;&#x4E2D;&#x5206;&#x914D; RAM&#xFF0C;&#x8BE5;&#x5757;&#x8DB3;&#x591F;&#x5927;&#x4EE5;&#x5BB9;&#x7EB3;&#x961F;&#x5217;&#xFF0C;&#x5982;&#x56FE; 7 &#x6240;&#x793A;&#xFF0C;&#x5F53;&#x4EFB;&#x52A1;&#x88AB;&#x5220;&#x9664;&#x65F6;&#xFF0C;RAM &#x88AB;&#x91CA;&#x653E;&#x3002;&#x961F;&#x5217;&#x4E0D;&#x4F1A;&#x5168;&#x90E8;&#x6D88;&#x8017;&#x7136;&#x800C;&#xFF0C;&#x7A7A;&#x95F2;&#x5757;&#x4E2D;&#x7684; RAM&#xFF0C;&#x56E0;&#x6B64;&#x5757;&#x88AB;&#x5206;&#x6210;&#x4E24;&#x90E8;&#x5206;&#xFF0C;&#x672A;&#x4F7F;&#x7528;&#x7684;&#x90E8;&#x5206;&#x4ECD;&#x7136;&#x53EF;&#x7528;&#x4E8E;&#x5C06;&#x6765;&#x8C03;&#x7528; <code>pvPortMalloc()</code>&#x3002;</li>
+<li>D &#x663E;&#x793A;&#x4E86;&#x76F4;&#x63A5;&#x4ECE;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x4EE3;&#x7801;&#x8C03;&#x7528; <code>pvPortMalloc()</code> &#x4E4B;&#x540E;&#x7684;&#x60C5;&#x51B5;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x901A;&#x8FC7; FreeRTOS API &#x51FD;&#x6570;&#x7684;&#x95F4;&#x63A5;&#x8C03;&#x7528;&#x3002; &#x7528;&#x6237;&#x5206;&#x914D;&#x7684;&#x5757;&#x8DB3;&#x591F;&#x5C0F;&#xFF0C;&#x53EF;&#x4EE5;&#x653E;&#x5165;&#x7B2C;&#x4E00;&#x4E2A;&#x7A7A;&#x95F2;&#x5757;&#xFF0C;&#x5373;&#x5206;&#x914D;&#x7ED9;&#x961F;&#x5217;&#x7684;&#x5185;&#x5B58;&#x548C;&#x5206;&#x914D;&#x7ED9;&#x540E;&#x7EED; TCB &#x7684;&#x5185;&#x5B58;&#x4E4B;&#x95F4;&#x7684;&#x5757;&#x3002; &#x5220;&#x9664;&#x4EFB;&#x52A1;&#x65F6;&#x91CA;&#x653E;&#x7684;&#x5185;&#x5B58;&#x73B0;&#x5728;&#x5DF2;&#x5206;&#x6210;&#x4E09;&#x4E2A;&#x72EC;&#x7ACB;&#x7684;&#x5757;; &#x7B2C;&#x4E00;&#x4E2A;&#x5757;&#x4FDD;&#x5B58;&#x961F;&#x5217;&#xFF0C;&#x7B2C;&#x4E8C;&#x4E2A;&#x5757;&#x4FDD;&#x5B58;&#x7528;&#x6237;&#x5206;&#x914D;&#x7684;&#x5185;&#x5B58;&#xFF0C;&#x7B2C;&#x4E09;&#x4E2A;&#x5757;&#x4FDD;&#x6301;&#x7A7A;&#x95F2;&#x3002;</li>
+<li>E &#x663E;&#x793A;&#x961F;&#x5217;&#x88AB;&#x5220;&#x9664;&#x540E;&#x7684;&#x60C5;&#x51B5;&#xFF0C;&#x8FD9;&#x4F1A;&#x81EA;&#x52A8;&#x91CA;&#x653E;&#x5DF2;&#x5206;&#x914D;&#x7ED9;&#x5DF2;&#x5220;&#x9664;&#x961F;&#x5217;&#x7684;&#x5185;&#x5B58;&#x3002;&#x73B0;&#x5728;&#xFF0C;&#x7528;&#x6237;&#x5206;&#x914D;&#x5757;&#x7684;&#x4EFB;&#x4E00;&#x4FA7;&#x90FD;&#x6709;&#x53EF;&#x7528;&#x5185;&#x5B58;&#x3002;</li>
+<li>F &#x663E;&#x793A;&#x7528;&#x6237;&#x5206;&#x914D;&#x7684;&#x5185;&#x5B58;&#x5DF2;&#x88AB;&#x91CA;&#x653E;&#x540E;&#x7684;&#x60C5;&#x51B5;&#x3002;&#x7528;&#x6237;&#x5206;&#x914D;&#x7684;&#x5757;&#x4F7F;&#x7528;&#x7684;&#x5185;&#x5B58;&#x5DF2;&#x4E0E;&#x4EFB;&#x610F;&#x4E00;&#x4FA7;&#x7684;&#x7A7A;&#x95F2;&#x5185;&#x5B58;&#x7EC4;&#x5408;&#xFF0C;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x66F4;&#x5927;&#x7684;&#x5355;&#x4E2A;&#x7A7A;&#x95F2;&#x5757;&#x3002;</li>
+</ol>
+<p><code>heap_4</code> &#x4E0D;&#x662F;&#x786E;&#x5B9A;&#x6027;&#x7684;&#xFF0C;&#x4F46;&#x6BD4; <code>malloc()</code> &#x548C; <code>free()</code> &#x7684;&#x5927;&#x591A;&#x6570;&#x6807;&#x51C6;&#x5E93;&#x5B9E;&#x73B0;&#x66F4;&#x5FEB;&#x3002;</p>
+<h3 id="&#x8BBE;&#x7F6E;-heap4-&#x4F7F;&#x7528;&#x7684;&#x6570;&#x7EC4;&#x7684;&#x8D77;&#x59CB;&#x5730;&#x5740;">&#x8BBE;&#x7F6E; Heap_4 &#x4F7F;&#x7528;&#x7684;&#x6570;&#x7EC4;&#x7684;&#x8D77;&#x59CB;&#x5730;&#x5740;</h3>
+<p>&#x672C;&#x8282;&#x5305;&#x542B;&#x9AD8;&#x7EA7;&#x4FE1;&#x606F;&#x3002;&#x82E5;&#x53EA;&#x662F;&#x4E3A;&#x4E86;&#x4F7F;&#x7528; <code>heap_4</code>&#xFF0C;&#x6CA1;&#x6709;&#x5FC5;&#x8981;&#x9605;&#x8BFB;&#x6216;&#x7406;&#x89E3;&#x672C;&#x8282;&#x3002;</p>
+<p>&#x6709;&#x65F6;&#xFF0C;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x7F16;&#x5199;&#x8005;&#x9700;&#x8981;&#x5C06; <code>heap_4</code> &#x4F7F;&#x7528;&#x7684;&#x6570;&#x7EC4;&#x653E;&#x5728;&#x7279;&#x5B9A;&#x7684;&#x5185;&#x5B58;&#x5730;&#x5740;&#x3002;&#x4F8B;&#x5982;&#xFF0C;FreeRTOS &#x4EFB;&#x52A1;&#x4F7F;&#x7528;&#x7684;&#x5806;&#x6808;&#x662F;&#x4ECE;&#x5806;&#x4E2D;&#x5206;&#x914D;&#x7684;&#xFF0C;&#x56E0;&#x6B64;&#x53EF;&#x80FD;&#x9700;&#x8981;&#x786E;&#x4FDD;&#x5806;&#x4F4D;&#x4E8E;&#x5FEB;&#x901F;&#x7684;&#x5185;&#x90E8;&#x5B58;&#x50A8;&#x5668;&#x4E2D;&#xFF0C; &#x800C;&#x4E0D;&#x662F;&#x7F13;&#x6162;&#x7684;&#x5916;&#x90E8;&#x5B58;&#x50A8;&#x5668;&#x3002;</p>
+<p>&#x9ED8;&#x8BA4;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;<code>heap_4</code> &#x4F7F;&#x7528;&#x7684;&#x6570;&#x7EC4;&#x5728; <code>heap_4.c</code> &#x6E90;&#x6587;&#x4EF6;&#x4E2D;&#x58F0;&#x660E;&#xFF0C;&#x5176;&#x8D77;&#x59CB;&#x5730;&#x5740;&#x7531;&#x94FE;&#x63A5;&#x5668;&#x81EA;&#x52A8;&#x8BBE;&#x7F6E;&#x3002; &#x4F46;&#x662F;&#xFF0C;&#x5982;&#x679C;&#x5728; <code>FreeRTOSConfig.h</code> &#x4E2D;&#x5C06; <code>configAPPLICATION_ALLOCATED_HEAP</code> &#x7F16;&#x8BD1;&#x65F6;&#x914D;&#x7F6E;&#x5E38;&#x91CF;&#x8BBE;&#x7F6E;&#x4E3A; 1&#xFF0C;&#x5219;&#x5FC5;&#x987B;&#x7531;&#x4F7F;&#x7528; FreeRTOS &#x7684;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x58F0;&#x660E;&#x8BE5;&#x6570;&#x7EC4;&#x3002; &#x5982;&#x679C;&#x6570;&#x7EC4;&#x58F0;&#x660E;&#x4E3A;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x7684;&#x4E00;&#x90E8;&#x5206;&#xFF0C;&#x5219;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x7684;&#x7F16;&#x5199;&#x8005;&#x53EF;&#x4EE5;&#x8BBE;&#x7F6E;&#x5176;&#x8D77;&#x59CB;&#x5730;&#x5740;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x5728; <code>FreeRTOSConfig.h</code> &#x4E2D;&#x5C06; <code>configAPPLICATION_ALLOCATED_HEAP</code> &#x8BBE;&#x7F6E;&#x4E3A; 1&#xFF0C;&#x5219;&#x5FC5;&#x987B;&#x5728;&#x5176;&#x4E2D;&#x4E00;&#x4E2A;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x7684;&#x6E90;&#x6587;&#x4EF6;&#x4E2D;&#x58F0;&#x660E;&#x4E00;&#x4E2A;&#x540D;&#x4E3A; <code>ucHeap</code> &#x7684; <code>uint8_t</code> &#x6570;&#x7EC4;&#xFF0C;&#x5176;&#x5927;&#x5C0F;&#x4E3A; <code>configTOTAL_HEAP_SIZE</code> &#x8BBE;&#x7F6E;&#x3002;</p>
+<p>&#x5C06;&#x53D8;&#x91CF;&#x653E;&#x5728;&#x7279;&#x5B9A;&#x5185;&#x5B58;&#x5730;&#x5740;&#x6240;&#x9700;&#x7684;&#x8BED;&#x6CD5;&#x53D6;&#x51B3;&#x4E8E;&#x6240;&#x4F7F;&#x7528;&#x7684;&#x7F16;&#x8BD1;&#x5668;&#xFF0C;&#x56E0;&#x6B64;&#x8BF7;&#x53C2;&#x9605;&#x7F16;&#x8BD1;&#x5668;&#x7684;&#x6587;&#x6863;&#x3002; &#x4E24;&#x4E2A;&#x7F16;&#x8BD1;&#x5668;&#x7684;&#x793A;&#x4F8B;&#x5982;&#x4E0B;&#xFF1A;</p>
+<ul>
+<li>&#x6E05;&#x5355; 2 &#x663E;&#x793A; GCC &#x7F16;&#x8BD1;&#x5668;&#x58F0;&#x660E;&#x6570;&#x7EC4;&#x6240;&#x9700;&#x7684;&#x8BED;&#x6CD5;&#xFF0C;&#x5E76;&#x5C06;&#x6570;&#x7EC4;&#x653E;&#x5728;&#x540D;&#x4E3A; <code>.my_heap</code> &#x7684;&#x5185;&#x5B58;&#x90E8;&#x5206;&#x4E2D;&#x3002;</li>
+<li>&#x6E05;&#x5355; 3 &#x663E;&#x793A; IAR &#x7F16;&#x8BD1;&#x5668;&#x58F0;&#x660E;&#x6570;&#x7EC4;&#x6240;&#x9700;&#x7684;&#x8BED;&#x6CD5;&#xFF0C;&#x5E76;&#x5C06;&#x6570;&#x7EC4;&#x653E;&#x5728;&#x7EDD;&#x5BF9;&#x5730;&#x5740; <code>0x20000000</code> &#x4E0A; &#x3002;</li>
+</ul>
+<pre><code class="lang-c"><span class="hljs-keyword">uint8_t</span> ucHeap[ configTOTAL_HEAP_SIZE ] __attribute__ ( ( section( <span class="hljs-string">&quot;.my_heap&quot;</span> ) ) );
+</code></pre>
+<p>&#x6E05;&#x5355; 2. &#x4F7F;&#x7528; GCC &#x8BED;&#x6CD5;&#x58F0;&#x660E; <code>heap_4</code> &#x4F7F;&#x7528;&#x7684;&#x6570;&#x7EC4;&#xFF0C;&#x5E76;&#x5C06;&#x6570;&#x7EC4;&#x653E;&#x5728;&#x540D;&#x4E3A; <code>.my_heap</code> &#x7684;&#x5185;&#x5B58;&#x6BB5;&#x4E2D;</p>
+<pre><code class="lang-c"><span class="hljs-keyword">uint8_t</span> ucHeap[ configTOTAL_HEAP_SIZE ] @ <span class="hljs-number">0x20000000</span>;
+</code></pre>
+<p>&#x6E05;&#x5355; 3. &#x4F7F;&#x7528; IAR &#x8BED;&#x6CD5;&#x58F0;&#x660E; <code>heap_4</code> &#x5C06;&#x4F7F;&#x7528;&#x7684;&#x6570;&#x7EC4;&#xFF0C;&#x5E76;&#x5C06;&#x6570;&#x7EC4;&#x653E;&#x5728;&#x7EDD;&#x5BF9;&#x5730;&#x5740; 0x20000000&#x3002;</p>
+<h3 id="heap5">Heap_5</h3>
+<p><code>heap_5</code> &#x7528;&#x4E8E;&#x5206;&#x914D;&#x548C;&#x91CA;&#x653E;&#x5185;&#x5B58;&#x7684;&#x7B97;&#x6CD5;&#x4E0E; <code>heap_4</code> &#x4F7F;&#x7528;&#x7684;&#x7B97;&#x6CD5;&#x76F8;&#x540C;&#x3002; &#x4E0E; <code>heap_4</code> &#x4E0D;&#x540C;&#x7684;&#x662F;&#xFF0C;<code>heap_5</code> &#x4E0D;&#x9650;&#x4E8E;&#x4ECE;&#x5355;&#x4E2A;&#x9759;&#x6001;&#x58F0;&#x660E;&#x7684;&#x6570;&#x7EC4;&#x4E2D;&#x5206;&#x914D;&#x5185;&#x5B58;; <code>heap_5</code> &#x53EF;&#x4EE5;&#x4ECE;&#x591A;&#x4E2A;&#x72EC;&#x7ACB;&#x7684;&#x5185;&#x5B58;&#x7A7A;&#x95F4;&#x5206;&#x914D;&#x5185;&#x5B58;&#x3002; &#x5F53;&#x8FD0;&#x884C; FreeRTOS &#x7684;&#x7CFB;&#x7EDF;&#x63D0;&#x4F9B;&#x7684; RAM &#x5728;&#x7CFB;&#x7EDF;&#x7684;&#x5185;&#x5B58;&#x6620;&#x5C04;&#x4E2D;&#x4E0D;&#x663E;&#x793A;&#x4E3A;&#x5355;&#x4E2A;&#x8FDE;&#x7EED;&#xFF08;&#x65E0;&#x7A7A;&#x95F4;&#xFF09;&#x5757;&#x65F6;&#xFF0C;<code>heap_5</code> &#x975E;&#x5E38;&#x6709;&#x7528;&#x3002;</p>
+<p>&#x5728;&#x7F16;&#x5199;&#x672C;&#x6587;&#x65F6;&#xFF0C;<code>heap_5</code> &#x662F;&#x552F;&#x4E00;&#x63D0;&#x4F9B;&#x7684;&#x5185;&#x5B58;&#x5206;&#x914D;&#x65B9;&#x6848;&#xFF0C;&#x5FC5;&#x987B;&#x5728;&#x8C03;&#x7528; <code>pvPortMalloc()</code> &#x4E4B;&#x524D;&#x663E;&#x5F0F;&#x521D;&#x59CB;&#x5316;&#x3002; &#x4F7F;&#x7528; <code>vPortDefineHeapRegions()</code> API&#x51FD;&#x6570;&#x521D;&#x59CB;&#x5316; <code>Heap_5</code>&#x3002; &#x5F53;&#x4F7F;&#x7528; <code>heap_5</code> &#x65F6;&#xFF0C;&#x5FC5;&#x987B;&#x5148;&#x8C03;&#x7528; <code>vPortDefineHeapRegions()</code>&#xFF0C;&#x7136;&#x540E;&#x624D;&#x80FD;&#x521B;&#x5EFA;&#x4EFB;&#x4F55;&#x5185;&#x6838;&#x5BF9;&#x8C61;&#xFF08;&#x4EFB;&#x52A1;&#xFF0C;&#x961F;&#x5217;&#xFF0C;&#x4FE1;&#x53F7;&#x91CF;&#x7B49;&#xFF09;&#x3002;</p>
+<h3 id="vportdefineheapregions-api&#x51FD;&#x6570;">vPortDefineHeapRegions() API&#x51FD;&#x6570;</h3>
+<p><code>vPortDefineHeapRegions()</code> &#x7528;&#x4E8E;&#x6307;&#x5B9A;&#x6BCF;&#x4E2A;&#x5355;&#x72EC;&#x7684;&#x5185;&#x5B58;&#x533A;&#x57DF;&#x7684;&#x8D77;&#x59CB;&#x5730;&#x5740;&#x548C;&#x5927;&#x5C0F;&#xFF0C;&#x5B83;&#x4EEC;&#x5171;&#x540C;&#x6784;&#x6210; <code>heap_5</code> &#x4F7F;&#x7528;&#x7684;&#x603B;&#x5185;&#x5B58;&#x3002;</p>
+<pre><code class="lang-c"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">vPortDefineHeapRegions</span><span class="hljs-params">( <span class="hljs-keyword">const</span> HeapRegion_t * <span class="hljs-keyword">const</span> pxHeapRegions )</span></span>;
+</code></pre>
+<p>&#x6E05;&#x5355; 4. <code>vPortDefineHeapRegions()</code> API &#x51FD;&#x6570;&#x539F;&#x578B;</p>
+<p>&#x6BCF;&#x4E2A;&#x5355;&#x72EC;&#x7684;&#x5B58;&#x50A8;&#x533A;&#x57DF;&#x7531; <code>HeapRegion_t</code> &#x7C7B;&#x578B;&#x7684;&#x7ED3;&#x6784;&#x63CF;&#x8FF0;&#x3002; &#x6240;&#x6709;&#x53EF;&#x7528;&#x5185;&#x5B58;&#x533A;&#x57DF;&#x7684;&#x63CF;&#x8FF0;&#x90FD;&#x4F5C;&#x4E3A; <code>HeapRegion_t</code> &#x7ED3;&#x6784;&#x6570;&#x7EC4;&#x4F20;&#x9012;&#x7ED9; <code>vPortDefineHeapRegions()</code>&#x3002;</p>
+<pre><code class="lang-c"><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">struct</span> HeapRegion
+{
+    <span class="hljs-comment">/* The start address of a block of memory that will be part of the heap.*/</span>
+    <span class="hljs-keyword">uint8_t</span> *pucStartAddress;
+
+    <span class="hljs-comment">/* The size of the block of memoryin bytes. */</span>
+    <span class="hljs-keyword">size_t</span> xSizeInBytes;
+} HeapRegion_t;
+</code></pre>
+<p>&#x6E05;&#x5355; 5. <code>HeapRegion_t</code> &#x7ED3;&#x6784;</p>
+<p>&#x8868; 5. <code>vPortDefineHeapRegions()</code> &#x53C2;&#x6570;</p>
+<p><table>
+  <thead>
+    <tr>
+      <th style="text-align:left">&#x53C2;&#x6570;&#x540D;&#x79F0;/&#x8FD4;&#x56DE;&#x503C;</th>
+      <th style="text-align:left">&#x63CF;&#x8FF0;</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:left">pxHeapRegions</td>
+      <td style="text-align:left">
+        <p>&#x6307;&#x5411; <code>HeapRegion_t</code> &#x7ED3;&#x6784;&#x6570;&#x7EC4;&#x5F00;&#x5934;&#x7684;&#x6307;&#x9488;&#x3002;
+          &#x6570;&#x7EC4;&#x4E2D;&#x7684;&#x6BCF;&#x4E2A;&#x7ED3;&#x6784;&#x90FD;&#x63CF;&#x8FF0;&#x4E86;&#x4F7F;&#x7528; <code>heap_5</code> &#x65F6;&#x5C06;&#x6210;&#x4E3A;&#x5806;&#x7684;&#x4E00;&#x90E8;&#x5206;&#x7684;&#x5185;&#x5B58;&#x533A;&#x57DF;&#x7684;&#x8D77;&#x59CB;&#x5730;&#x5740;&#x548C;&#x957F;&#x5EA6;&#x3002;</p>
+        <p>&#x6570;&#x7EC4;&#x4E2D;&#x7684; <code>HeapRegion_t</code> &#x7ED3;&#x6784;&#x5FC5;&#x987B;&#x6309;&#x8D77;&#x59CB;&#x5730;&#x5740;&#x6392;&#x5E8F;;
+          &#x63CF;&#x8FF0;&#x5177;&#x6709;&#x6700;&#x4F4E;&#x8D77;&#x59CB;&#x5730;&#x5740;&#x7684;&#x5B58;&#x50A8;&#x533A;&#x57DF;&#x7684; <code>HeapRegion_t</code> &#x7ED3;&#x6784;&#x5FC5;&#x987B;&#x662F;&#x6570;&#x7EC4;&#x4E2D;&#x7684;&#x7B2C;&#x4E00;&#x4E2A;&#x7ED3;&#x6784;&#xFF0C;&#x5E76;&#x4E14;&#x63CF;&#x8FF0;&#x5177;&#x6709;&#x6700;&#x9AD8;&#x8D77;&#x59CB;&#x5730;&#x5740;&#x7684;&#x5B58;&#x50A8;&#x533A;&#x57DF;&#x7684; <code>HeapRegion_t</code> &#x7ED3;&#x6784;&#x5FC5;&#x987B;&#x662F;&#x6570;&#x7EC4;&#x4E2D;&#x7684;&#x6700;&#x540E;&#x4E00;&#x4E2A;&#x7ED3;&#x6784;&#x3002;</p>
+        <p>&#x6570;&#x7EC4;&#x7684;&#x672B;&#x5C3E;&#x7531; <code>HeapRegion_t</code> &#x7ED3;&#x6784;&#x6807;&#x8BB0;&#xFF0C;&#x8BE5;&#x7ED3;&#x6784;&#x7684; <code>pucStartAddress</code> &#x6210;&#x5458;&#x8BBE;&#x7F6E;&#x4E3A; <code>NULL</code>&#x3002;</p>
+      </td>
+    </tr>
+  </tbody>
+</table>&#x4E3E;&#x4F8B;&#x6765;&#x8BF4;&#xFF0C;&#x8003;&#x8651;&#x56FE; 8 A &#x4E2D;&#x6240;&#x793A;&#x7684;&#x5047;&#x8BBE;&#x5B58;&#x50A8;&#x5668;&#x6620;&#x5C04;&#xFF0C;&#x5176;&#x5305;&#x542B;&#x4E09;&#x4E2A;&#x5355;&#x72EC;&#x7684; RAM &#x5757;&#xFF1A;RAM1&#xFF0C;RAM2 &#x548C; RAM3&#x3002; &#x5047;&#x8BBE;&#x53EF;&#x6267;&#x884C;&#x4EE3;&#x7801;&#x88AB;&#x653E;&#x7F6E;&#x5728;&#x53EA;&#x8BFB;&#x5B58;&#x50A8;&#x5668;&#x4E2D;&#xFF0C;&#x672A;&#x793A;&#x51FA;&#x3002;</p>
+<p><img src=".gitbook/assets/wei-xin-jie-tu-20190904152410.png" alt="&#x56FE; 8. &#x5185;&#x5B58;&#x6620;&#x5C04;"></p>
+<p>&#x6E05;&#x5355; 6 &#x663E;&#x793A;&#x4E86;&#x4E00;&#x4E2A; <code>HeapRegion_t</code> &#x7ED3;&#x6784;&#x6570;&#x7EC4;&#xFF0C;&#x5B83;&#x4EEC;&#x5171;&#x540C;&#x63CF;&#x8FF0;&#x4E86;&#x4E09;&#x4E2A; RAM &#x5757;&#x3002;</p>
+<pre><code class="lang-c"><span class="hljs-comment">/* &#x5B9A;&#x4E49;&#x4E09;&#x4E2A;RAM&#x533A;&#x57DF;&#x7684;&#x8D77;&#x59CB;&#x5730;&#x5740;&#x548C;&#x5927;&#x5C0F;&#x3002; */</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> RAM1_START_ADDRESS( ( uint8_t * ) 0x00010000 )</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> RAM1_SIZE( 65 * 1024 )</span>
+
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> RAM2_START_ADDRESS( ( uint8_t * ) 0x00020000 )</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> RAM2_SIZE( 32 * 1024 )</span>
+
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> RAM3_START_ADDRESS( ( uint8_t * ) 0x00030000 )</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> RAM3_SIZE( 32 * 1024 )</span>
+
+<span class="hljs-comment">/* &#x521B;&#x5EFA;&#x4E00;&#x4E2A; HeapRegion_t &#x5B9A;&#x4E49;&#x6570;&#x7EC4;&#xFF0C;&#x5176;&#x4E2D;&#x5305;&#x542B;&#x4E09;&#x4E2A; RAM &#x533A;&#x57DF;&#x7684;&#x6BCF;&#x4E2A;&#x7D22;&#x5F15;&#xFF0C;&#x5E76;&#x7528;&#x7A7A;&#x5730;&#x5740;&#x7ED3;&#x675F;&#x6570;&#x7EC4;&#x3002;
+HeapRegion_t &#x7ED3;&#x6784;&#x5FC5;&#x987B;&#x6309;&#x5F00;&#x59CB;&#x5730;&#x5740;&#x987A;&#x5E8F;&#x51FA;&#x73B0;&#xFF0C;&#x5305;&#x542B;&#x6700;&#x4F4E;&#x5F00;&#x59CB;&#x5730;&#x5740;&#x7684;&#x7ED3;&#x6784;&#x9996;&#x5148;&#x51FA;&#x73B0;&#x3002;*/</span>
+<span class="hljs-keyword">const</span> HeapRegion_t xHeapRegions[] =
+{
+    { RAM1_START_ADDRESS, RAM1_SIZE },
+    { RAM2_START_ADDRESS, RAM2_SIZE },
+    { RAM3_START_ADDRESS, RAM3_SIZE },
+    { <span class="hljs-literal">NULL</span>,               <span class="hljs-number">0</span>         }  <span class="hljs-comment">/* &#x6807;&#x8BB0;&#x6570;&#x7EC4;&#x7684;&#x7ED3;&#x5C3E;&#x3002; */</span>
+};
+
+<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">( <span class="hljs-keyword">void</span> )</span>
+</span>{
+    <span class="hljs-comment">/* &#x521D;&#x59CB;&#x5316; heap_5&#x3002; */</span>
+    vPortDefineHeapRegions( xHeapRegions );
+
+    <span class="hljs-comment">/* &#x5728;&#x8FD9;&#x91CC;&#x6DFB;&#x52A0;&#x5E94;&#x7528;&#x4EE3;&#x7801;&#x3002; */</span>
+}
+</code></pre>
+<p>&#x6E05;&#x5355; 6. &#x4E00;&#x4E2A; <code>HeapRegion_t</code> &#x7ED3;&#x6784;&#x6570;&#x7EC4;&#xFF0C;&#x5B83;&#x4EEC;&#x5171;&#x540C;&#x63CF;&#x8FF0;&#x4E86; RAM &#x7684; 3 &#x4E2A;&#x533A;&#x57DF;</p>
+<p>&#x867D;&#x7136;&#x6E05;&#x5355; 6 &#x6B63;&#x786E;&#x63CF;&#x8FF0;&#x4E86; RAM&#xFF0C;&#x4F46;&#x5B83;&#x6CA1;&#x6709;&#x6F14;&#x793A;&#x4E00;&#x4E2A;&#x53EF;&#x7528;&#x7684;&#x793A;&#x4F8B;&#xFF0C;&#x56E0;&#x4E3A;&#x5B83;&#x5C06;&#x6240;&#x6709; RAM &#x5206;&#x914D;&#x7ED9;&#x5806;&#xFF0C;&#x800C;&#x6CA1;&#x6709; RAM &#x53EF;&#x4F9B;&#x5176;&#x4ED6;&#x53D8;&#x91CF;&#x4F7F;&#x7528;&#x3002;</p>
+<p>&#x6784;&#x5EFA;&#x9879;&#x76EE;&#x65F6;&#xFF0C;&#x6784;&#x5EFA;&#x8FC7;&#x7A0B;&#x7684;&#x94FE;&#x63A5;&#x9636;&#x6BB5;&#x4F1A;&#x4E3A;&#x6BCF;&#x4E2A;&#x53D8;&#x91CF;&#x5206;&#x914D;&#x4E00;&#x4E2A; RAM &#x5730;&#x5740;&#x3002; &#x53EF;&#x4F9B;&#x94FE;&#x63A5;&#x5668;&#x4F7F;&#x7528;&#x7684; RAM &#x901A;&#x5E38;&#x7531;&#x94FE;&#x63A5;&#x5668;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#xFF08;&#x5982;&#x94FE;&#x63A5;&#x63CF;&#x8FF0;&#x6587;&#x4EF6;&#xFF09;&#x63CF;&#x8FF0;&#x3002; &#x5728;&#x56FE; 8 B &#x4E2D;&#xFF0C;&#x5047;&#x8BBE;&#x94FE;&#x63A5;&#x5668;&#x811A;&#x672C;&#x5305;&#x542B;&#x6709;&#x5173; RAM1 &#x7684;&#x4FE1;&#x606F;&#xFF0C;&#x4F46;&#x4E0D;&#x5305;&#x62EC;&#x6709;&#x5173; RAM2 &#x6216; RAM3 &#x7684;&#x4FE1;&#x606F;&#x3002; &#x56E0;&#x6B64;&#xFF0C;&#x94FE;&#x63A5;&#x5668;&#x5728; RAM1 &#x4E2D;&#x653E;&#x7F6E;&#x4E86;&#x53D8;&#x91CF;&#xFF0C;&#x53EA;&#x7559;&#x4E0B;&#x4E86;&#x5730;&#x5740;&#x4E3A; <code>0x0001nnnn</code> &#x7684; RAM1 &#x90E8;&#x5206;&#x53EF;&#x4F9B; heap_5 &#x4F7F;&#x7528;&#x3002; <code>0x0001nnnn</code> &#x7684;&#x5B9E;&#x9645;&#x503C;&#x5C06;&#x53D6;&#x51B3;&#x4E8E;&#x6240;&#x94FE;&#x63A5;&#x7684;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x4E2D;&#x5305;&#x542B;&#x7684;&#x6240;&#x6709;&#x53D8;&#x91CF;&#x7684;&#x603B;&#x5927;&#x5C0F;&#x3002; &#x94FE;&#x63A5;&#x5668;&#x4F7F;&#x6240;&#x6709; RAM2 &#x548C;&#x6240;&#x6709; RAM3 &#x90FD;&#x672A;&#x4F7F;&#x7528;&#xFF0C;&#x4F7F;&#x5F97;&#x6574;&#x4E2A; RAM2 &#x548C;&#x6574;&#x4E2A; RAM3 &#x53EF;&#x4F9B; <code>heap_5</code> &#x4F7F;&#x7528;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x4F7F;&#x7528;&#x6E05;&#x5355; 6 &#x4E2D;&#x6240;&#x793A;&#x7684;&#x4EE3;&#x7801;&#xFF0C;&#x5219;&#x5206;&#x914D;&#x7ED9;&#x5730;&#x5740; <code>0x0001nnnn</code>&#x4E0B;&#x9762;&#x7684; <code>heap_5</code> &#x7684; RAM &#x5C06;&#x4E0E;&#x7528;&#x4E8E;&#x4FDD;&#x5B58;&#x53D8;&#x91CF;&#x7684; RAM &#x91CD;&#x53E0;&#x3002; &#x4E3A;&#x907F;&#x514D;&#x8FD9;&#x79CD;&#x60C5;&#x51B5;&#xFF0C;<code>xHeapRegions[]</code> &#x6570;&#x7EC4;&#x4E2D;&#x7684;&#x7B2C;&#x4E00;&#x4E2A; <code>HeapRegion_t</code> &#x7ED3;&#x6784;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x8D77;&#x59CB;&#x5730;&#x5740;<code>0x0001nnnn</code>&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x8D77;&#x59CB;&#x5730;&#x5740; <code>0x00010000</code>&#x3002; &#x4F46;&#x662F;&#xFF0C;&#x8FD9;&#x4E0D;&#x662F;&#x63A8;&#x8350;&#x7684;&#x89E3;&#x51B3;&#x65B9;&#x6848;&#xFF0C;&#x56E0;&#x4E3A;&#xFF1A;</p>
+<ol>
+<li>&#x8D77;&#x59CB;&#x5730;&#x5740;&#x53EF;&#x80FD;&#x4E0D;&#x5BB9;&#x6613;&#x786E;&#x5B9A;&#x3002;</li>
+<li>&#x94FE;&#x63A5;&#x5668;&#x4F7F;&#x7528;&#x7684; RAM &#x91CF;&#x53EF;&#x80FD;&#x4F1A;&#x5728;&#x5C06;&#x6765;&#x7684;&#x7248;&#x672C;&#x4E2D;&#x53D1;&#x751F;&#x53D8;&#x5316;&#xFF0C;&#x9700;&#x8981;&#x66F4;&#x65B0; <code>HeapRegion_t</code>&#x7ED3;&#x6784;&#x4E2D;&#x4F7F;&#x7528;&#x7684;&#x8D77;&#x59CB;&#x5730;&#x5740;&#x3002;</li>
+<li>&#x6784;&#x5EFA;&#x5DE5;&#x5177;&#x672A;&#x77E5;&#xFF0C; &#x56E0;&#x6B64;&#xFF0C;&#x5982;&#x679C;&#x94FE;&#x63A5;&#x5668;&#x4F7F;&#x7528;&#x7684; RAM &#x548C; <code>heap_5</code> &#x4F7F;&#x7528;&#x7684; RAM &#x91CD;&#x53E0;&#xFF0C;&#x5219;&#x65E0;&#x6CD5;&#x8B66;&#x544A;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x7F16;&#x5199;&#x8005;&#x3002;</li>
+</ol>
+<p>&#x6E05;&#x5355; 7 &#x6F14;&#x793A;&#x4E86;&#x4E00;&#x4E2A;&#x66F4;&#x65B9;&#x4FBF;&#x548C;&#x53EF;&#x7EF4;&#x62A4;&#x7684;&#x793A;&#x4F8B;&#x3002; &#x5B83;&#x58F0;&#x660E;&#x4E86;&#x4E00;&#x4E2A;&#x540D;&#x4E3A; <code>ucHeap</code> &#x7684;&#x6570;&#x7EC4;&#x3002; <code>ucHeap</code> &#x662F;&#x4E00;&#x4E2A;&#x666E;&#x901A;&#x53D8;&#x91CF;&#xFF0C;&#x56E0;&#x6B64;&#x5B83;&#x6210;&#x4E3A;&#x94FE;&#x63A5;&#x5668;&#x5206;&#x914D;&#x7ED9; RAM1 &#x7684;&#x6570;&#x636E;&#x7684;&#x4E00;&#x90E8;&#x5206;&#x3002; <code>xHeapRegions</code> &#x6570;&#x7EC4;&#x4E2D;&#x7684;&#x7B2C;&#x4E00;&#x4E2A; <code>HeapRegion_t</code> &#x7ED3;&#x6784;&#x63CF;&#x8FF0;&#x4E86; <code>ucHeap</code> &#x7684;&#x8D77;&#x59CB;&#x5730;&#x5740;&#x548C;&#x5927;&#x5C0F;&#xFF0C;&#x56E0;&#x6B64; <code>ucHeap</code> &#x6210;&#x4E3A; <code>heap_5</code> &#x7BA1;&#x7406;&#x7684;&#x5185;&#x5B58;&#x7684;&#x4E00;&#x90E8;&#x5206;&#x3002; &#x53EF;&#x4EE5;&#x589E;&#x52A0;<code>ucHeap</code> &#x7684;&#x5927;&#x5C0F;&#xFF0C;&#x76F4;&#x5230;&#x94FE;&#x63A5;&#x5668;&#x4F7F;&#x7528;&#x7684; RAM &#x6D88;&#x8017;&#x6240;&#x6709; RAM1&#xFF0C;&#x5982;&#x56FE; 8 C &#x6240;&#x793A;&#x3002;</p>
+<pre><code class="lang-c"><span class="hljs-comment">/* &#x5B9A;&#x4E49;&#x94FE;&#x63A5;&#x5668;&#x672A;&#x4F7F;&#x7528;&#x7684;&#x4E24;&#x4E2A;RAM&#x533A;&#x57DF;&#x7684;&#x8D77;&#x59CB;&#x5730;&#x5740;&#x548C;&#x5927;&#x5C0F;&#x3002; */</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> RAM2_START_ADDRESS( ( uint8_t * ) 0x00020000 )</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> RAM2_SIZE( 32 * 1024 )</span>
+
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> RAM3_START_ADDRESS( ( uint8_t * ) 0x00030000 )</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> RAM3_SIZE( 32 * 1024 )</span>
+
+<span class="hljs-comment">/* &#x58F0;&#x660E;&#x4E00;&#x4E2A;&#x6570;&#x7EC4;&#xFF0C;&#x8BE5;&#x6570;&#x7EC4;&#x5C06;&#x6210;&#x4E3A; heap_5 &#x4F7F;&#x7528;&#x7684;&#x5806;&#x7684;&#x4E00;&#x90E8;&#x5206;&#x3002; &#x8BE5;&#x6570;&#x7EC4;&#x5C06;&#x7531;&#x94FE;&#x63A5;&#x5668;&#x653E;&#x7F6E;&#x5728; RAM1 &#x4E2D;&#x3002; */</span>
+<span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> RAM1_HEAP_SIZE ( 30 * 1024 )</span>
+<span class="hljs-keyword">static</span> <span class="hljs-keyword">uint8_t</span> ucHeap[ RAM1_HEAP_SIZE ];
+
+<span class="hljs-comment">/* &#x521B;&#x5EFA;&#x4E00;&#x4E2A; HeapRegion_t &#x6570;&#x7EC4;&#x3002; &#x800C;&#x5728;&#x6E05;&#x5355; 6 &#x4E2D;&#xFF0C;&#x7B2C;&#x4E00;&#x4E2A;&#x6761;&#x76EE;&#x63CF;&#x8FF0;&#x4E86;&#x6240;&#x6709; RAM1&#xFF0C;&#x56E0;&#x6B64; heap_5 
+&#x5C06;&#x4F7F;&#x7528;&#x6240;&#x6709; RAM1&#xFF0C;&#x8FD9;&#x6B21;&#x7B2C;&#x4E00;&#x4E2A;&#x6761;&#x76EE;&#x4EC5;&#x63CF;&#x8FF0; ucHeap &#x6570;&#x7EC4;&#xFF0C;&#x56E0;&#x6B64; heap_5 &#x5C06;&#x4EC5;&#x4F7F;&#x7528;&#x5305;&#x542B; ucHeap 
+&#x6570;&#x7EC4;&#x7684; RAM1 &#x90E8;&#x5206;&#x3002; HeapRegion_t &#x7ED3;&#x6784;&#x4ECD;&#x5FC5;&#x987B;&#x4EE5;&#x8D77;&#x59CB;&#x5730;&#x5740;&#x987A;&#x5E8F;&#x51FA;&#x73B0;&#xFF0C;&#x5176;&#x7ED3;&#x6784;&#x5305;&#x542B;&#x6700;&#x5148;&#x51FA;&#x73B0;&#x7684;&#x6700;&#x4F4E;&#x8D77;
+&#x59CB;&#x5730;&#x5740;&#x3002;*/</span>
+<span class="hljs-keyword">const</span> HeapRegion_t xHeapRegions[] =
+{
+    { ucHeap,             RAM1_HEAP_SIZE },
+    { RAM2_START_ADDRESS, RAM2_SIZE },
+    { RAM3_START_ADDRESS, RAM3_SIZE },
+    { <span class="hljs-literal">NULL</span>,               <span class="hljs-number">0</span>         }  <span class="hljs-comment">/* &#x6807;&#x8BB0;&#x6570;&#x7EC4;&#x7684;&#x7ED3;&#x5C3E;&#x3002; */</span>
+};
+</code></pre>
+<p>&#x6E05;&#x5355; 7. &#x4E00;&#x4E2A; <code>HeapRegion_t</code> &#x7ED3;&#x6784;&#x6570;&#x7EC4;&#xFF0C;&#x63CF;&#x8FF0;&#x6240;&#x6709; RAM2&#xFF0C;&#x6240;&#x6709; RAM3&#xFF0C;&#x4F46;&#x53EA;&#x662F; RAM1 &#x7684;&#x4E00;&#x90E8;&#x5206;</p>
+<p>&#x6E05;&#x5355;7&#x4E2D;&#x6F14;&#x793A;&#x7684;&#x6280;&#x672F;&#x7684;&#x4F18;&#x70B9;&#x5305;&#x62EC;&#xFF1A;</p>
+<ol>
+<li>&#x6CA1;&#x6709;&#x5FC5;&#x8981;&#x4F7F;&#x7528;&#x786C;&#x7F16;&#x7801;&#x7684;&#x8D77;&#x59CB;&#x5730;&#x5740;&#x3002;</li>
+<li><code>HeapRegion_t</code> &#x7ED3;&#x6784;&#x4E2D;&#x4F7F;&#x7528;&#x7684;&#x5730;&#x5740;&#x5C06;&#x7531;&#x94FE;&#x63A5;&#x5668;&#x81EA;&#x52A8;&#x8BBE;&#x7F6E;&#xFF0C;&#x56E0;&#x6B64;&#x5373;&#x4F7F;&#x94FE;&#x63A5;&#x5668;&#x4F7F;&#x7528;&#x7684; RAM &#x91CF;&#x5728;&#x5C06;&#x6765;&#x7684;&#x6784;&#x5EFA;&#x4E2D;&#x53D1;&#x751F;&#x66F4;&#x6539;&#xFF0C;&#x4E5F;&#x59CB;&#x7EC8;&#x662F;&#x6B63;&#x786E;&#x7684;&#x3002;</li>
+<li>&#x5206;&#x914D;&#x7ED9; <code>heap_5</code> &#x7684; RAM &#x4E0D;&#x53EF;&#x80FD;&#x4E0E;&#x94FE;&#x63A5;&#x5668;&#x653E;&#x5165; RAM1 &#x7684;&#x6570;&#x636E;&#x91CD;&#x53E0;&#x3002;</li>
+<li>&#x5982;&#x679C; <code>ucHeap</code> &#x592A;&#x5927;&#xFF0C;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x5C06;&#x4E0D;&#x4F1A;&#x94FE;&#x63A5;&#x3002;</li>
+</ol>
+<h2 id="&#x5806;&#x76F8;&#x5173;&#x7684;&#x5B9E;&#x7528;&#x529F;&#x80FD;">&#x5806;&#x76F8;&#x5173;&#x7684;&#x5B9E;&#x7528;&#x529F;&#x80FD;</h2>
+<h3 id="xportgetfreeheapsize-api&#x51FD;&#x6570;">xPortGetFreeHeapSize() API&#x51FD;&#x6570;</h3>
+<p><code>xPortGetFreeHeapSize()</code> API &#x51FD;&#x6570;&#x5728;&#x8C03;&#x7528;&#x51FD;&#x6570;&#x65F6;&#x8FD4;&#x56DE;&#x5806;&#x4E2D;&#x7684;&#x7A7A;&#x95F2;&#x5B57;&#x8282;&#x6570;&#x3002;&#x5B83;&#x53EF;&#x7528;&#x4E8E;&#x4F18;&#x5316;&#x5806;&#x5927;&#x5C0F;&#x3002; &#x4F8B;&#x5982;&#xFF0C;&#x5982;&#x679C; <code>xPortGetFreeHeapSize()</code> &#x5728;&#x521B;&#x5EFA;&#x4E86;&#x6240;&#x6709;&#x5185;&#x6838;&#x5BF9;&#x8C61;&#x540E;&#x8FD4;&#x56DE; 2000&#xFF0C;&#x90A3;&#x4E48; <code>configTOTAL_HEAP_SIZE</code> &#x7684;&#x503C;&#x53EF;&#x4EE5;&#x51CF;&#x5C11; 2000&#x3002;</p>
+<p>&#x4F7F;&#x7528; <code>heap_3</code> &#x65F6;&#xFF0C;<code>xPortGetFreeHeapSize()</code>&#x4E0D;&#x53EF;&#x7528;&#x3002;</p>
+<pre><code class="lang-c"><span class="hljs-keyword">size_t</span> xPortGetFreeHeapSize( <span class="hljs-keyword">void</span> );
+</code></pre>
+<p>&#x6E05;&#x5355; 8. <code>xPortGetFreeHeapSize()</code>API &#x51FD;&#x6570;&#x539F;&#x578B;</p>
+<p>&#x8868; 6. <code>xPortGetFreeHeapSize()</code> &#x8FD4;&#x56DE;&#x503C;</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">&#x53C2;&#x6570;&#x540D;&#x79F0;/&#x8FD4;&#x56DE;&#x503C;</th>
+<th style="text-align:left">&#x63CF;&#x8FF0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">&#x8FD4;&#x56DE;&#x503C;</td>
+<td style="text-align:left">&#x8C03;&#x7528; <code>xPortGetFreeHeapSize()</code> &#x65F6;&#x5728;&#x5806;&#x4E2D;&#x4FDD;&#x6301;&#x672A;&#x5206;&#x914D;&#x7684;&#x5B57;&#x8282;&#x6570;&#x3002;</td>
+</tr>
+</tbody>
+</table>
+<h3 id="xportgetminimumeverfreeheapsize-api&#x51FD;&#x6570;">xPortGetMinimumEverFreeHeapSize() API&#x51FD;&#x6570;</h3>
+<p><code>xPortGetMinimumEverFreeHeapSize()</code> API &#x51FD;&#x6570;&#x8FD4;&#x56DE;&#x81EA; FreeRTOS &#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x5F00;&#x59CB;&#x6267;&#x884C;&#x4EE5;&#x6765;&#x5806;&#x4E2D;&#x66FE;&#x5B58;&#x5728;&#x7684;&#x6700;&#x5C0F;&#x672A;&#x5206;&#x914D;&#x5B57;&#x8282;&#x6570;&#x3002;</p>
+<p><code>xPortGetMinimumEverFreeHeapSize()</code> &#x8FD4;&#x56DE;&#x7684;&#x503C;&#x8868;&#x660E;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x5DF2;&#x7ECF;&#x63A5;&#x8FD1;&#x8017;&#x5C3D;&#x5806;&#x7A7A;&#x95F4;&#x3002;&#x4F8B;&#x5982;&#xFF0C;&#x5982;&#x679C; <code>xPortGetMinimumEverFreeHeapSize()</code> &#x8FD4;&#x56DE;200&#xFF0C;&#x90A3;&#x4E48;&#xFF0C;&#x5728;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x5F00;&#x59CB;&#x6267;&#x884C;&#x540E;&#x7684;&#x67D0;&#x4E2A;&#x65F6;&#x5019;&#xFF0C;&#x5B83;&#x4F1A;&#x5728;&#x8017;&#x5C3D;&#x5806;&#x7A7A;&#x95F4;&#x7684; 200 &#x5B57;&#x8282;&#x4E4B;&#x5185;&#x3002;</p>
+<p><code>xPortGetMinimumEverFreeHeapSize()</code> &#x4EC5;&#x5728;&#x4F7F;&#x7528; <code>heap_4</code> &#x6216; <code>heap_5</code> &#x65F6;&#x53EF;&#x7528;&#x3002;</p>
+<pre><code class="lang-c"><span class="hljs-keyword">size_t</span> xPortGetMinimumEverFreeHeapSize( <span class="hljs-keyword">void</span> );
+</code></pre>
+<p>&#x6E05;&#x5355; 9. <code>xPortGetMinimumEverFreeHeapSize()</code>API &#x51FD;&#x6570;&#x539F;&#x578B;</p>
+<p>&#x8868; 7. <code>xPortGetMinimumEverFreeHeapSize()</code>&#x8FD4;&#x56DE;&#x503C;</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">&#x53C2;&#x6570;&#x540D;&#x79F0;/&#x8FD4;&#x56DE;&#x503C;</th>
+<th style="text-align:left">&#x63CF;&#x8FF0;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">&#x8FD4;&#x56DE;&#x503C;</td>
+<td style="text-align:left">&#x81EA; FreeRTOS &#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x5F00;&#x59CB;&#x6267;&#x884C;&#x4EE5;&#x6765;&#x5806;&#x4E2D;&#x5DF2;&#x5B58;&#x5728;&#x7684;&#x6700;&#x5C0F;&#x672A;&#x5206;&#x914D;&#x5B57;&#x8282;&#x6570;&#x3002;</td>
+</tr>
+</tbody>
+</table>
+<h3 id="malloc-&#x5931;&#x8D25;&#x7684;&#x94A9;&#x5B50;&#x51FD;&#x6570;">malloc &#x5931;&#x8D25;&#x7684;&#x94A9;&#x5B50;&#x51FD;&#x6570;</h3>
+<p>&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x4ECE;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x4EE3;&#x7801;&#x8C03;&#x7528; <code>pvPortMalloc()</code>&#x3002; &#x6BCF;&#x6B21;&#x521B;&#x5EFA;&#x5185;&#x6838;&#x5BF9;&#x8C61;&#x65F6;&#xFF0C;&#x5B83;&#x4E5F;&#x4F1A;&#x5728; FreeRTOS &#x6E90;&#x6587;&#x4EF6;&#x4E2D;&#x8C03;&#x7528;&#x3002;&#x5185;&#x6838;&#x5BF9;&#x8C61;&#x7684;&#x793A;&#x4F8B;&#x5305;&#x62EC;&#x4EFB;&#x52A1;&#xFF0C;&#x961F;&#x5217;&#xFF0C;&#x4FE1;&#x53F7;&#x91CF;&#x548C;&#x4E8B;&#x4EF6;&#x7EC4;&#xFF0C;&#x6240;&#x6709;&#x8FD9;&#x4E9B;&#x90FD;&#x5C06;&#x5728;&#x672C;&#x4E66;&#x540E;&#x9762;&#x7684;&#x7AE0;&#x8282;&#x4E2D;&#x4ECB;&#x7ECD;&#x3002;</p>
+<p>&#x5C31;&#x50CF;&#x6807;&#x51C6;&#x5E93; <code>malloc()</code> &#x51FD;&#x6570;&#x4E00;&#x6837;&#xFF0C;&#x5982;&#x679C; <code>pvPortMalloc()</code> &#x7531;&#x4E8E;&#x6240;&#x8BF7;&#x6C42;&#x5927;&#x5C0F;&#x7684;&#x5757;&#x4E0D;&#x5B58;&#x5728;&#x800C;&#x65E0;&#x6CD5;&#x8FD4;&#x56DE; RAM &#x5757;&#xFF0C;&#x90A3;&#x4E48;&#x5B83;&#x5C06;&#x8FD4;&#x56DE; <code>NULL</code>&#x3002; &#x5982;&#x679C;&#x7531;&#x4E8E;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x7F16;&#x5199;&#x5668;&#x6B63;&#x5728;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x5185;&#x6838;&#x5BF9;&#x8C61;&#x800C;&#x6267;&#x884C; <code>pvPortMalloc()</code>&#xFF0C;&#x5E76;&#x4E14;&#x5BF9; <code>pvPortMalloc()</code> &#x7684;&#x8C03;&#x7528;&#x8FD4;&#x56DE; <code>NULL</code>&#xFF0C;&#x5219;&#x5185;&#x6838;&#x5BF9;&#x8C61;&#x4E0D;&#x4F1A;&#x88AB;&#x521B;&#x5EFA;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x5BF9; <code>pvPortMalloc()</code> &#x7684;&#x8C03;&#x7528;&#x8FD4;&#x56DE; <code>NULL</code>&#xFF0C;&#x5219;&#x53EF;&#x4EE5;&#x5C06;&#x6240;&#x6709;&#x793A;&#x4F8B;&#x5806;&#x914D;&#x7F6E;&#x65B9;&#x6848;&#x914D;&#x7F6E;&#x4E3A;&#x8C03;&#x7528;&#x94A9;&#x5B50;&#xFF08;&#x6216;&#x56DE;&#x8C03;&#xFF09;&#x51FD;&#x6570;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x5728; <code>FreeRTOSConfig.h</code> &#x4E2D;&#x5C06; <code>configUSE_MALLOC_FAILED_HOOK</code> &#x8BBE;&#x7F6E;&#x4E3A; 1&#xFF0C;&#x5219;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x5FC5;&#x987B;&#x63D0;&#x4F9B; malloc &#x5931;&#x8D25;&#x7684;&#x94A9;&#x5B50;&#x51FD;&#x6570;&#xFF0C;&#x8BE5;&#x51FD;&#x6570;&#x5177;&#x6709;&#x7531;&#x6E05;&#x5355; 10 &#x663E;&#x793A;&#x7684;&#x540D;&#x79F0;&#x548C;&#x539F;&#x578B;&#x3002;&#x8BE5;&#x51FD;&#x6570;&#x53EF;&#x4EE5;&#x4EE5;&#x9002;&#x5408;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x7684;&#x4EFB;&#x4F55;&#x65B9;&#x5F0F;&#x5B9E;&#x73B0;&#x3002;</p>
+<pre><code class="lang-c"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">vApplicationMallocFailedHook</span><span class="hljs-params">( <span class="hljs-keyword">void</span> )</span></span>;
+</code></pre>
+<p>&#x6E05;&#x5355; 10. malloc &#x5931;&#x8D25;&#x7684;&#x94A9;&#x5B50;&#x51FD;&#x6570;&#x540D;&#x548C;&#x539F;&#x578B;&#x3002;</p>
+
+                                
+                                </section>
+                            
+    </div>
+    <div class="search-results">
+        <div class="has-results">
+            
+            <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+            <ul class="search-results-list"></ul>
+            
+        </div>
+        <div class="no-results">
+            
+            <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+            
+        </div>
+    </div>
+</div>
+
+                        </div>
+                    </div>
+                
+            </div>
+
+            
+                
+                <a href="freertos-de-fa-hang.html" class="navigation navigation-prev " aria-label="Previous page: FreeRTOS 的发行">
+                    <i class="fa fa-angle-left"></i>
+                </a>
+                
+                
+                <a href="ren-wu-guan-li.html" class="navigation navigation-next " aria-label="Next page: 任务管理">
+                    <i class="fa fa-angle-right"></i>
+                </a>
+                
+            
+        
+    </div>
+
+    <script>
+        var gitbook = gitbook || [];
+        gitbook.push(function() {
+            gitbook.page.hasChanged({"page":{"title":"堆内存管理","level":"1.4","depth":1,"next":{"title":"任务管理","level":"1.5","depth":1,"path":"ren-wu-guan-li.md","ref":"ren-wu-guan-li.md","articles":[]},"previous":{"title":"FreeRTOS 的发行","level":"1.3","depth":1,"path":"freertos-de-fa-hang.md","ref":"freertos-de-fa-hang.md","articles":[]},"dir":"ltr"},"config":{"gitbook":"*","theme":"default","variables":{},"plugins":[],"pluginsConfig":{"highlight":{},"search":{},"lunr":{"maxIndexSize":1000000,"ignoreSpecialCharacters":false},"sharing":{"facebook":true,"twitter":true,"google":false,"weibo":false,"instapaper":false,"vk":false,"all":["facebook","google","twitter","weibo","instapaper"]},"fontsettings":{"theme":"white","family":"sans","size":2},"theme-default":{"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"},"showLevel":false}},"structure":{"langs":"LANGS.md","readme":"README.md","glossary":"GLOSSARY.md","summary":"SUMMARY.md"},"pdf":{"pageNumbers":true,"fontSize":12,"fontFamily":"Arial","paperSize":"a4","chapterMark":"pagebreak","pageBreaksBefore":"/","margin":{"right":62,"left":62,"top":56,"bottom":56}},"styles":{"website":"styles/website.css","pdf":"styles/pdf.css","epub":"styles/epub.css","mobi":"styles/mobi.css","ebook":"styles/ebook.css","print":"styles/print.css"}},"file":{"path":"dui-nei-cun-guan-li.md","mtime":"2020-02-19T18:46:18.675Z","type":"markdown"},"gitbook":{"version":"3.2.3","time":"2020-02-19T18:54:30.821Z"},"basePath":".","book":{"language":""}});
+        });
+    </script>
+</div>
+
+        
+    <script src="gitbook/gitbook.js"></script>
+    <script src="gitbook/theme.js"></script>
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search-engine.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-search/search.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/lunr.min.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-lunr/search-lunr.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-sharing/buttons.js"></script>
+        
+    
+        
+        <script src="gitbook/gitbook-plugin-fontsettings/fontsettings.js"></script>
+        
+    
+
+    </body>
+</html>
+
