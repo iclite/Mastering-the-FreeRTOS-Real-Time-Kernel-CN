@@ -1,6 +1,6 @@
 # Table of contents
 
-* [掌握 FreeROTS™ 实时内核](README.md)
+* [掌握 FreeRTOS™ 实时内核](README.md)
 * [前言](qian-yan.md)
 * [FreeRTOS 的发行](freertos-de-fa-hang.md)
 * [堆内存管理](dui-nei-cun-guan-li.md)
