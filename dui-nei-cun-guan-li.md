@@ -186,7 +186,7 @@ typedef struct HeapRegion
 {
     /* The start address of a block of memory that will be part of the heap.*/
     uint8_t *pucStartAddress;
-    
+
     /* The size of the block of memoryin bytes. */
     size_t xSizeInBytes;
 } HeapRegion_t;
@@ -196,28 +196,25 @@ typedef struct HeapRegion
 
 表 5. `vPortDefineHeapRegions()` 参数
 
+| 参数名称/返回值 | 描述 |
+| :--- | :--- |
+
+
 <table>
   <thead>
     <tr>
-      <th style="text-align:left">&#x53C2;&#x6570;&#x540D;&#x79F0;/&#x8FD4;&#x56DE;&#x503C;</th>
-      <th style="text-align:left">&#x63CF;&#x8FF0;</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align:left">pxHeapRegions</td>
-      <td style="text-align:left">
+      <th style="text-align:left">pxHeapRegions</th>
+      <th style="text-align:left">
         <p>&#x6307;&#x5411; <code>HeapRegion_t</code> &#x7ED3;&#x6784;&#x6570;&#x7EC4;&#x5F00;&#x5934;&#x7684;&#x6307;&#x9488;&#x3002;
           &#x6570;&#x7EC4;&#x4E2D;&#x7684;&#x6BCF;&#x4E2A;&#x7ED3;&#x6784;&#x90FD;&#x63CF;&#x8FF0;&#x4E86;&#x4F7F;&#x7528; <code>heap_5</code> &#x65F6;&#x5C06;&#x6210;&#x4E3A;&#x5806;&#x7684;&#x4E00;&#x90E8;&#x5206;&#x7684;&#x5185;&#x5B58;&#x533A;&#x57DF;&#x7684;&#x8D77;&#x59CB;&#x5730;&#x5740;&#x548C;&#x957F;&#x5EA6;&#x3002;</p>
         <p>&#x6570;&#x7EC4;&#x4E2D;&#x7684; <code>HeapRegion_t</code> &#x7ED3;&#x6784;&#x5FC5;&#x987B;&#x6309;&#x8D77;&#x59CB;&#x5730;&#x5740;&#x6392;&#x5E8F;;
           &#x63CF;&#x8FF0;&#x5177;&#x6709;&#x6700;&#x4F4E;&#x8D77;&#x59CB;&#x5730;&#x5740;&#x7684;&#x5B58;&#x50A8;&#x533A;&#x57DF;&#x7684; <code>HeapRegion_t</code> &#x7ED3;&#x6784;&#x5FC5;&#x987B;&#x662F;&#x6570;&#x7EC4;&#x4E2D;&#x7684;&#x7B2C;&#x4E00;&#x4E2A;&#x7ED3;&#x6784;&#xFF0C;&#x5E76;&#x4E14;&#x63CF;&#x8FF0;&#x5177;&#x6709;&#x6700;&#x9AD8;&#x8D77;&#x59CB;&#x5730;&#x5740;&#x7684;&#x5B58;&#x50A8;&#x533A;&#x57DF;&#x7684; <code>HeapRegion_t</code> &#x7ED3;&#x6784;&#x5FC5;&#x987B;&#x662F;&#x6570;&#x7EC4;&#x4E2D;&#x7684;&#x6700;&#x540E;&#x4E00;&#x4E2A;&#x7ED3;&#x6784;&#x3002;</p>
         <p>&#x6570;&#x7EC4;&#x7684;&#x672B;&#x5C3E;&#x7531; <code>HeapRegion_t</code> &#x7ED3;&#x6784;&#x6807;&#x8BB0;&#xFF0C;&#x8BE5;&#x7ED3;&#x6784;&#x7684; <code>pucStartAddress</code> &#x6210;&#x5458;&#x8BBE;&#x7F6E;&#x4E3A; <code>NULL</code>&#x3002;</p>
-      </td>
+      </th>
     </tr>
-  </tbody>
-</table>举例来说，考虑图 8 A 中所示的假设存储器映射，其包含三个单独的 RAM 块：RAM1，RAM2 和 RAM3。 假设可执行代码被放置在只读存储器中，未示出。
-
-![&#x56FE; 8. &#x5185;&#x5B58;&#x6620;&#x5C04;](.gitbook/assets/wei-xin-jie-tu-20190904152410.png)
+  </thead>
+  <tbody></tbody>
+</table>![&#x56FE; 8. &#x5185;&#x5B58;&#x6620;&#x5C04;](.gitbook/assets/wei-xin-jie-tu-20190904152410.png)
 
 清单 6 显示了一个 `HeapRegion_t` 结构数组，它们共同描述了三个 RAM 块。
 
@@ -246,7 +243,7 @@ int main( void )
 {
     /* 初始化 heap_5。 */
     vPortDefineHeapRegions( xHeapRegions );
-    
+
     /* 在这里添加应用代码。 */
 }
 ```

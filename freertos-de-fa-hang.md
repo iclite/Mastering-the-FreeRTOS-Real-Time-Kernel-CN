@@ -95,7 +95,7 @@ FreeRTOS
 
 特定 FreeRTOS 移植的源文件包含在 `FreeRTOS/Source/portable` 目录中。 可移植目录按层次结构排列，首先是编译器，然后是处理器体系结构。 层次结构如图 3 所示。
 
-如果你在使用编译器 \[_compiler\]_ 的架构 \[_architecture\]_ 的处理器上运行 FreeRTOS，除了核心 FreeRTOS 源文件之外，你还必须构建位于 `FreeRTOS/Source/portable/[compiler]/[architecture]` 目录中的文件。 
+如果你在使用编译器 \[_compiler\]_ 的架构 \[_architecture\]_ 的处理器上运行 FreeRTOS，除了核心 FreeRTOS 源文件之外，你还必须构建位于 `FreeRTOS/Source/portable/[compiler]/[architecture]` 目录中的文件。
 
 正如将在第 2 章堆内存管理中所描述的，FreeRTOS 还认为堆内存分配是便携式层的一部分。 使用早于V9.0.0 的 FreeRTOS 版本的项目必须包含堆内存管理器。 从 FreeRTOS V9.0.0 开始，只有在 `FreeRTOSConfig.h` 中将 `configSUPPORT_DYNAMIC_ALLOCATION` 设置为 1 或者未定义 `configSUPPORT_DYNAMIC_ALLOCATION` 时才需要堆内存管理器。
 
@@ -141,7 +141,7 @@ FreeRTOS 要求在编译器的 include 路径中包含三个目录。 如下：
 
 每个 FreeRTOS 移植都附带至少一个可以构建的演示应用程序，不会生成任何错误或警告，尽管某些演示比其他演示更旧，并且自演示程序发布以来构建工具的自身的更新可能会引起报错。
 
-Linux ****用户须知：FreeRTOS 是在 Windows 主机上开发和测试的。 在 Linux 主机上构建演示项目时，偶尔会导致构建错误。 构建错误几乎总是与引用文件名时使用的字母大小写或文件路径中使用的斜杠字符的方向有关。 请使用 FreeRTOS 联系表（[http://www.FreeRTOS.org/contact](http://www.FreeRTOS.org/contact)）提醒我们任何此类错误。
+Linux _\*\*_用户须知：FreeRTOS 是在 Windows 主机上开发和测试的。 在 Linux 主机上构建演示项目时，偶尔会导致构建错误。 构建错误几乎总是与引用文件名时使用的字母大小写或文件路径中使用的斜杠字符的方向有关。 请使用 FreeRTOS 联系表（[http://www.FreeRTOS.org/contact](http://www.FreeRTOS.org/contact)）提醒我们任何此类错误。
 
 演示应用程序有几个目的：
 
@@ -204,11 +204,11 @@ int main( void )
 {
     /* 执行必要的任何硬件设置。 */
     prvSetupHardware();
-    
+
     /* ---可以在这里创建应用程序任务 ---*/
     /* 启动已创建的任务。 */
     vTaskStartScheduler();
-    
+
     /* 只有当没有足够的堆来启动调度程序时，执行才会到达这里。 */
     for( ;; );
     return 0;
@@ -291,7 +291,7 @@ FreeRTOS 的每个端口都有一个唯一的 `portmacro.h` 头文件，其中�
 
 | 前缀 | 宏定义的位置 | 例子 |
 | :--- | :--- | :--- |
-| port  | portable.h 或 portmacro.h | **port**MAX\_DELAY |
+| port | portable.h 或 portmacro.h | **port**MAX\_DELAY |
 | task | task.h | **task**ENTER\_CRITICAL\(\) |
 | pd | projdefs.h | **pd**TRUE |
 | config | FreeRTOSConfig.h | **config**USE\_PREEMPTION |
