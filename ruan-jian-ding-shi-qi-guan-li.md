@@ -10,8 +10,8 @@
 
 软件计时器功能是可选的。要包括软件计时器功能，请执行以下操作:
 
-1. 将FreeRTOS源文件FreeRTOS/Source/timers.c构建为项目的一部分 
-2. 在FreeRTOSConfig.h中将configUSE\_TIMERS设置为1。
+1. 将FreeRTOS源文件`FreeRTOS/Source/timers.c`构建为项目的一部分 
+2. 在`FreeRTOSConfig.h`中将`configUSE_TIMERS`设置为1。
 
 ### **范围** 
 
@@ -82,7 +82,7 @@ xTimerDelete\(\)接口函数的作用是：删除计时器。可以随时删除�
 
 所有软件计时器回调函数都在同一RTOS守护进程\(或“计时器服务”\)任务的上下文中执行\[1\]。
 
-* _\[1\]. 该任务过去被称为“计时器服务任务”，因为最初它只用于执行软件计时器回调函数。现在同一任务也用于其他目的，因此它被称为“RTOS守护程序任务”的更一般的名称。_
+_\[1\]. 该任务过去被称为“计时器服务任务”，因为最初它只用于执行软件计时器回调函数。现在同一任务也用于其他目的，因此它被称为“RTOS守护程序任务”的更一般的名称。_
 
 守护程序任务，是在启动调度程序时，自动创建的标准FreeRTOS任务。其优先级和堆栈大小分别由`configTIMER_TASK_PRIORITY`和`configTIMER_TASK_STACK_DEPTH`编译时间配置常量设置。这两个常量都在FreeRTOSConfig.h中定义。
 
