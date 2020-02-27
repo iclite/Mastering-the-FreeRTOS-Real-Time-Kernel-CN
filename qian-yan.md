@@ -4,7 +4,7 @@
 
 ### 关于 FreeRTOS
 
-FreeRTOS 由 Real Time Engineers Ltd. 独家拥有，开发和维护。Real Time Engineers Ltd. 与世界领先的芯片公司密切合作十多年，为您提供屡获殊荣的商业级和完全免费的高质量软件。 
+FreeRTOS 由 Real Time Engineers Ltd. 独家拥有，开发和维护。Real Time Engineers Ltd. 与世界领先的芯片公司密切合作十多年，为您提供屡获殊荣的商业级和完全免费的高质量软件。
 
 FreeRTOS 非常适合使用微控制器和微处理器的深度嵌入式实时应用程序。这种类型的应用程序通常包括硬件和软件时间要求的混合。
 

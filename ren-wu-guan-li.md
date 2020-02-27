@@ -52,7 +52,7 @@ int32_t lVariableExample = 0;
     {
         /* 实现任务功能的代码将在此处。 */
     }
-    
+
     /* 如果任务实现突破上述循环，则必须在到达其实现功能结束之前删除该任务。 传递给 vTaskDelete() 
     API 函数的 NULL 参数指示要删除的任务是调用（这个）任务。 用于命名 API 函数的约定在第 0 节中
     描述，使用早于 V9.0.0 的 FreeRTOS 版本的项目必须构建一个 heap_n.c 文件。 从 
@@ -96,87 +96,91 @@ BaseType_t xTaskCreate( TaskFunction_t pvTaskCode,
 
 表8. `xTaskCreate()` 参数和返回值
 
-<table>
-  <thead>
-    <tr>
-      <th style="text-align:left">&#x53C2;&#x6570;&#x540D;&#x79F0;/&#x8FD4;&#x56DE;&#x503C;</th>
-      <th style="text-align:left">&#x63CF;&#x8FF0;</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align:left">pvTaskCode</td>
-      <td style="text-align:left">&#x4EFB;&#x52A1;&#x662F;&#x7B80;&#x5355;&#x7684;C&#x51FD;&#x6570;&#xFF0C;&#x5B83;&#x6C38;&#x8FDC;&#x4E0D;&#x4F1A;&#x9000;&#x51FA;&#xFF0C;&#x56E0;&#x6B64;&#x901A;&#x5E38;&#x88AB;&#x5B9E;&#x73B0;&#x4E3A;&#x65E0;&#x9650;&#x5FAA;&#x73AF;&#x3002; <code>pvTaskCode</code> &#x53C2;&#x6570;&#x53EA;&#x662F;&#x6307;&#x5411;&#x5B9E;&#x73B0;&#x4EFB;&#x52A1;&#x7684;&#x51FD;&#x6570;&#x7684;&#x6307;&#x9488;&#xFF08;&#x5B9E;&#x9645;&#x4E0A;&#xFF0C;&#x53EA;&#x662F;&#x51FD;&#x6570;&#x7684;&#x540D;&#x79F0;&#xFF09;&#x3002;</td>
-    </tr>
-    <tr>
-      <td style="text-align:left">pcName</td>
-      <td style="text-align:left">
-        <p>&#x4EFB;&#x52A1;&#x7684;&#x63CF;&#x8FF0;&#x6027;&#x540D;&#x79F0;&#x3002;
-          FreeRTOS &#x4E0D;&#x4EE5;&#x4EFB;&#x4F55;&#x65B9;&#x5F0F;&#x4F7F;&#x7528;&#x5B83;&#x3002;
-          &#x5B83;&#x4EC5;&#x4F5C;&#x4E3A;&#x8C03;&#x8BD5; ID &#x5305;&#x542B;&#x5728;&#x5185;&#x3002;
-          &#x901A;&#x8FC7;&#x4EBA;&#x7C7B;&#x53EF;&#x8BFB;&#x7684;&#x540D;&#x79F0;&#x8BC6;&#x522B;&#x4EFB;&#x52A1;&#x6BD4;&#x5C1D;&#x8BD5;&#x901A;&#x8FC7;&#x53E5;&#x67C4;&#x8BC6;&#x522B;&#x4EFB;&#x52A1;&#x8981;&#x7B80;&#x5355;&#x5F97;&#x591A;&#x3002;&#x5DE5;&#x5177;&#x5305;&#x542B;&#x5728;&#x5185;&#x3002;
-          &#x901A;&#x8FC7;&#x4EBA;&#x7C7B;&#x53EF;&#x8BFB;&#x540D;&#x79F0;&#x8BC6;&#x522B;&#x4EFB;&#x52A1;&#x6BD4;&#x5C1D;&#x8BD5;&#x901A;&#x8FC7;&#x53E5;&#x67C4;&#x8BC6;&#x522B;&#x4EFB;&#x52A1;&#x8981;&#x7B80;&#x5355;&#x5F97;&#x591A;&#x3002;</p>
-        <p>&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x5B9A;&#x4E49;&#x7684;&#x5E38;&#x91CF; <code>configMAX_TASK_NAME_LEN</code> &#x5B9A;&#x4E49;&#x4E86;&#x4EFB;&#x52A1;&#x540D;&#x79F0;&#x53EF;&#x4EE5;&#x91C7;&#x7528;&#x7684;&#x6700;&#x5927;&#x957F;&#x5EA6;&#xFF0C;&#x5305;&#x62EC; <code>NULL</code> &#x7EC8;&#x6B62;&#x7B26;&#x3002;
-          &#x63D0;&#x4F9B;&#x957F;&#x4E8E;&#x6B64;&#x6700;&#x5927;&#x503C;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#x5C06;&#x5BFC;&#x81F4;&#x5B57;&#x7B26;&#x4E32;&#x88AB;&#x9759;&#x9ED8;&#x622A;&#x65AD;&#x3002;</p>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left">usStackDepth</td>
-      <td style="text-align:left">
-        <p>&#x6BCF;&#x4E2A;&#x4EFB;&#x52A1;&#x90FD;&#x6709;&#x81EA;&#x5DF1;&#x552F;&#x4E00;&#x7684;&#x5806;&#x6808;&#xFF0C;&#x5728;&#x521B;&#x5EFA;&#x4EFB;&#x52A1;&#x65F6;&#x7531;&#x5185;&#x6838;&#x5206;&#x914D;&#x7ED9;&#x4EFB;&#x52A1;&#x3002; <code>usStackDepth</code> &#x503C;&#x544A;&#x8BC9;&#x5185;&#x6838;&#x5806;&#x6808;&#x7684;&#x5927;&#x5C0F;&#x3002;</p>
-        <p>&#x8BE5;&#x503C;&#x6307;&#x5B9A;&#x5806;&#x6808;&#x53EF;&#x4EE5;&#x5BB9;&#x7EB3;&#x7684;&#x5B57;&#x6570;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x5B57;&#x8282;&#x6570;&#x3002;
-          &#x4F8B;&#x5982;&#xFF0C;&#x5982;&#x679C;&#x5806;&#x6808;&#x662F; 32 &#x4F4D;&#x5BBD;&#x5E76;&#x4E14; <code>usStackDepth</code> &#x4F5C;&#x4E3A;
-          100 &#x4F20;&#x5165;&#xFF0C;&#x5219;&#x5C06;&#x5206;&#x914D; 400 &#x5B57;&#x8282;&#x7684;&#x5806;&#x6808;&#x7A7A;&#x95F4;&#xFF08;100
-          * 4 &#x5B57;&#x8282;&#xFF09;&#x3002; &#x5806;&#x6808;&#x6DF1;&#x5EA6;&#x4E58;&#x4EE5;&#x5806;&#x6808;&#x5BBD;&#x5EA6;&#x4E0D;&#x5F97;&#x8D85;&#x8FC7; <code>uint16_t</code> &#x7C7B;&#x578B;&#x7684;&#x53D8;&#x91CF;&#x4E2D;&#x53EF;&#x5305;&#x542B;&#x7684;&#x6700;&#x5927;&#x503C;&#x3002;</p>
-        <p>&#x7A7A;&#x95F2;&#x4EFB;&#x52A1;&#x4F7F;&#x7528;&#x7684;&#x5806;&#x6808;&#x5927;&#x5C0F;&#x7531;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x5B9A;&#x4E49;&#x7684;&#x5E38;&#x91CF; <code>configMINIMAL_STACK_SIZE</code>&#x5B9A;&#x4E49;&#x3002;
-          &#x5728; FreeRTOS &#x6F14;&#x793A;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x4E2D;&#x4E3A;&#x6B63;&#x5728;&#x4F7F;&#x7528;&#x7684;&#x5904;&#x7406;&#x5668;&#x4F53;&#x7CFB;&#x7ED3;&#x6784;&#x5206;&#x914D;&#x7ED9;&#x6B64;&#x5E38;&#x91CF;&#x7684;&#x503C;&#x662F;&#x5EFA;&#x8BAE;&#x7684;&#x6700;&#x5C0F;&#x4EFB;&#x52A1;&#x3002;
-          &#x5982;&#x679C;&#x60A8;&#x7684;&#x4EFB;&#x52A1;&#x4F7F;&#x7528;&#x5927;&#x91CF;&#x5806;&#x6808;&#x7A7A;&#x95F4;&#xFF0C;&#x5219;&#x5FC5;&#x987B;&#x5206;&#x914D;&#x66F4;&#x5927;&#x7684;&#x503C;&#x3002;</p>
-        <p>&#x6CA1;&#x6709;&#x7B80;&#x5355;&#x7684;&#x65B9;&#x6CD5;&#x6765;&#x786E;&#x5B9A;&#x4EFB;&#x52A1;&#x6240;&#x9700;&#x7684;&#x5806;&#x6808;&#x7A7A;&#x95F4;&#x3002;
-          &#x53EF;&#x4EE5;&#x8BA1;&#x7B97;&#xFF0C;&#x4F46;&#x662F;&#x5927;&#x591A;&#x6570;&#x7528;&#x6237;&#x53EA;&#x9700;&#x5206;&#x914D;&#x4ED6;&#x4EEC;&#x8BA4;&#x4E3A;&#x5408;&#x7406;&#x7684;&#x503C;&#xFF0C;&#x7136;&#x540E;&#x4F7F;&#x7528;
-          FreeRTOS &#x63D0;&#x4F9B;&#x7684;&#x529F;&#x80FD;&#x6765;&#x786E;&#x4FDD;&#x5206;&#x914D;&#x7684;&#x7A7A;&#x95F4;&#x786E;&#x5B9E;&#x8DB3;&#x591F;&#xFF0C;&#x5E76;&#x4E14;
-          RAM &#x4E0D;&#x4F1A;&#x88AB;&#x6D6A;&#x8D39;&#x3002; &#x7B2C; 12.3 &#x8282;
-          &#x201C;&#x5806;&#x6808;&#x6EA2;&#x51FA;&#x201D; &#x5305;&#x542B;&#x6709;&#x5173;&#x5982;&#x4F55;&#x67E5;&#x8BE2;&#x4EFB;&#x52A1;&#x5B9E;&#x9645;&#x4F7F;&#x7528;&#x7684;&#x6700;&#x5927;&#x5806;&#x6808;&#x7A7A;&#x95F4;&#x7684;&#x4FE1;&#x606F;&#x3002;</p>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left">pvParameters</td>
-      <td style="text-align:left">&#x4EFB;&#x52A1;&#x51FD;&#x6570;&#x63A5;&#x53D7;&#x6307;&#x5411; <code>void</code>&#xFF08;<code>void *</code>&#xFF09;&#x7684;&#x7C7B;&#x578B;&#x6307;&#x9488;&#x7684;&#x53C2;&#x6570;&#x3002;
-        &#x5206;&#x914D;&#x7ED9; <code>pvParameters</code> &#x7684;&#x503C;&#x662F;&#x4F20;&#x9012;&#x7ED9;&#x4EFB;&#x52A1;&#x7684;&#x503C;&#x3002;
-        &#x672C;&#x4E66;&#x4E2D;&#x7684;&#x4E00;&#x4E9B;&#x793A;&#x4F8B;&#x6F14;&#x793A;&#x4E86;&#x5982;&#x4F55;&#x4F7F;&#x7528;&#x8BE5;&#x53C2;&#x6570;&#x3002;</td>
-    </tr>
-    <tr>
-      <td style="text-align:left">uxPriority</td>
-      <td style="text-align:left">
-        <p>&#x5B9A;&#x4E49;&#x4EFB;&#x52A1;&#x6267;&#x884C;&#x7684;&#x4F18;&#x5148;&#x7EA7;&#x3002;
-          &#x53EF;&#x4EE5;&#x5C06;&#x4F18;&#x5148;&#x7EA7;&#x4ECE; 0&#xFF08;&#x6700;&#x4F4E;&#x4F18;&#x5148;&#x7EA7;&#xFF09;&#x5206;&#x914D;&#x7ED9;&#xFF08;<code>configMAX_PRIORITIES - 1</code>&#xFF09;&#xFF0C;&#x8FD9;&#x662F;&#x6700;&#x9AD8;&#x4F18;&#x5148;&#x7EA7;&#x3002; <code>configMAX_PRIORITIES</code> &#x662F;&#x7528;&#x6237;&#x5B9A;&#x4E49;&#x7684;&#x5E38;&#x91CF;&#xFF0C;&#x5728;
-          3.5 &#x8282;&#x4E2D;&#x63CF;&#x8FF0;&#x3002;</p>
-        <p>&#x4F20;&#x9012;&#x4E0A;&#x9762;&#x7684; <code>uxPriority</code> &#x503C;&#xFF08;<code>configMAX_PRIORITIES - 1</code>&#xFF09;&#x5C06;&#x5BFC;&#x81F4;&#x5206;&#x914D;&#x7ED9;&#x4EFB;&#x52A1;&#x7684;&#x4F18;&#x5148;&#x7EA7;&#x88AB;&#x9759;&#x9ED8;&#x9650;&#x5236;&#x4E3A;&#x6700;&#x5927;&#x5408;&#x6CD5;&#x503C;&#x3002;</p>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left">pxCreatedTask</td>
-      <td style="text-align:left">
-        <p><code>pxCreatedTask</code> &#x53EF;&#x7528;&#x4E8E;&#x4F20;&#x9012;&#x6B63;&#x5728;&#x521B;&#x5EFA;&#x7684;&#x4EFB;&#x52A1;&#x7684;&#x53E5;&#x67C4;&#x3002;
-          &#x7136;&#x540E;&#xFF0C;&#x6B64;&#x53E5;&#x67C4;&#x53EF;&#x7528;&#x4E8E;&#x5F15;&#x7528;
-          API &#x8C03;&#x7528;&#x4E2D;&#x7684;&#x4EFB;&#x52A1;&#xFF0C;&#x4F8B;&#x5982;&#xFF0C;&#x66F4;&#x6539;&#x4EFB;&#x52A1;&#x4F18;&#x5148;&#x7EA7;&#x6216;&#x5220;&#x9664;&#x4EFB;&#x52A1;&#x3002;</p>
-        <p>&#x5982;&#x679C;&#x60A8;&#x7684;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x6CA1;&#x6709;&#x4F7F;&#x7528;&#x4EFB;&#x52A1;&#x53E5;&#x67C4;&#xFF0C;&#x90A3;&#x4E48; <code>pxCreatedTask</code> &#x53EF;&#x4EE5;&#x8BBE;&#x7F6E;&#x4E3A; <code>NULL</code>&#x3002;</p>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left">&#x8FD4;&#x56DE;&#x503C;</td>
-      <td style="text-align:left">
-        <p>&#x6709;&#x4E24;&#x79CD;&#x53EF;&#x80FD;&#x7684;&#x8FD4;&#x56DE;&#x503C;&#xFF1A;</p>
-        <ol>
-          <li><code>pdPASS</code>&#xFF1A;&#x8FD9;&#x8868;&#x660E;&#x8BE5;&#x4EFB;&#x52A1;&#x5DF2;&#x6210;&#x529F;&#x521B;&#x5EFA;&#x3002;</li>
-          <li><code>pdFAIL</code>&#xFF1A;&#x8FD9;&#x8868;&#x660E;&#x8BE5;&#x4EFB;&#x52A1;&#x5C1A;&#x672A;&#x521B;&#x5EFA;&#xFF0C;&#x56E0;&#x4E3A;
-            FreeRTOS &#x53EF;&#x7528;&#x7684;&#x5806;&#x5185;&#x5B58;&#x4E0D;&#x8DB3;&#xFF0C;&#x65E0;&#x6CD5;&#x5206;&#x914D;&#x8DB3;&#x591F;&#x7684;
-            RAM &#x6765;&#x4FDD;&#x5B58;&#x4EFB;&#x52A1;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x548C;&#x5806;&#x6808;&#x3002;&#x7B2C;
-            2 &#x7AE0;&#x63D0;&#x4F9B;&#x4E86;&#x6709;&#x5173;&#x5806;&#x5185;&#x5B58;&#x7BA1;&#x7406;&#x7684;&#x66F4;&#x591A;&#x4FE1;&#x606F;&#x3002;</li>
-        </ol>
-      </td>
-    </tr>
-  </tbody>
-</table>### 示例 1. 创建任务
+        每个任务都有自己唯一的堆栈，在创建任务时由内核分配给任务。 `usStackDepth` 值告诉内核堆栈的大小。 该值指定堆栈可以容纳的字数，而不是字节数。 例如，如果堆栈是 32 位宽并且 `usStackDepth` 作为 100 传入，则将分配 400 字节的堆栈空间（100
+
+* 4 字节）。 堆栈深度乘以堆栈宽度不得超过 `uint16_t` 类型的变量中可包含的最大值。&lt;/p&gt;
+
+  空闲任务使用的堆栈大小由应用程序定义的常量 `configMINIMAL_STACK_SIZE`定义。
+
+  在 FreeRTOS 演示应用程序中为正在使用的处理器体系结构分配给此常量的值是建议的最小任务。
+
+  如果您的任务使用大量堆栈空间，则必须分配更大的值。&lt;/p&gt;
+
+  没有简单的方法来确定任务所需的堆栈空间。
+
+  可以计算，但是大多数用户只需分配他们认为合理的值，然后使用
+
+  FreeRTOS 提供的功能来确保分配的空间确实足够，并且
+
+  RAM 不会被浪费。 第 12.3 节
+
+  “堆栈溢出” 包含有关如何查询任务实际使用的最大堆栈空间的信息。&lt;/p&gt;
+
+  &lt;/td&gt;
+
+  &lt;/tr&gt;
+
+  pvParameters
+
+  任务函数接受指向 `void`（`void *`）的类型指针的参数。
+
+  分配给 `pvParameters` 的值是传递给任务的值。
+
+  本书中的一些示例演示了如何使用该参数。&lt;/td&gt;
+
+  &lt;/tr&gt;
+
+  uxPriority
+
+  定义任务执行的优先级。
+
+  可以将优先级从 0（最低优先级）分配给（`configMAX_PRIORITIES - 1`），这是最高优先级。 `configMAX_PRIORITIES` 是用户定义的常量，在
+
+  3.5 节中描述。&lt;/p&gt;
+
+  传递上面的 `uxPriority` 值（`configMAX_PRIORITIES - 1`）将导致分配给任务的优先级被静默限制为最大合法值。
+
+  &lt;/td&gt;
+
+  &lt;/tr&gt;
+
+  pxCreatedTask
+
+  `pxCreatedTask` 可用于传递正在创建的任务的句柄。
+
+  然后，此句柄可用于引用
+
+  API 调用中的任务，例如，更改任务优先级或删除任务。&lt;/p&gt;
+
+  如果您的应用程序没有使用任务句柄，那么 `pxCreatedTask` 可以设置为 `NULL`。
+
+  &lt;/td&gt;
+
+  &lt;/tr&gt;
+
+  返回值
+
+  有两种可能的返回值：
+
+  `pdPASS`：这表明该任务已成功创建。
+
+  `pdFAIL`：这表明该任务尚未创建，因为
+
+  FreeRTOS 可用的堆内存不足，无法分配足够的
+
+  RAM 来保存任务数据结构和堆栈。第
+
+  2 章提供了有关堆内存管理的更多信息。&lt;/li&gt;
+
+  &lt;/ol&gt;
+
+  &lt;/td&gt;
+
+  &lt;/tr&gt;
+
+  &lt;/tbody&gt;
+
+  &lt;/table&gt;\#\#\# 示例 1. 创建任务
 
 此示例演示了创建两个简单任务所需的步骤，然后启动执行的任务。 任务只是定期打印一个字符串，使用粗略的空循环来创建周期延迟。 这两个任务都以相同的优先级创建，除了打印出的字符串外，它们是相同的，参见清单 14 和清单 15 了解它们各自的实现。
 
@@ -191,7 +195,7 @@ volatile uint32_t ul; /* volatile 以确保 ul 没有优化。 */
     {
         /* 打印出此任务的名称。 */
         vPrintString( pcTaskName );
-        
+
         /* 延迟一段时间。 */
         for( ul = 0; ul < mainDELAY_LOOP_COUNT; ul++ )
         {
@@ -215,7 +219,7 @@ volatile uint32_t ul; /* volatile 以确保 ul 不被优化掉。 */
     {
         /* 打印出此任务的名称。 */
         vPrintString( pcTaskName );
-        
+
         /* 延迟一段时间。 */
         for( ul = 0; ul < mainDELAY_LOOP_COUNT; ul++ )
         {
@@ -241,13 +245,13 @@ int main( void )
                     NULL,    /* 此示例不使用任务参数。 */
                     1,       /* 此任务将以优先级 1 运行。 */
                     NULL );  /* 此示例不使用任务句柄。 */
-                    
+
     /* 以完全相同的方式，以相同的优先级创建另一个任务。 */
     xTaskCreate(vTask2, "Task 2", 1000, NULL, 1, NULL );
-    
+
     /* 启动调度程序，以便任务开始执行。 */
     vTaskStartScheduler();    
-    
+
     /* 如果一切正常，那么 main() 将永远不会到达这里，因为调度程序将重新运行这些任务。如果 main() 
     确实到达这里，那么很可能没有足够的堆内存来创建空闲任务。第 2 章提供了关于堆内存管理的更多信息。 */
     for( ;; );
@@ -275,15 +279,15 @@ void vTask1( void *pvParameters )
 {
 const char *pcTaskName = "Task 1 is running\r\n";
 volatile uint32_t ul; /* volatile 确保 ul 没有被优化掉。 */
-    
+
     /* 如果正在执行此任务代码，则必须已经启动了调度程序。在进入无限循环之前创建另一个任务。 */
     xTaskCreate( vTask2, "Task 2", 1000, NULL, 1, NULL );
-    
+
     for( ;; )
     {
         /* 打印出此任务的名称。 */
         vPrintString( pcTaskName );
-        
+
         /* 延迟一段时间。 */
         for( ul = 0; ul < mainDELAY_LOOP_COUNT; ul++ )
         {
@@ -300,23 +304,23 @@ volatile uint32_t ul; /* volatile 确保 ul 没有被优化掉。 */
 
 在示例 1 中创建的两个任务是字面上的，它们之间的唯一区别是它们打印出来的文本字符串。 相反，可以通过创建单个任务实现的两个实例来删除此重复。 然后可以使用任务参数将要打印出的字符串传递给每个任务。
 
-清单  18 包含示例 2 使用的单任务函数（`vTaskFunction`）的代码。此单个函数替换示例 1 中使用的两个任务函数（`vTask1` 和 `vTask2`）。注意如何将任务参数强制转换为 `char *` 以获取字符串任务 应打印出来。
+清单 18 包含示例 2 使用的单任务函数（`vTaskFunction`）的代码。此单个函数替换示例 1 中使用的两个任务函数（`vTask1` 和 `vTask2`）。注意如何将任务参数强制转换为 `char *` 以获取字符串任务 应打印出来。
 
 ```c
 void vTaskFunction( void *pvParameters )
 {
 char *pcTaskName;
 volatile uint32_t ul; /* volatile 以确保 ul 不被优化掉。 */
-    
+
     /* 要打印的字符串通过参数传入。将此转换为字符指针。 */
     pcTaskName = ( char * ) pvParameters;
-    
+
     /* 对于大多数任务，都是在一个无限循环中实现的。 */
     for( ;; )
     {
         /* 打印出此任务的名称。 */
         vPrintString( pcTaskName );
-        
+
         /* 延迟一段时间。 */
         for( ul = 0; ul < mainDELAY_LOOP_COUNT; ul++ )
         {
@@ -328,7 +332,7 @@ volatile uint32_t ul; /* volatile 以确保 ul 不被优化掉。 */
 
 清单 18. 用于在示例 2 中创建两个任务的单个任务函数
 
-即使现在只有一个任务实现（`vTaskFunction`），也可以创建多个已定义任务的实例。每个创建的实例将在 FreeRTOS 调度程序的控制下独立执行。 
+即使现在只有一个任务实现（`vTaskFunction`），也可以创建多个已定义任务的实例。每个创建的实例将在 FreeRTOS 调度程序的控制下独立执行。
 
 清单 19 显示了如何使用 `xTaskCreate()` 函数的 `pvParameters` 参数将文本字符串传递给任务。
 
@@ -347,14 +351,14 @@ int main( void )
                     (void*)pcTextForTask1, /* 使用任务参数将要打印的文本传递到任务中。 */
                     1,                     /* 这个任务将以优先级 1 运行。 */
                     NULL );                /* 本例中没有使用任务句柄。 */
-                    
+
     /* 用完全相同的方法创建另一个任务。注意，这一次将从同一个任务实现 (vTaskFunction) 
     创建多个任务。只有参数中传递的值不同。正在创建同一任务的两个实例。 */
     xTaskCreate( vTaskFunction, "Task 2", 1000, (void*)pcTextForTask2, 1, NULL );
-    
+
     /* 启动调度程序，使任务开始执行。 */
     vTaskStartScheduler();    
-    
+
     /* 如果一切正常，那么 main() 将永远不会到达这里，因为调度程序现在将运行这些任务。
     如果 main() 确实到达这里，那么很可能没有足够的堆内存来创建空闲任务。第 2 章提供了关于堆
     内存管理的更多信息。 */
@@ -422,13 +426,13 @@ int main( void )
 {
     /* Create the first task at priority 1.  The priority is the second to last parameter. */
     xTaskCreate( vTaskFunction, "Task 1", 1000, (void*)pcTextForTask1, 1, NULL );
-    
+
     /* 以优先级 2 创建第二个任务，优先级高于优先级 1。优先级是倒数第二个参数。 */
     xTaskCreate( vTaskFunction, "Task 2", 1000, (void*)pcTextForTask2, 2, NULL );
-    
+
     /* 启动调度程序，以便任务开始执行。 */
     vTaskStartScheduler();    
-    
+
     /* 不会到达这里。 */
     return 0;
 }
@@ -491,51 +495,47 @@ FreeRTOS 的队列，二进制信号量，计数信号量，互斥量，递归�
 void vTaskDelay( TickType_txTicksToDelay );
 ```
 
-清单 22.  `vTaskDelay()` 的函数原型
+清单 22. `vTaskDelay()` 的函数原型
 
 表 9. `vTaskDelay()` 参数
+
+| 参数名称 | 描述 |
+| :--- | :--- |
+
 
 <table>
   <thead>
     <tr>
-      <th style="text-align:left">&#x53C2;&#x6570;&#x540D;&#x79F0;</th>
-      <th style="text-align:left">&#x63CF;&#x8FF0;</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align:left">xTicksToDelay</td>
-      <td style="text-align:left">
+      <th style="text-align:left">xTicksToDelay</th>
+      <th style="text-align:left">
         <p>&#x8C03;&#x7528;&#x4EFB;&#x52A1;&#x5728;&#x8F6C;&#x6362;&#x56DE;&#x5C31;&#x7EEA;&#x72B6;&#x6001;&#x4E4B;&#x524D;&#x5C06;&#x4FDD;&#x6301;&#x5728;&#x963B;&#x585E;&#x72B6;&#x6001;&#x7684;&#x6EF4;&#x7B54;&#x4E2D;&#x65AD;&#x6570;&#x3002;</p>
         <p>&#x4F8B;&#x5982;&#xFF0C;&#x5982;&#x679C;&#x4E00;&#x4E2A;&#x540D;&#x4E3A; <code>vTaskDelay(100)</code> &#x7684;&#x4EFB;&#x52A1;&#x5728;&#x6EF4;&#x7B54;&#x8BA1;&#x6570;&#x4E3A; <code>10,000</code> &#x65F6;&#x7ACB;&#x5373;&#x8FDB;&#x5165;&#x963B;&#x585E;&#x72B6;&#x6001;&#xFF0C;&#x5E76;&#x4FDD;&#x6301;&#x963B;&#x585E;&#x72B6;&#x6001;&#xFF0C;&#x76F4;&#x5230;&#x6EF4;&#x7B54;&#x8BA1;&#x6570;&#x8FBE;&#x5230; <code>10,100</code>&#x3002;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x5B8F; <code>pdMS_TO_TICKS()</code> &#x5C06;&#x4EE5;&#x6BEB;&#x79D2;&#x4E3A;&#x5355;&#x4F4D;&#x7684;&#x65F6;&#x95F4;&#x8F6C;&#x6362;&#x4E3A;&#x4EE5;
           int &#x4E3A;&#x5355;&#x4F4D;&#x7684;&#x65F6;&#x95F4;&#x3002;&#x4F8B;&#x5982;&#xFF0C;&#x8C03;&#x7528; <code>vTaskDelay(pdMS_TO_TICKS(100))</code> &#x5C06;&#x5BFC;&#x81F4;&#x8C03;&#x7528;&#x4EFB;&#x52A1;&#x4FDD;&#x6301;&#x963B;&#x585E;&#x72B6;&#x6001;
           100 &#x6BEB;&#x79D2;&#x3002;</p>
-      </td>
+      </th>
     </tr>
-  </tbody>
-</table>```c
-void vTaskFunction( void *pvParameters )
-{
-char *pcTaskName;
-const TickType_t xDelay250ms = pdMS_TO_TICKS( 250 );
+  </thead>
+  <tbody></tbody>
+</table>```text
+/* 要打印的字符串通过参数传入。将此转换为字符指针。 */
+pcTaskName = ( char * ) pvParameters;
 
-    /* 要打印的字符串通过参数传入。将此转换为字符指针。 */
-    pcTaskName = ( char * ) pvParameters;
-    
-    /* 对于大多数任务，都是在一个无限循环中实现的。 */
-    for( ;; )
-    {
-        /* 打印出此任务的名称。 */
-        vPrintString( pcTaskName );
-        
-        /* 延迟一段时间。 这次调用 vTaskDelay() 会将任务置于阻塞状态，直到延迟时间结束。
-        参数需要 'ticks' 中指定的时间，并使用 pdMS_TO_TICKS() 宏（声明 xDelay250ms 
-        常量）将 250 毫秒转换为滴答的等效时间。*/
-        vTaskDelay( xDelay250ms );
-    }
+/* 对于大多数任务，都是在一个无限循环中实现的。 */
+for( ;; )
+{
+    /* 打印出此任务的名称。 */
+    vPrintString( pcTaskName );
+
+    /* 延迟一段时间。 这次调用 vTaskDelay() 会将任务置于阻塞状态，直到延迟时间结束。
+    参数需要 'ticks' 中指定的时间，并使用 pdMS_TO_TICKS() 宏（声明 xDelay250ms 
+    常量）将 250 毫秒转换为滴答的等效时间。*/
+    vTaskDelay( xDelay250ms );
 }
 ```
 
+}
+
+```text
 清单 23. 空循环延迟的示例任务的源代码已被对 `vTaskDelay()`的调用所取代
 
 尽管这两项任务仍在不同的优先级下创建，但现在都将运行。 示例 4 的输出（如图 16 所示）确认了预期的行为。
@@ -572,35 +572,36 @@ void vTaskDelayUntil( TickType_t* pxPreviousWakeTime, TickType_t xTimeIncrement 
 
 表 10. `vTaskDelayUntil()` 的参数
 
+| 参数名称 | 描述 |
+| :--- | :--- |
+
+
 <table>
   <thead>
     <tr>
-      <th style="text-align:left">&#x53C2;&#x6570;&#x540D;&#x79F0;</th>
-      <th style="text-align:left">&#x63CF;&#x8FF0;</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align:left">pxPreviousWakeTime</td>
-      <td style="text-align:left">
+      <th style="text-align:left">pxPreviousWakeTime</th>
+      <th style="text-align:left">
         <p>&#x6B64;&#x53C2;&#x6570;&#x7684;&#x547D;&#x540D;&#x662F;&#x57FA;&#x4E8E; <code>vTaskDelayUntil()</code> &#x7528;&#x4E8E;&#x5B9E;&#x73B0;&#x5B9A;&#x671F;&#x6267;&#x884C;&#x4E14;&#x5177;&#x6709;&#x56FA;&#x5B9A;&#x9891;&#x7387;&#x7684;&#x4EFB;&#x52A1;&#x3002;
           &#x5728;&#x8FD9;&#x79CD;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;<code>pxPreviousWakeTime</code> &#x4FDD;&#x6301;&#x4EFB;&#x52A1;&#x6700;&#x540E;&#x4E00;&#x6B21;&#x79BB;&#x5F00;&#x963B;&#x585E;&#x72B6;&#x6001;&#x7684;&#x65F6;&#x95F4;&#xFF08;&#x88AB;
           &apos;&#x5524;&#x9192;&apos;&#xFF09;&#x3002; &#x6B64;&#x65F6;&#x95F4;&#x7528;&#x4F5C;&#x53C2;&#x8003;&#x70B9;&#xFF0C;&#x7528;&#x4E8E;&#x8BA1;&#x7B97;&#x4EFB;&#x52A1;&#x4E0B;&#x6B21;&#x79BB;&#x5F00;&#x963B;&#x585E;&#x72B6;&#x6001;&#x7684;&#x65F6;&#x95F4;&#x3002;</p>
         <p><code>pxPreviousWakeTime</code> &#x6307;&#x5411;&#x7684;&#x53D8;&#x91CF;&#x5728; <code>vTaskDelayUntil()</code>&#x51FD;&#x6570;&#x4E2D;&#x81EA;&#x52A8;&#x66F4;&#x65B0;&#xFF1B;&#x5B83;&#x901A;&#x5E38;&#x4E0D;&#x4F1A;&#x88AB;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x4EE3;&#x7801;&#x4FEE;&#x6539;&#xFF0C;&#x4F46;&#x5FC5;&#x987B;&#x5728;&#x7B2C;&#x4E00;&#x6B21;&#x4F7F;&#x7528;&#x4E4B;&#x524D;&#x521D;&#x59CB;&#x5316;&#x4E3A;&#x5F53;&#x524D;&#x7684;&#x6EF4;&#x7B54;&#x8BA1;&#x6570;&#x3002;
           &#x6E05;&#x5355; 25 &#x6F14;&#x793A;&#x4E86;&#x5982;&#x4F55;&#x6267;&#x884C;&#x521D;&#x59CB;&#x5316;&#x3002;</p>
-      </td>
+      </th>
     </tr>
+  </thead>
+  <tbody></tbody>
+</table><table>
+  <thead>
     <tr>
-      <td style="text-align:left">xTimeIncrement</td>
-      <td style="text-align:left">
+      <th style="text-align:left">xTimeIncrement</th>
+      <th style="text-align:left">
         <p>&#x6B64;&#x53C2;&#x6570;&#x7684;&#x547D;&#x540D;&#x4E5F;&#x662F;&#x57FA;&#x4E8E; <code>vTaskDelayUntil()</code> &#x7528;&#x4E8E;&#x5B9E;&#x73B0;&#x5B9A;&#x671F;&#x6267;&#x884C;&#x4E14;&#x5177;&#x6709;&#x56FA;&#x5B9A;&#x9891;&#x7387;&#x7684;&#x4EFB;&#x52A1;&#xFF0C;&#x9891;&#x7387;&#x7531; <code>xTimeIncrement</code> &#x503C;&#x8BBE;&#x7F6E;&#x3002;</p>
         <p><code>xTimeIncrement</code> &#x5728; &apos;ticks&apos; &#x4E2D;&#x6307;&#x5B9A;&#x3002; <code>pdMS_TO_TICKS()</code>&#x5B8F;&#x53EF;&#x7528;&#x4E8E;&#x5C06;&#x6BEB;&#x79D2;&#x6307;&#x5B9A;&#x7684;&#x65F6;&#x95F4;&#x8F6C;&#x6362;&#x4E3A;&#x523B;&#x5EA6;&#x4E2D;&#x6307;&#x5B9A;&#x7684;&#x65F6;&#x95F4;&#x3002;</p>
-      </td>
+      </th>
     </tr>
-  </tbody>
-</table>### 示例 5. 将示例任务转换为使用 vTaskDelayUntil\(\)
-
-示例 4 中创建的两个任务是周期性任务，但是使用 `vTaskDelay()` 并不保证它们运行的频率是固定的，因为任务离开阻塞状态的时间与它们调用 `vTaskDelay()` 的时间相关。 将任务转换为使用`vTaskDelayUntil()` 而不是 `vTaskDelay()` 可以解决这个潜在的问题。
+  </thead>
+  <tbody></tbody>
+</table>示例 4 中创建的两个任务是周期性任务，但是使用 `vTaskDelay()` 并不保证它们运行的频率是固定的，因为任务离开阻塞状态的时间与它们调用 `vTaskDelay()` 的时间相关。 将任务转换为使用`vTaskDelayUntil()` 而不是 `vTaskDelay()` 可以解决这个潜在的问题。
 
 ```c
 void vTaskFunction( void *pvParameters )
@@ -610,17 +611,17 @@ TickType_t xLastWakeTime;
 
     /* 要打印的字符串通过参数传入。将此转换为字符指针。 */
     pcTaskName = ( char * ) pvParameters;
-    
+
     /* 需要使用当前滴针计数初始化 xLastWakeTime 变量。注意，这是唯一一次显式地写入变量。
     在此之后，xLastWakeTime 将在 vTaskDelayUntil() 中自动更新。 */
     xLastWakeTime = xTaskGetTickCount();
-    
+
     /* 对于大多数任务，都是在一个无限循环中实现的。 */
     for( ;; )
     {
         /* 打印出此任务的名称。 */
         vPrintString( pcTaskName );
-        
+
         /* 这个任务应该精确地每 250 毫秒执行一次。根据 vTaskDelay() 函数，时间是以滴答为
         单位度量的，pdMS_TO_TICKS() 宏用于将毫秒转换为滴答。xLastWakeTime 在 
         vTaskDelayUntil() 中自动更新，因此任务不会显式地更新 xLastWakeTime。 */
@@ -646,10 +647,10 @@ TickType_t xLastWakeTime;
 void vContinuousProcessingTask( void *pvParameters )
 {
 char *pcTaskName;
-    
+
     /* 要打印的字符串通过参数传入。将此转换为字符指针。 */
     pcTaskName = ( char * ) pvParameters;
-    
+
     /* 对于大多数任务，都务是在一个无限循环中实现的。 */
     for( ;; )
     {
@@ -670,13 +671,13 @@ const TickType_t xDelay3ms = pdMS_TO_TICKS( 3 );
     /* 需要使用当前滴针计数初始化 xLastWakeTime 变量。注意，这是唯一一次显式地写入变量。
     在此之后，xLastWakeTime 由 vTaskDelayUntil() API 函数自动管理。 */
     xLastWakeTime = xTaskGetTickCount();
-    
+
     /* 对于大多数任务，都务是在一个无限循环中实现的。 */
     for( ;; )
     {
         /* 打印出此任务的名称。 */
         vPrintString( "Periodic task is running\r\n" );
-        
+
         /* 任务应该每 3 毫秒执行一次，在这个函数中可以看到 xDelay3ms 的声明。 */
         vTaskDelayUntil( &xLastWakeTime, xDelay3ms);
     }
@@ -689,7 +690,7 @@ const TickType_t xDelay3ms = pdMS_TO_TICKS( 3 );
 
 ![&#x56FE; 19. &#x6267;&#x884C;&#x793A;&#x4F8B; 6 &#x65F6;&#x751F;&#x6210;&#x7684;&#x8F93;&#x51FA;](.gitbook/assets/wei-xin-jie-tu-20190906100757.png)
 
-![&#x56FE; 20.  &#x793A;&#x4F8B; 6 &#x7684;&#x6267;&#x884C;&#x6A21;&#x5F0F;](.gitbook/assets/wei-xin-jie-tu-20190906100911.png)
+![&#x56FE; 20. &#x793A;&#x4F8B; 6 &#x7684;&#x6267;&#x884C;&#x6A21;&#x5F0F;](.gitbook/assets/wei-xin-jie-tu-20190906100911.png)
 
 ## 空闲任务和空闲任务钩子
 
@@ -752,7 +753,7 @@ void vApplicationIdleHook( void )
 
 清单 29. 一个非常简单的空闲钩子函数
 
-`config_IDLE_HOOK` 必须在 `FreeRTOSConfig.h` 设置为  1  ，以便调用空闲钩子函数。
+`config_IDLE_HOOK` 必须在 `FreeRTOSConfig.h` 设置为 1 ，以便调用空闲钩子函数。
 
 稍微修改实现创建任务的函数以打印出 `ulIdleCycleCount` 值，如清单 30 所示。
 
@@ -764,13 +765,13 @@ const TickType_t xDelay250ms = pdMS_TO_TICKS( 250 );
 
     /* 要打印的字符串通过参数传入。将此转换为字符指针。 */
     pcTaskName = ( char * ) pvParameters;
-    
+
     /* 与大多数任务一样，此任务在无限循环中实现。 */
     for( ;; )
     {
         /* 打印出此任务的名称，并加入 ulIdleCycleCount 的次数。 */
         vPrintStringAndNumber( pcTaskName, ulIdleCycleCount);
-        
+
         /* 延迟 250 毫秒。 */
         vTaskDelay( xDelay250ms);
     }
@@ -814,28 +815,25 @@ UBaseType_t uxTaskPriorityGet( TaskHandle_t pxTask );
 
 表 12. `uxTaskPriorityGet()`参数和返回值
 
-<table>
-  <thead>
-    <tr>
-      <th style="text-align:left">&#x53C2;&#x6570;&#x540D;&#x79F0;/&#x8FD4;&#x56DE;&#x503C;</th>
-      <th style="text-align:left">&#x63CF;&#x8FF0;</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align:left">pxTask</td>
-      <td style="text-align:left">
-        <p>&#x6B63;&#x5728;&#x67E5;&#x8BE2;&#x5176;&#x4F18;&#x5148;&#x7EA7;&#x7684;&#x4EFB;&#x52A1;&#x7684;&#x53E5;&#x67C4;&#xFF08;&#x4E3B;&#x9898;&#x4EFB;&#x52A1;&#xFF09;
-          - &#x8BF7;&#x53C2;&#x9605; <code>xTaskCreate()</code>API &#x51FD;&#x6570;&#x7684;<code>pxCreatedTask</code>&#x53C2;&#x6570;&#xFF0C;&#x4EE5;&#x83B7;&#x53D6;&#x6709;&#x5173;&#x83B7;&#x53D6;&#x4EFB;&#x52A1;&#x53E5;&#x67C4;&#x7684;&#x4FE1;&#x606F;&#x3002;</p>
-        <p>&#x4EFB;&#x52A1;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x4F20;&#x9012; <code>NULL</code> &#x4EE3;&#x66FF;&#x6709;&#x6548;&#x7684;&#x4EFB;&#x52A1;&#x53E5;&#x67C4;&#x6765;&#x67E5;&#x8BE2;&#x81EA;&#x5DF1;&#x7684;&#x4F18;&#x5148;&#x7EA7;&#x3002;</p>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align:left">&#x8FD4;&#x56DE;&#x503C;</td>
-      <td style="text-align:left">&#x5F53;&#x524D;&#x5206;&#x914D;&#x7ED9;&#x6B63;&#x5728;&#x67E5;&#x8BE2;&#x7684;&#x4EFB;&#x52A1;&#x7684;&#x4F18;&#x5148;&#x7EA7;&#x3002;</td>
-    </tr>
-  </tbody>
-</table>示例 8. 改变任务优先级
+      正在查询其优先级的任务的句柄（主题任务）
+
+* 请参阅 `xTaskCreate()`API 函数的`pxCreatedTask`参数，以获取有关获取任务句柄的信息。&lt;/p&gt;
+
+  任务可以通过传递 `NULL` 代替有效的任务句柄来查询自己的优先级。
+
+  &lt;/td&gt;
+
+  &lt;/tr&gt;
+
+  返回值
+
+  当前分配给正在查询的任务的优先级。
+
+  &lt;/tr&gt;
+
+  &lt;/tbody&gt;
+
+  &lt;/table&gt;示例 8. 改变任务优先级
 
 调度程序将始终选择最高就绪状态任务作为进入运行状态的任务。示例 8 通过使用 `vTaskPrioritySet()` API 函数来更改两个任务相对于彼此的优先级来证明这一点。
 
@@ -855,21 +853,21 @@ UBaseType_t uxPriority;
 
     /* 这个任务总是在任务2之前运行，因为它是用更高的优先级创建的。
     Task 1和Task 2都不会阻塞，因此两者都将始终处于运行或就绪状态。 
-    
+
     查询此任务正在运行的优先级——传入NULL意味着 “返回调用任务的权限”。 */
     uxPriority = uxTaskPriorityGet( NULL );
-    
+
     for( ;; )
     {
         /* 打印出此任务的名称。 */
         vPrintString( "Task 1 is running\r\n" );
-        
+
         /* 将 Task 2 的优先级设置在 Task 1 的优先级之上，将导致 Task 2 立即开始运行
         (因为此时 Task 2 的优先级将高于创建的两个任务)。注意在调用 vTaskPrioritySet() 
         时使用 task 2 的句柄( xTask2Handle )。清单 35 显示了如何获得句柄。 */
         vPrintString( "About to raise the Task 2 priority\r\n" );
         vTaskPrioritySet( xTask2Handle, ( uxPriority + 1 ) );
-        
+
         /* 任务 1 只有在优先级高于任务 2 时才会运行。因此，要使此任务达到此点，
         任务 2 必须已经执行，并将其优先级重新设置为低于此任务的优先级。 */
     }
@@ -882,20 +880,20 @@ UBaseType_t uxPriority;
 void vTask2( void *pvParameters )
 {
 UBaseType_t uxPriority;
-    
+
     /* 任务 1 总是在此任务之前运行，因为任务 1 具有更高的优先级。
     任务 1 和任务 2 都不会阻塞，因此总是处于运行或就绪状态。
-    
+
     查询此任务正在运行的优先级——传入 NULL 意味着“返回调用任务的优先级”。*/
     uxPriority = uxTaskPriorityGet( NULL );
-    
+
     for( ;; )
     {
         /* 要使此任务达到此点，任务 1 必须已经运行并将此任务的优先级设置为高于其自身的优先级。 
-        
+
         打印出此任务的名称。 */
         vPrintString( "Task 2 is running\r\n" );
-        
+
         /* 将此任务的优先级设置回其初始值。传递 NULL 作为任务句柄意味着
         “更改调用任务的优先级”。将任务 1 的优先级设置为低于任务 1 的优先级，
         将导致任务 1 立即重新开始运行，从而抢占该任务。 */
@@ -919,16 +917,16 @@ int main( void )
     任务句柄也没有使用，因此也设置为 NULL。 */
     xTaskCreate( vTask1, "Task 1", 1000, NULL, 2, NULL );
     /* 任务以优先级 2 创建 _______________________^. */
-    
+
     /* 创建优先级为 1 的第二个任务——它低于任务1的优先级。同样，没有使用任务参数，
     所以将其设置为 NULL —— 但是这次需要任务句柄，因此在最后一个参数中传递了
     xTask2Handle 的地址。 */
     xTaskCreate( vTask2, "Task 2", 1000, NULL, 1, &xTask2Handle );
     /* 任务句柄是最后一个参数 ________________________^^^^^^^^^^^^^ */
-    
+
     /* 启动调度程序，使任务开始执行。 */
     vTaskStartScheduler();    
-    
+
     /* 如果一切正常，那么 main() 将永远不会到达这里，因为调度程序现在将运行这些任务。
     如果 main() 确实到达这里，那么很可能没有足够的堆内存来创建空闲任务。第 2 章提供了
     关于堆内存管理的更多信息。 */
@@ -966,26 +964,23 @@ void vTaskDelete( TaskHandle_t pxTaskToDelete );
 
 表 13. `vTaskDelete()` 参数
 
+| 参数名称/返回值 | 描述 |
+| :--- | :--- |
+
+
 <table>
   <thead>
     <tr>
-      <th style="text-align:left">&#x53C2;&#x6570;&#x540D;&#x79F0;/&#x8FD4;&#x56DE;&#x503C;</th>
-      <th style="text-align:left">&#x63CF;&#x8FF0;</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td style="text-align:left">pxTaskToDelete</td>
-      <td style="text-align:left">
+      <th style="text-align:left">pxTaskToDelete</th>
+      <th style="text-align:left">
         <p>&#x8981;&#x5220;&#x9664;&#x7684;&#x4EFB;&#x52A1;&#x7684;&#x53E5;&#x67C4;&#xFF08;&#x4E3B;&#x9898;&#x4EFB;&#x52A1;&#xFF09;&#x2014;&#x2014;
           &#x8BF7;&#x53C2;&#x9605; <code>xTaskCreate()</code>API &#x51FD;&#x6570;&#x7684;<code>pxCreatedTask</code> &#x53C2;&#x6570;&#xFF0C;&#x4EE5;&#x83B7;&#x53D6;&#x6709;&#x5173;&#x83B7;&#x53D6;&#x4EFB;&#x52A1;&#x53E5;&#x67C4;&#x7684;&#x4FE1;&#x606F;&#x3002;</p>
         <p>&#x4EFB;&#x52A1;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x5728;&#x6709;&#x6548;&#x7684;&#x4EFB;&#x52A1;&#x53E5;&#x67C4;&#x5904;&#x4F20;&#x9012; <code>NULL</code> &#x6765;&#x5220;&#x9664;&#x81EA;&#x5DF1;&#x3002;</p>
-      </td>
+      </th>
     </tr>
-  </tbody>
-</table>### 示例 9. 删除任务
-
-这是一个非常简单的示例，其行为如下。
+  </thead>
+  <tbody></tbody>
+</table>这是一个非常简单的示例，其行为如下。
 
 1. 任务 1 由 `main()` 创建，优先级为 1。当它运行时，它以优先级 2 创建任务 2。任务 2 现在是最高优先级的任务，因此它立即开始执行。`main()` 的源代码如清单 37 所示，任务 1 的源代码如清单 38 所示。
 2. 任务 2 除了删除自己之外，什么也不会做。它可以通过向 `vTaskDelete()` 传递 `NULL` 来删除自己，但是处于演示目的，它会使用自己的任务句柄。任务 2  的源代码如清单 39 所示。
@@ -1000,10 +995,10 @@ int main( void )
     任务句柄也未使用，因此同样设置为NULL。 */
     xTaskCreate( vTask1, "Task 1", 1000, NULL, 1, NULL );
     /* 创建该任务的优先级为 1 ____________________^. */
-    
+
     /* 启动调度程序，以便任务开始执行。 */
     vTaskStartScheduler();    
-    
+
     /* 由于调度程序已经启动，main() 永远不会到达此处。 */
     for( ;; );
 }
@@ -1022,12 +1017,12 @@ const TickType_txDelay100ms = pdMS_TO_TICKS( 100UL );
     {
         /* 打印这个任务的名称 */
         vPrintString( "Task 1 is running\r\n" );
-        
+
         /* 创建一个更高优先级的任务 2。 同样，没有使用任务参数，所以将其设置为 NULL 
         —— 但是这次需要任务句柄，因此将 xTask2Handle 的地址作为最后一个参数传递。*/
         xTaskCreate( vTask2, "Task 2", 1000, NULL, 2, &xTask2Handle );
         /* 任务句柄是最后一个参数 ________________________^^^^^^^^^^^^^ */
-        
+
         /* 任务 2 具有更高的优先级，因此任务 1 到达此处任务 2 必须已经执行并自行删除。 
         延迟 100 毫秒。 */
         vTaskDelay( xDelay100ms );
@@ -1185,7 +1180,7 @@ void vTask2( void *pvParameters )
 2. 任务 2 进入运行态，同样开始写字符串 `"123456789"` 到 UART，并离开运行态。
 3. 任务 1 重新进入，并将剩余的字符串写入 UART。
 
-在这种情况下实际写入 UART 的是 `"abcdefg123456789hijklmnop"` 。任务 1  编写的字符串没有按照预期的顺序完整的写入 UART，而是被破坏了，因为任务 2 写入 UART 的字符串有人出现在其中。
+在这种情况下实际写入 UART 的是 `"abcdefg123456789hijklmnop"` 。任务 1 编写的字符串没有按照预期的顺序完整的写入 UART，而是被破坏了，因为任务 2 写入 UART 的字符串有人出现在其中。
 
 通常，使用协作式调度比抢占式调度更容易避免由于时访问而造成的问题：
 
