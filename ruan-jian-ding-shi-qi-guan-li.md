@@ -54,8 +54,6 @@ void ATimerCallback( TimerHandle_t xTimer );
 
 图38显示了单次定时器和自动重新加载定时器之间的行为差异。虚线垂直线标记计时中断发生的时间。
 
-SSS
-
 ![&#x56FE;38&#x4E00;&#x6B21;&#x6027;&#x8F6F;&#x4EF6;&#x8BA1;&#x65F6;&#x5668;&#x548C;&#x81EA;&#x52A8;&#x91CD;&#x65B0;&#x52A0;&#x8F7D;&#x8F6F;&#x4EF6;&#x8BA1;&#x65F6;&#x5668;&#x4E4B;&#x95F4;&#x7684;&#x884C;&#x4E3A;&#x5DEE;&#x5F02;](.gitbook/assets/Figure38.png)
 
 参考图38：
