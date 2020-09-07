@@ -54,7 +54,7 @@ void ATimerCallback( TimerHandle_t xTimer );
 
 图38显示了单次定时器和自动重新加载定时器之间的行为差异。虚线垂直线标记计时中断发生的时间。
 
-![&#x56FE;38&#x4E00;&#x6B21;&#x6027;&#x8F6F;&#x4EF6;&#x8BA1;&#x65F6;&#x5668;&#x548C;&#x81EA;&#x52A8;&#x91CD;&#x65B0;&#x52A0;&#x8F7D;&#x8F6F;&#x4EF6;&#x8BA1;&#x65F6;&#x5668;&#x4E4B;&#x95F4;&#x7684;&#x884C;&#x4E3A;&#x5DEE;&#x5F02;](.gitbook/assets/figure38.png)
+![&#x56FE;38&#x4E00;&#x6B21;&#x6027;&#x8F6F;&#x4EF6;&#x8BA1;&#x65F6;&#x5668;&#x548C;&#x81EA;&#x52A8;&#x91CD;&#x65B0;&#x52A0;&#x8F7D;&#x8F6F;&#x4EF6;&#x8BA1;&#x65F6;&#x5668;&#x4E4B;&#x95F4;&#x7684;&#x884C;&#x4E3A;&#x5DEE;&#x5F02;](.gitbook/assets/Figure38.png)
 
 参考图38：
 
@@ -72,9 +72,9 @@ void ATimerCallback( TimerHandle_t xTimer );
 
 xTimerDelete\(\)接口函数的作用是：删除计时器。可以随时删除计时器。
 
-![&#x56FE;39&#x81EA;&#x52A8;&#x91CD;&#x65B0;&#x52A0;&#x8F7D;&#x8F6F;&#x4EF6;&#x8BA1;&#x65F6;&#x5668;&#x72B6;&#x6001;&#x548C;&#x8F6C;&#x6362;](.gitbook/assets/figure39.png)
+![&#x56FE;39&#x81EA;&#x52A8;&#x91CD;&#x65B0;&#x52A0;&#x8F7D;&#x8F6F;&#x4EF6;&#x8BA1;&#x65F6;&#x5668;&#x72B6;&#x6001;&#x548C;&#x8F6C;&#x6362;](.gitbook/assets/Figure39.png)
 
-![&#x56FE;40&#x4E00;&#x6B21;&#x6027;&#x8F6F;&#x4EF6;&#x5B9A;&#x65F6;&#x5668;&#x72B6;&#x6001;&#x548C;&#x8F6C;&#x6362;](.gitbook/assets/figure40.png)
+![&#x56FE;40&#x4E00;&#x6B21;&#x6027;&#x8F6F;&#x4EF6;&#x5B9A;&#x65F6;&#x5668;&#x72B6;&#x6001;&#x548C;&#x8F6C;&#x6362;](.gitbook/assets/Figure40.png)
 
 ## 软件定时器的上下文
 
@@ -94,7 +94,7 @@ _\[1\]. 该任务过去被称为“计时器服务任务”，因为最初它只
 
 计时器命令队列是在启动调度程序时自动创建的标准FreeRTOS队列。定时器命令队列的长度由FreeRTOSConfig.h中的`configTIMER_QUEUE_LENGTH`编译时间配置常量设置。
 
-![&#x56FE;41 &#x8F6F;&#x4EF6;&#x5B9A;&#x65F6;&#x5668;API&#x51FD;&#x6570;&#x4F7F;&#x7528;&#x5B9A;&#x65F6;&#x5668;&#x547D;&#x4EE4;&#x961F;&#x5217;&#x4E0E;RTOS&#x5B88;&#x62A4;&#x7A0B;&#x5E8F;&#x4EFB;&#x52A1;&#x901A;&#x4FE1;](.gitbook/assets/figure41.png)
+![&#x56FE;41 &#x8F6F;&#x4EF6;&#x5B9A;&#x65F6;&#x5668;API&#x51FD;&#x6570;&#x4F7F;&#x7528;&#x5B9A;&#x65F6;&#x5668;&#x547D;&#x4EE4;&#x961F;&#x5217;&#x4E0E;RTOS&#x5B88;&#x62A4;&#x7A0B;&#x5E8F;&#x4EFB;&#x52A1;&#x901A;&#x4FE1;](.gitbook/assets/Figure41.png)
 
 ### **守护进程任务调度**
 
@@ -102,7 +102,7 @@ _\[1\]. 该任务过去被称为“计时器服务任务”，因为最初它只
 
 图42显示了当守护程序任务的优先级低于调用`xTimerStart()`API函数的任务的优先级时的执行模式
 
-![&#x56FE;42 &#x8C03;&#x7528;xTimerStart\(\)&#x7684;&#x4EFB;&#x52A1;&#x7684;&#x4F18;&#x5148;&#x7EA7;&#x9AD8;&#x4E8E;&#x5B88;&#x62A4;&#x7A0B;&#x5E8F;&#x4EFB;&#x52A1;&#x7684;&#x4F18;&#x5148;&#x7EA7;&#x65F6;&#x7684;&#x6267;&#x884C;&#x6A21;&#x5F0F;](.gitbook/assets/figure42.png)
+![&#x56FE;42 &#x8C03;&#x7528;xTimerStart\(\)&#x7684;&#x4EFB;&#x52A1;&#x7684;&#x4F18;&#x5148;&#x7EA7;&#x9AD8;&#x4E8E;&#x5B88;&#x62A4;&#x7A0B;&#x5E8F;&#x4EFB;&#x52A1;&#x7684;&#x4F18;&#x5148;&#x7EA7;&#x65F6;&#x7684;&#x6267;&#x884C;&#x6A21;&#x5F0F;](.gitbook/assets/Figure42.png)
 
 参照图42，其中任务1的优先级高于守护程序任务的优先级，并且守护程序任务的优先级高于空闲任务的优先级：
 
@@ -114,7 +114,7 @@ _\[1\]. 该任务过去被称为“计时器服务任务”，因为最初它只
 
 图43显示了类似于图42所示的场景，但是这一次守护程序任务的优先级高于调用`xTimerStart()`的任务的优先级。
 
-![&#x56FE;43 &#x5F53;&#x8C03;&#x7528;xTimerStart\(\)&#x7684;&#x4EFB;&#x52A1;&#x7684;&#x4F18;&#x5148;&#x7EA7;&#x4F4E;&#x4E8E;&#x5B88;&#x62A4;&#x7A0B;&#x5E8F;&#x4EFB;&#x52A1;&#x7684;&#x4F18;&#x5148;&#x7EA7;&#x65F6;&#x7684;&#x6267;&#x884C;&#x6A21;&#x5F0F;](.gitbook/assets/figure43.png)
+![&#x56FE;43 &#x5F53;&#x8C03;&#x7528;xTimerStart\(\)&#x7684;&#x4EFB;&#x52A1;&#x7684;&#x4F18;&#x5148;&#x7EA7;&#x4F4E;&#x4E8E;&#x5B88;&#x62A4;&#x7A0B;&#x5E8F;&#x4EFB;&#x52A1;&#x7684;&#x4F18;&#x5148;&#x7EA7;&#x65F6;&#x7684;&#x6267;&#x884C;&#x6A21;&#x5F0F;](.gitbook/assets/Figure43.png)
 
 参照图43，其中守护任务的优先级高于任务1的优先级，任务1的优先级高于空闲任务的优先级： 1. t1时刻 和之前一样，任务1正在运行态，守护任务在阻塞态。
 
@@ -192,7 +192,9 @@ TimerHandle_t xTimerCreate( const char * const pcTimerName,
       </td>
     </tr>
   </tbody>
-</table>### **xTimerStart\(\)API函数**
+</table>
+
+### **xTimerStart\(\)API函数**
 
 `xTimerStart()`用于启动处于休眠状态的软件定时器，或重置\(重新启动\)处于运行状态的软件定时器。`xTimerStop()`用于停止处于运行状态的软件计时器。停止软件计时器与将计时器转换到休眠状态相同。
 
@@ -267,7 +269,9 @@ BaseType_t xTimerStart( TimerHandle_t xTimer, TickType_t xTicksToWait );
       </td>
     </tr>
   </tbody>
-</table>此示例创建并启动一个一次性计时器和一个自动重新加载计时器-如清单75所示。
+</table>
+
+此示例创建并启动一个一次性计时器和一个自动重新加载计时器-如清单75所示。
 
 ```c
 /* 分配给单次和自动重新加载计时器的周期分别为3.333秒和半秒。 */ 
@@ -360,7 +364,7 @@ TickType_t xTimeNow;
 
 执行此示例将生成如图44所示的输出。图44显示了自动重新加载计时器的回调函数以500个滴答的固定周期执行\(清单75中的`mainAUTO_RELOAD_TIMER_PERIOD`设置为500\)，当滴答计数为3333时，一次性计时器的回调函数只执行一次\(清单75中的`MainOne_Shot_Timer_Period`设置为3333\)。
 
-![&#x56FE;44 &#x6267;&#x884C;&#x793A;&#x4F8B;13&#x65F6;&#x4EA7;&#x751F;&#x7684;&#x8F93;&#x51FA;](.gitbook/assets/figure44.png)
+![&#x56FE;44 &#x6267;&#x884C;&#x793A;&#x4F8B;13&#x65F6;&#x4EA7;&#x751F;&#x7684;&#x8F93;&#x51FA;](.gitbook/assets/Figure44.png)
 
 ## 定时器ID
 
@@ -546,7 +550,9 @@ BaseType_t xTimerChangePeriod( TimerHandle_t xTimer,
       </td>
     </tr>
   </tbody>
-</table>清单83 展示了包含自检的FreeRTOS例程是怎么在软件定时器的回调函数中使用 `xTimerChangePeriod()`在自检失败时提高LED闪烁速度的。执行自检的软件定时器被称为“检查定时器”。
+</table>
+
+清单83 展示了包含自检的FreeRTOS例程是怎么在软件定时器的回调函数中使用 `xTimerChangePeriod()`在自检失败时提高LED闪烁速度的。执行自检的软件定时器被称为“检查定时器”。
 
 ```c
 /* 检查计时器的创建周期为3000毫秒，导致LED每3秒切换一次。如果自检功能检测到意外状态，则检查计时器的周期将更改为仅200毫秒，从而导致更快的切换速率。*/ 
@@ -658,7 +664,9 @@ BaseType_t xTimerReset( TimerHandle_t xTimer, TickType_t xTicksToWait );
       </td>
     </tr>
   </tbody>
-</table>### 示例15.重置软件计时器
+</table>
+
+### 示例15.重置软件计时器
 
 此示例模拟手机上的背光行为。背光：
 
