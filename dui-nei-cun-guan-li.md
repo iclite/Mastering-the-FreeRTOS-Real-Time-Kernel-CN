@@ -214,7 +214,9 @@ typedef struct HeapRegion
     </tr>
   </thead>
   <tbody></tbody>
-</table>![&#x56FE; 8. &#x5185;&#x5B58;&#x6620;&#x5C04;](.gitbook/assets/wei-xin-jie-tu-20190904152410.png)
+</table>
+
+![&#x56FE; 8. &#x5185;&#x5B58;&#x6620;&#x5C04;](.gitbook/assets/wei-xin-jie-tu-20190904152410.png)
 
 清单 6 显示了一个 `HeapRegion_t` 结构数组，它们共同描述了三个 RAM 块。
 
