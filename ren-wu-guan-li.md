@@ -516,37 +516,38 @@ void vTaskDelay( TickType_txTicksToDelay );
     </tr>
   </thead>
   <tbody></tbody>
-</table>```text
-/* 要打印的字符串通过参数传入。将此转换为字符指针。 */
-pcTaskName = ( char * ) pvParameters;
+</table>
 
-/* 对于大多数任务，都是在一个无限循环中实现的。 */
-for( ;; )
-{
-    /* 打印出此任务的名称。 */
-    vPrintString( pcTaskName );
+```text
+void vTaskFunction( void *pvParameters ) 
+{ 
+char *pcTaskName; 
+const TickType_t xDelay250ms = pdMS_TO_TICKS( 250 );
 
-    /* 延迟一段时间。 这次调用 vTaskDelay() 会将任务置于阻塞状态，直到延迟时间结束。
-    参数需要 'ticks' 中指定的时间，并使用 pdMS_TO_TICKS() 宏（声明 xDelay250ms 
-    常量）将 250 毫秒转换为滴答的等效时间。*/
-    vTaskDelay( xDelay250ms );
+    /* 要打印的字符串通过参数传入。将此转换为字符指针。 */
+    pcTaskName = ( char * ) pvParameters;
+
+    /* 对于大多数任务，都是在一个无限循环中实现的。 */
+    for( ;; )
+    {
+        /* 打印出此任务的名称。 */
+        vPrintString( pcTaskName );
+
+        /* 延迟一段时间。 这次调用 vTaskDelay() 会将任务置于阻塞状态，直到延迟时间结束。
+        参数需要 'ticks' 中指定的时间，并使用 pdMS_TO_TICKS() 宏（声明 xDelay250ms 
+        常量）将 250 毫秒转换为滴答的等效时间。*/
+        vTaskDelay( xDelay250ms );
+    }
 }
 ```
 
-}
-
-```text
 清单 23. 空循环延迟的示例任务的源代码已被对 `vTaskDelay()`的调用所取代
 
 尽管这两项任务仍在不同的优先级下创建，但现在都将运行。 示例 4 的输出（如图 16 所示）确认了预期的行为。
 
-![&#x56FE; 16. &#x6267;&#x884C;&#x793A;&#x4F8B; 4 &#x65F6;&#x751F;&#x6210;&#x7684;&#x8F93;&#x51FA;](.gitbook/assets/wei-xin-jie-tu-20190905144129.png)
-
 图 17 中显示的执行顺序解释了为什么两个任务都运行，即使它们是以不同的优先级创建的。 为简单起见，省略了调度程序本身的执行。
 
 在启动调度程序时自动创建空闲任务，以确保始终有至少一个任务能够运行 \(至少一个处于就绪状态的任务\)。第 3.8 节，空闲任务和空闲任务钩子，更详细地描述了空闲任务。
-
-![&#x56FE; 17. &#x4EFB;&#x52A1;&#x4F7F;&#x7528; vTaskDelay\(\) &#x4EE3;&#x66FF; NULL &#x5FAA;&#x73AF;&#x65F6;&#x7684;&#x6267;&#x884C;&#x987A;&#x5E8F;](.gitbook/assets/wei-xin-jie-tu-20190905144416.png)
 
 这两个任务的实现发生了变化，没有改变它们的功能。将图 17 与图 12 进行比较，可以清楚地看到，实现此功能的方式要有效得多。
 
@@ -554,17 +555,17 @@ for( ;; )
 
 在图 17 的场景中，每当任务离开阻塞状态时，它们会在重新进入阻塞状态之前执行一小部分时间。 大多数情况下，没有能够运行的应用程序任务（就绪状态下没有应用程序任务），因此，没有可以选择进入运行状态的应用程序任务。 在这种情况下，空闲任务将运行。 分配给空闲的处理时间量是系统中备用处理能力的度量。使用 RTOS 可以简单地通过允许应用程序完全由事件驱动来显着增加备用处理能力。
 
+![&#x56FE; 18.](.gitbook/assets/figure18.png)
+
 图 18 中的粗线显示了示例 4 中的任务执行的转换，每个转换现在都转换到阻塞状态，然后返回到就绪状态。
 
-![&#x56FE; 18. &#x7C97;&#x7EBF;&#x8868;&#x793A;&#x7531;&#x793A;&#x4F8B; 4 &#x4E2D;&#x7684;&#x4EFB;&#x52A1;&#x6267;&#x884C;&#x7684;&#x72B6;&#x6001;&#x8F6C;&#x6362;](.gitbook/assets/wei-xin-jie-tu-20190905145306.png)
-
-### vTaskDelayUntil\(\) API 函数
+#### vTaskDelayUntil\(\) API 函数
 
 `vTaskDelayUntil()` 类似于 `vTaskDelay()`。 正如刚才演示的，`vTaskDelay()` 参数指定了调用`vTaskDelay()` 的任务与再次从阻塞状态过渡到正常状态的任务之间应该发生的滴动中断的数量。任务处于阻塞状态的时间长度由 `vTaskDelay()` 参数指定，但是任务离开阻塞状态的时间与调用 `vTaskDelay()` 的时间相关。
 
 相反，`vTaskDelayUntil()` 的参数指定调用任务应该从阻塞状态移动到就绪状态的精确计时计数值。`vTaskDelayUntil()` 是在需要固定执行期间（您希望任务以固定频率定期执行）时应使用的 API 函数，因为调用任务被解除阻塞的时间是绝对的，而不是相对于调用函数时（与 `vTaskDelay()` 的情况一样）。
 
-```c
+```text
 void vTaskDelayUntil( TickType_t* pxPreviousWakeTime, TickType_t xTimeIncrement );
 ```
 
@@ -590,7 +591,9 @@ void vTaskDelayUntil( TickType_t* pxPreviousWakeTime, TickType_t xTimeIncrement 
     </tr>
   </thead>
   <tbody></tbody>
-</table><table>
+</table>
+
+<table>
   <thead>
     <tr>
       <th style="text-align:left">xTimeIncrement</th>
@@ -601,7 +604,9 @@ void vTaskDelayUntil( TickType_t* pxPreviousWakeTime, TickType_t xTimeIncrement 
     </tr>
   </thead>
   <tbody></tbody>
-</table>示例 4 中创建的两个任务是周期性任务，但是使用 `vTaskDelay()` 并不保证它们运行的频率是固定的，因为任务离开阻塞状态的时间与它们调用 `vTaskDelay()` 的时间相关。 将任务转换为使用`vTaskDelayUntil()` 而不是 `vTaskDelay()` 可以解决这个潜在的问题。
+</table>
+
+示例 4 中创建的两个任务是周期性任务，但是使用 `vTaskDelay()` 并不保证它们运行的频率是固定的，因为任务离开阻塞状态的时间与它们调用 `vTaskDelay()` 的时间相关。 将任务转换为使用`vTaskDelayUntil()` 而不是 `vTaskDelay()` 可以解决这个潜在的问题。
 
 ```c
 void vTaskFunction( void *pvParameters )
@@ -980,7 +985,9 @@ void vTaskDelete( TaskHandle_t pxTaskToDelete );
     </tr>
   </thead>
   <tbody></tbody>
-</table>这是一个非常简单的示例，其行为如下。
+</table>
+
+这是一个非常简单的示例，其行为如下。
 
 1. 任务 1 由 `main()` 创建，优先级为 1。当它运行时，它以优先级 2 创建任务 2。任务 2 现在是最高优先级的任务，因此它立即开始执行。`main()` 的源代码如清单 37 所示，任务 1 的源代码如清单 38 所示。
 2. 任务 2 除了删除自己之外，什么也不会做。它可以通过向 `vTaskDelete()` 传递 `NULL` 来删除自己，但是处于演示目的，它会使用自己的任务句柄。任务 2  的源代码如清单 39 所示。

@@ -138,7 +138,9 @@ BaseType_t xQueueSendToBack( QueueHandle_t xQueue,
     </tr>
   </thead>
   <tbody></tbody>
-</table><table>
+</table>
+
+<table>
   <thead>
     <tr>
       <th style="text-align:left">xTicksToWait</th>
@@ -152,7 +154,9 @@ BaseType_t xQueueSendToBack( QueueHandle_t xQueue,
     </tr>
   </thead>
   <tbody></tbody>
-</table><table>
+</table>
+
+<table>
   <thead>
     <tr>
       <th style="text-align:left">&#x8FD4;&#x56DE;&#x503C;</th>
@@ -167,7 +171,9 @@ BaseType_t xQueueSendToBack( QueueHandle_t xQueue,
     </tr>
   </thead>
   <tbody></tbody>
-</table>xQueueReceive\(\) 是用来从队列中接收（读取）一个元素。收到的元素将从队列中删除。
+</table>
+
+xQueueReceive\(\) 是用来从队列中接收（读取）一个元素。收到的元素将从队列中删除。
 
 {% hint style="info" %}
 切勿从中断服务程序调用 `xQueueReceive()`。 中断安全 `xQueueReceiveFromISR()` API 函数在第 6 章中描述。
@@ -198,7 +204,9 @@ BaseType_t xQueueReceive( QueueHandle_t xQueue,
     </tr>
   </thead>
   <tbody></tbody>
-</table><table>
+</table>
+
+<table>
   <thead>
     <tr>
       <th style="text-align:left">pvBuffer</th>
@@ -209,7 +217,9 @@ BaseType_t xQueueReceive( QueueHandle_t xQueue,
     </tr>
   </thead>
   <tbody></tbody>
-</table><table>
+</table>
+
+<table>
   <thead>
     <tr>
       <th style="text-align:left">xTicksToWait</th>
@@ -224,7 +234,9 @@ BaseType_t xQueueReceive( QueueHandle_t xQueue,
     </tr>
   </thead>
   <tbody></tbody>
-</table><table>
+</table>
+
+<table>
   <thead>
     <tr>
       <th style="text-align:left">&#x8FD4;&#x56DE;&#x503C;</th>
@@ -239,7 +251,9 @@ BaseType_t xQueueReceive( QueueHandle_t xQueue,
     </tr>
   </thead>
   <tbody></tbody>
-</table>`uxQueueMessagesWaiting()` 用于查询当前队列中的项目数。
+</table>
+
+`uxQueueMessagesWaiting()` 用于查询当前队列中的项目数。
 
 {% hint style="info" %}
 切勿从中断服务程序调用 `uxQueueMessagesWaiting()`。 应该在其位置使用中断安全 `uxQueueMessagesWaitingFromISR()`。
@@ -605,7 +619,9 @@ int main( void )
     </tr>
   </thead>
   <tbody></tbody>
-</table>| t6 | 优先级高于接收任务优先级的两个任务正在等待队列中的空间可用，因此任务接收者一旦从队列中删除了一个项目就会被抢占。 此时发送者 2 等待的时间比发送者 1 长，因此发送者 2 进入运行状态。 |
+</table>
+
+| t6 | 优先级高于接收任务优先级的两个任务正在等待队列中的空间可用，因此任务接收者一旦从队列中删除了一个项目就会被抢占。 此时发送者 2 等待的时间比发送者 1 长，因此发送者 2 进入运行状态。 |
 | :--- | :--- |
 
 
@@ -872,7 +888,9 @@ QueueSetHandle_t xQueueCreateSet(const UBaseType_t uxEventQueueLength);
     </tr>
   </thead>
   <tbody></tbody>
-</table><table>
+</table>
+
+<table>
   <thead>
     <tr>
       <th style="text-align:left">&#x8FD4;&#x56DE;&#x503C;</th>
@@ -883,7 +901,9 @@ QueueSetHandle_t xQueueCreateSet(const UBaseType_t uxEventQueueLength);
     </tr>
   </thead>
   <tbody></tbody>
-</table>`xQueueAddToSet()` 将队列或信号量添加到队列集中。信号量将在本书后面描述。
+</table>
+
+`xQueueAddToSet()` 将队列或信号量添加到队列集中。信号量将在本书后面描述。
 
 ```c
 BaseType_t xQueueAddToSet( QueueSetMemberHandle_t xQueueOrSemaphore, 
@@ -909,7 +929,9 @@ BaseType_t xQueueAddToSet( QueueSetMemberHandle_t xQueueOrSemaphore,
     </tr>
   </thead>
   <tbody></tbody>
-</table>| xQueueSet | 要添加队列或信号量的队列集的句柄。 |
+</table>
+
+| xQueueSet | 要添加队列或信号量的队列集的句柄。 |
 | :--- | :--- |
 
 
@@ -929,7 +951,9 @@ BaseType_t xQueueAddToSet( QueueSetMemberHandle_t xQueueOrSemaphore,
     </tr>
   </thead>
   <tbody></tbody>
-</table>`xQueueSelectFromSet()` 从队列集中读取队列句柄。
+</table>
+
+`xQueueSelectFromSet()` 从队列集中读取队列句柄。
 
 当作为集合成员的队列或信号量接收数据时，接收队列或信号量的句柄被发送到队列集合，并在任务调用 `xQueueSelectFromSet()` 时返回。如果从对 `xQueueSelectFromSet()` 的调用中返回句柄，则句柄引用的队列或信号量已知包含数据，然后调用任务必须直接从队列或信号量中读取。
 
@@ -967,7 +991,9 @@ QueueSetMemberHandle_t xQueueSelectFromSet( QueueSetHandle_t xQueueSet,
     </tr>
   </thead>
   <tbody></tbody>
-</table><table>
+</table>
+
+<table>
   <thead>
     <tr>
       <th style="text-align:left">&#x8FD4;&#x56DE;&#x503C;</th>
@@ -978,7 +1004,9 @@ QueueSetMemberHandle_t xQueueSelectFromSet( QueueSetHandle_t xQueueSet,
     </tr>
   </thead>
   <tbody></tbody>
-</table>本示例创建两个发送任务和一个接收任务。发送任务通过两个独立的队列向接收任务发送数据，每个任务一个队列。这两个队列被添加到队列集中，接收任务从队列集中读取以确定这两个队列中的哪一个包含数据。
+</table>
+
+本示例创建两个发送任务和一个接收任务。发送任务通过两个独立的队列向接收任务发送数据，每个任务一个队列。这两个队列被添加到队列集中，接收任务从队列集中读取以确定这两个队列中的哪一个包含数据。
 
 任务、队列和队列集都是在 `main()` 中创建的，请参见清单 63 了解其实现。
 
@@ -1252,7 +1280,9 @@ BaseType_t xQueueOverwrite( QueueHandle_t xQueue, const void * pvItemToQueue );
     </tr>
   </thead>
   <tbody></tbody>
-</table>| 返回值 | `xQueueOverwrite()` 将写入队列，即使队列已满，因此 `pdPASS` 是唯一可能的返回值。 |
+</table>
+
+| 返回值 | `xQueueOverwrite()` 将写入队列，即使队列已满，因此 `pdPASS` 是唯一可能的返回值。 |
 | :--- | :--- |
 
 
