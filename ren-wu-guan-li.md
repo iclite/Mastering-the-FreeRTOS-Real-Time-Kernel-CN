@@ -590,6 +590,8 @@ void vTaskDelayUntil( TickType_t* pxPreviousWakeTime, TickType_t xTimeIncrement 
 
 表 10. `vTaskDelayUntil()` 的参数
 
+
+
 | 参数名称 | 描述 |
 | :--- | :--- |
 
@@ -822,8 +824,8 @@ void vTaskPrioritySet( TaskHandle_t pxTask, UBaseType_t uxNewPriority );
 
 | 参数名称 | 描述 |
 | :--- | :--- |
-| pxTask | 正在修改其优先级的任务的句柄（主题任务）—— 有关获取任务句柄的信息，请参阅`xTaskCreate()` API函数的 `pxCreatedTask` 参数。任务可以通过传递 `NULL` 代替有效的任务句柄来更改自己的优先级。 |
-| uxNewPriority | 要设置主题任务的优先级。 这自动限制为（`configMAX_PRIORITIES - 1`）的最大可用优先级，其中 `configMAX_PRIORITIES` 是在 `FreeRTOSConfig.h` 头文件中设置编译时间常量。 |
+| `pxTask` | 正在修改其优先级的任务的句柄（主题任务）—— 有关获取任务句柄的信息，请参阅`xTaskCreate()` API函数的 `pxCreatedTask` 参数。任务可以通过传递 `NULL` 代替有效的任务句柄来更改自己的优先级。 |
+| `uxNewPriority` | 要设置主题任务的优先级。 这自动限制为（`configMAX_PRIORITIES - 1`）的最大可用优先级，其中 `configMAX_PRIORITIES` 是在 `FreeRTOSConfig.h` 头文件中设置编译时间常量。 |
 
 ### uxTaskPriorityGet\(\) API 函数
 
@@ -837,11 +839,37 @@ UBaseType_t uxTaskPriorityGet( TaskHandle_t pxTask );
 
 表 12. `uxTaskPriorityGet()`参数和返回值
 
-      正在查询其优先级的任务的句柄（主题任务）
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:left">&#x53C2;&#x6570;&#x540D;&#x79F0;/&#x8FD4;&#x56DE;&#x503C;</th>
+      <th style="text-align:left">&#x63CF;&#x8FF0;</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:left"><code>pxTask</code>
+      </td>
+      <td style="text-align:left">
+        <p>&#x6B63;&#x5728;&#x67E5;&#x8BE2;&#x5176;&#x4F18;&#x5148;&#x7EA7;&#x7684;&#x4EFB;&#x52A1;&#x7684;&#x53E5;&#x67C4;&#xFF08;&#x4E3B;&#x9898;&#x4EFB;&#x52A1;&#xFF09;&#x2014;
+          &#x8BF7;&#x53C2;&#x9605; <code>xTaskCreate()</code>API &#x51FD;&#x6570;&#x7684;<code>pxCreatedTask</code>&#x53C2;&#x6570;&#xFF0C;&#x4EE5;&#x83B7;&#x53D6;&#x6709;&#x5173;&#x83B7;&#x53D6;&#x4EFB;&#x52A1;&#x53E5;&#x67C4;&#x7684;&#x4FE1;&#x606F;&#x3002;</p>
+        <p></p>
+        <p></p>
+        <p>&#x4EFB;&#x52A1;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x4F20;&#x9012;<code> NULL </code>&#x4EE3;&#x66FF;&#x6709;&#x6548;&#x7684;&#x4EFB;&#x52A1;&#x53E5;&#x67C4;&#x6765;&#x67E5;&#x8BE2;&#x81EA;&#x5DF1;&#x7684;&#x4F18;&#x5148;&#x7EA7;&#x3002;</p>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left">&#x8FD4;&#x56DE;&#x503C;</td>
+      <td style="text-align:left">&#x5F53;&#x524D;&#x5206;&#x914D;&#x7ED9;&#x6B63;&#x5728;&#x67E5;&#x8BE2;&#x7684;&#x4EFB;&#x52A1;&#x7684;&#x4F18;&#x5148;&#x7EA7;&#x3002;</td>
+    </tr>
+  </tbody>
+</table>
 
-* 请参阅 `xTaskCreate()`API 函数的`pxCreatedTask`参数，以获取有关获取任务句柄的信息。&lt;/p&gt;
+      
 
-  任务可以通过传递 `NULL` 代替有效的任务句柄来查询自己的优先级。
+* &lt;/p&gt;
+
+
 
   &lt;/td&gt;
 
@@ -849,7 +877,7 @@ UBaseType_t uxTaskPriorityGet( TaskHandle_t pxTask );
 
   返回值
 
-  当前分配给正在查询的任务的优先级。
+
 
   &lt;/tr&gt;
 
