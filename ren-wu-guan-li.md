@@ -96,91 +96,102 @@ BaseType_t xTaskCreate( TaskFunction_t pvTaskCode,
 
 表8. `xTaskCreate()` 参数和返回值
 
-        每个任务都有自己唯一的堆栈，在创建任务时由内核分配给任务。 `usStackDepth` 值告诉内核堆栈的大小。 该值指定堆栈可以容纳的字数，而不是字节数。 例如，如果堆栈是 32 位宽并且 `usStackDepth` 作为 100 传入，则将分配 400 字节的堆栈空间（100
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:left">&#x53C2;&#x6570;&#x540D;&#x79F0;/&#x8FD4;&#x56DE;&#x503C;</th>
+      <th style="text-align:left">&#x63CF;&#x8FF0;</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:left"><code>pvTaskCode</code>
+      </td>
+      <td style="text-align:left">&#x4EFB;&#x52A1;&#x4EC5;&#x4EC5;&#x662F;&#x4ECE;&#x4E0D;&#x9000;&#x51FA;&#x7684;C&#x51FD;&#x6570;&#xFF0C;&#x56E0;&#x6B64;&#x901A;&#x5E38;&#x4F5C;&#x4E3A;&#x65E0;&#x9650;&#x5FAA;&#x73AF;&#x6765;&#x5B9E;&#x73B0;&#x3002;<code>PvTaskCode</code>&#x53C2;&#x6570;&#x53EA;&#x662F;&#x6307;&#x5411;&#x5B9E;&#x73B0;&#x4EFB;&#x52A1;&#x7684;&#x51FD;&#x6570;&#x7684;&#x6307;&#x9488;(&#x5B9E;&#x9645;&#x4E0A;&#xFF0C;&#x53EA;&#x662F;&#x51FD;&#x6570;&#x7684;&#x540D;&#x79F0;)&#x3002;</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><code>pcName</code>
+      </td>
+      <td style="text-align:left">&#x4EFB;&#x52A1;&#x7684;&#x63CF;&#x8FF0;&#x6027;&#x540D;&#x79F0;&#x3002;FreeRTOS&#x4E0D;&#x4F1A;&#x4EE5;&#x4EFB;&#x4F55;&#x65B9;&#x5F0F;&#x4F7F;&#x7528;&#x5B83;&#x3002;&#x5B83;&#x7EAF;&#x7CB9;&#x662F;&#x4F5C;&#x4E3A;&#x8C03;&#x8BD5;&#x8F85;&#x52A9;&#x5DE5;&#x5177;&#x800C;&#x5305;&#x542B;&#x7684;&#x3002;&#x901A;&#x8FC7;&#x4EBA;&#x7C7B;&#x53EF;&#x8BFB;&#x7684;&#x540D;&#x79F0;&#x6807;&#x8BC6;&#x4EFB;&#x52A1;&#x8981;&#x6BD4;&#x5C1D;&#x8BD5;&#x901A;&#x8FC7;&#x5176;&#x53E5;&#x67C4;&#x6807;&#x8BC6;&#x4EFB;&#x52A1;&#x7B80;&#x5355;&#x5F97;&#x591A;&#x3002;
+        <br
+        />
+        <br />&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x5B9A;&#x4E49;&#x7684;&#x5E38;&#x91CF;<code>configMAX_TASK_NAME_LEN</code>&#x5B9A;&#x4E49;&#x4E86;&#x4EFB;&#x52A1;&#x540D;&#x79F0;&#x53EF;&#x4EE5;&#x5305;&#x542B;&#x7684;&#x6700;&#x5927;&#x957F;&#x5EA6;-&#x5305;&#x62EC;&#x7A7A;&#x7EC8;&#x6B62;&#x7B26;&#x3002;&#x63D0;&#x4F9B;&#x957F;&#x5EA6;&#x8D85;&#x8FC7;&#x6B64;&#x6700;&#x5927;&#x503C;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#x5C06;&#x5BFC;&#x81F4;&#x5B57;&#x7B26;&#x4E32;&#x88AB;&#x81EA;&#x52A8;&#x622A;&#x65AD;&#x3002;</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><code>usStackDepth</code>
+      </td>
+      <td style="text-align:left">
+        <p>&#x6BCF;&#x4E2A;&#x4EFB;&#x52A1;&#x90FD;&#x6709;&#x81EA;&#x5DF1;&#x7684;&#x552F;&#x4E00;&#x5806;&#x6808;&#xFF0C;&#x8BE5;&#x5806;&#x6808;&#x5728;&#x521B;&#x5EFA;&#x4EFB;&#x52A1;&#x65F6;&#x7531;&#x5185;&#x6838;&#x5206;&#x914D;&#x7ED9;&#x4EFB;&#x52A1;&#x3002; <code>usStackDepth</code>&#x503C;&#x544A;&#x8BC9;&#x5185;&#x6838;&#x5806;&#x6808;&#x7684;&#x5927;&#x5C0F;&#x3002;</p>
+        <p></p>
+        <p>&#x8BE5;&#x503C;&#x6307;&#x5B9A;&#x5806;&#x6808;&#x53EF;&#x4EE5;&#x5BB9;&#x7EB3;&#x7684;&#x5B57;&#x6570;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x5B57;&#x8282;&#x6570;&#x3002;
+          &#x4F8B;&#x5982;&#xFF0C;&#x5982;&#x679C;&#x5806;&#x6808;&#x662F; 32 &#x4F4D;&#x5BBD;&#x5E76;&#x4E14; <code>usStackDepth</code> &#x4F5C;&#x4E3A;
+          100 &#x4F20;&#x5165;&#xFF0C;&#x5219;&#x5C06;&#x5206;&#x914D; 400 &#x5B57;&#x8282;&#x7684;&#x5806;&#x6808;&#x7A7A;&#x95F4;&#xFF08;100
+          * 4 &#x5B57;&#x8282;&#xFF09;&#x3002; &#x5806;&#x6808;&#x6DF1;&#x5EA6;&#x4E58;&#x4EE5;&#x5806;&#x6808;&#x5BBD;&#x5EA6;&#x4E0D;&#x5F97;&#x8D85;&#x8FC7; <code>uint16_t</code> &#x7C7B;&#x578B;&#x7684;&#x53D8;&#x91CF;&#x4E2D;&#x53EF;&#x5305;&#x542B;&#x7684;&#x6700;&#x5927;&#x503C;&#x3002;
+          <br
+          />
+        </p>
+        <p>&#x7A7A;&#x95F2;&#x4EFB;&#x52A1;&#x4F7F;&#x7528;&#x7684;&#x5806;&#x6808;&#x5927;&#x5C0F;&#x7531;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x5B9A;&#x4E49;&#x7684;&#x5E38;&#x91CF; <code>configMINIMAL_STACK_SIZE</code>&#x5B9A;&#x4E49;&#x3002;&#x5728;
+          FreeRTOS &#x6F14;&#x793A;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x4E2D;&#x4E3A;&#x6B63;&#x5728;&#x4F7F;&#x7528;&#x7684;&#x5904;&#x7406;&#x5668;&#x4F53;&#x7CFB;&#x7ED3;&#x6784;&#x5206;&#x914D;&#x7ED9;&#x6B64;&#x5E38;&#x91CF;&#x7684;&#x503C;&#x662F;&#x5EFA;&#x8BAE;&#x7684;&#x6700;&#x5C0F;&#x4EFB;&#x52A1;&#x3002;&#x5982;&#x679C;&#x60A8;&#x7684;&#x4EFB;&#x52A1;&#x4F7F;&#x7528;&#x5927;&#x91CF;&#x5806;&#x6808;&#x7A7A;&#x95F4;&#xFF0C;&#x5219;&#x5FC5;&#x987B;&#x5206;&#x914D;&#x66F4;&#x5927;&#x7684;&#x503C;&#x3002;
+          <br
+          />
+          <br />
+        </p>
+        <p>&#x6CA1;&#x6709;&#x7B80;&#x5355;&#x7684;&#x65B9;&#x6CD5;&#x6765;&#x786E;&#x5B9A;&#x4EFB;&#x52A1;&#x6240;&#x9700;&#x7684;&#x5806;&#x6808;&#x7A7A;&#x95F4;&#x3002;&#x53EF;&#x4EE5;&#x8BA1;&#x7B97;&#xFF0C;&#x4F46;&#x662F;&#x5927;&#x591A;&#x6570;&#x7528;&#x6237;&#x53EA;&#x9700;&#x5206;&#x914D;&#x4ED6;&#x4EEC;&#x8BA4;&#x4E3A;&#x5408;&#x7406;&#x7684;&#x503C;&#xFF0C;&#x7136;&#x540E;&#x4F7F;&#x7528;FreeRTOS
+          &#x63D0;&#x4F9B;&#x7684;&#x529F;&#x80FD;&#x6765;&#x786E;&#x4FDD;&#x5206;&#x914D;&#x7684;&#x7A7A;&#x95F4;&#x786E;&#x5B9E;&#x8DB3;&#x591F;&#xFF0C;&#x5E76;&#x4E14;RAM
+          &#x4E0D;&#x4F1A;&#x88AB;&#x6D6A;&#x8D39;&#x3002; &#x7B2C; 12.3 &#x8282;&#x201C;&#x5806;&#x6808;&#x6EA2;&#x51FA;&#x201D;
+          &#x5305;&#x542B;&#x6709;&#x5173;&#x5982;&#x4F55;&#x67E5;&#x8BE2;&#x4EFB;&#x52A1;&#x5B9E;&#x9645;&#x4F7F;&#x7528;&#x7684;&#x6700;&#x5927;&#x5806;&#x6808;&#x7A7A;&#x95F4;&#x7684;&#x4FE1;&#x606F;&#x3002;</p>
+        <p></p>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left">
+        <p></p>
+        <p><code>pvParameters</code>
+        </p>
+      </td>
+      <td style="text-align:left">&#x4EFB;&#x52A1;&#x51FD;&#x6570;&#x63A5;&#x53D7;&#x6307;&#x5411; <code>void</code>&#xFF08;<code>void *</code>&#xFF09;&#x7684;&#x7C7B;&#x578B;&#x6307;&#x9488;&#x7684;&#x53C2;&#x6570;&#x3002;&#x5206;&#x914D;&#x7ED9; <code>pvParameters</code> &#x7684;&#x503C;&#x662F;&#x4F20;&#x9012;&#x7ED9;&#x4EFB;&#x52A1;&#x7684;&#x503C;&#x3002;&#x672C;&#x4E66;&#x4E2D;&#x7684;&#x4E00;&#x4E9B;&#x793A;&#x4F8B;&#x6F14;&#x793A;&#x4E86;&#x5982;&#x4F55;&#x4F7F;&#x7528;&#x8BE5;&#x53C2;&#x6570;&#x3002;</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><code>uxPriority</code>
+      </td>
+      <td style="text-align:left">
+        <p>&#x5B9A;&#x4E49;&#x4EFB;&#x52A1;&#x6267;&#x884C;&#x7684;&#x4F18;&#x5148;&#x7EA7;&#x3002;&#x53EF;&#x4EE5;&#x5C06;&#x4F18;&#x5148;&#x7EA7;&#x4ECE;
+          0&#xFF08;&#x6700;&#x4F4E;&#x4F18;&#x5148;&#x7EA7;&#xFF09;&#x5206;&#x914D;&#x7ED9;&#xFF08;<code>configMAX_PRIORITIES - 1</code>&#xFF09;&#xFF0C;&#x8FD9;&#x662F;&#x6700;&#x9AD8;&#x4F18;&#x5148;&#x7EA7;&#x3002; <code>configMAX_PRIORITIES</code> &#x662F;&#x7528;&#x6237;&#x5B9A;&#x4E49;&#x7684;&#x5E38;&#x91CF;&#xFF0C;&#x5728;3.5
+          &#x8282;&#x4E2D;&#x63CF;&#x8FF0;&#x3002;
+          <br />
+        </p>
+        <p>&#x4F20;&#x9012;&#x4E0A;&#x9762;&#x7684; <code>uxPriority</code> &#x503C;&#xFF08;<code>configMAX_PRIORITIES - 1</code>&#xFF09;&#x5C06;&#x5BFC;&#x81F4;&#x5206;&#x914D;&#x7ED9;&#x4EFB;&#x52A1;&#x7684;&#x4F18;&#x5148;&#x7EA7;&#x88AB;&#x9759;&#x9ED8;&#x9650;&#x5236;&#x4E3A;&#x6700;&#x5927;&#x5408;&#x6CD5;&#x503C;&#x3002;</p>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><code>pxCreatedTask</code>
+      </td>
+      <td style="text-align:left">
+        <p><code>pxCreatedTask</code> &#x53EF;&#x7528;&#x4E8E;&#x4F20;&#x9012;&#x6B63;&#x5728;&#x521B;&#x5EFA;&#x7684;&#x4EFB;&#x52A1;&#x7684;&#x53E5;&#x67C4;&#x3002;&#x7136;&#x540E;&#xFF0C;&#x6B64;&#x53E5;&#x67C4;&#x53EF;&#x7528;&#x4E8E;&#x5F15;&#x7528;
+          API &#x8C03;&#x7528;&#x4E2D;&#x7684;&#x4EFB;&#x52A1;&#xFF0C;&#x4F8B;&#x5982;&#xFF0C;&#x66F4;&#x6539;&#x4EFB;&#x52A1;&#x4F18;&#x5148;&#x7EA7;&#x6216;&#x5220;&#x9664;&#x4EFB;&#x52A1;&#x3002;
+          <br
+          />
+        </p>
+        <p>&#x5982;&#x679C;&#x60A8;&#x7684;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x6CA1;&#x6709;&#x4F7F;&#x7528;&#x4EFB;&#x52A1;&#x53E5;&#x67C4;&#xFF0C;&#x90A3;&#x4E48; <code>pxCreatedTask</code> &#x53EF;&#x4EE5;&#x8BBE;&#x7F6E;&#x4E3A; <code>NULL</code>&#x3002;</p>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align:left">&#x8FD4;&#x56DE;&#x503C;</td>
+      <td style="text-align:left">
+        <p>&#x6709;&#x4E24;&#x79CD;&#x53EF;&#x80FD;&#x7684;&#x8FD4;&#x56DE;&#x503C;&#xFF1A;</p>
+        <p><code>pdPASS</code>&#xFF1A;&#x8FD9;&#x8868;&#x660E;&#x8BE5;&#x4EFB;&#x52A1;&#x5DF2;&#x6210;&#x529F;&#x521B;&#x5EFA;&#x3002;</p>
+        <p><code>pdFAIL</code>&#xFF1A;&#x8FD9;&#x8868;&#x660E;&#x8BE5;&#x4EFB;&#x52A1;&#x5C1A;&#x672A;&#x521B;&#x5EFA;&#xFF0C;&#x56E0;&#x4E3A;
+          FreeRTOS &#x53EF;&#x7528;&#x7684;&#x5806;&#x5185;&#x5B58;&#x4E0D;&#x8DB3;&#xFF0C;&#x65E0;&#x6CD5;&#x5206;&#x914D;&#x8DB3;&#x591F;&#x7684;
+          RAM &#x6765;&#x4FDD;&#x5B58;&#x4EFB;&#x52A1;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x548C;&#x5806;&#x6808;&#x3002;&#x7B2C;
+          2 &#x7AE0;&#x63D0;&#x4F9B;&#x4E86;&#x6709;&#x5173;&#x5806;&#x5185;&#x5B58;&#x7BA1;&#x7406;&#x7684;&#x66F4;&#x591A;&#x4FE1;&#x606F;&#x3002;</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
 
-* 4 字节）。 堆栈深度乘以堆栈宽度不得超过 `uint16_t` 类型的变量中可包含的最大值。&lt;/p&gt;
 
-  空闲任务使用的堆栈大小由应用程序定义的常量 `configMINIMAL_STACK_SIZE`定义。
 
-  在 FreeRTOS 演示应用程序中为正在使用的处理器体系结构分配给此常量的值是建议的最小任务。
-
-  如果您的任务使用大量堆栈空间，则必须分配更大的值。&lt;/p&gt;
-
-  没有简单的方法来确定任务所需的堆栈空间。
-
-  可以计算，但是大多数用户只需分配他们认为合理的值，然后使用
-
-  FreeRTOS 提供的功能来确保分配的空间确实足够，并且
-
-  RAM 不会被浪费。 第 12.3 节
-
-  “堆栈溢出” 包含有关如何查询任务实际使用的最大堆栈空间的信息。&lt;/p&gt;
-
-  &lt;/td&gt;
-
-  &lt;/tr&gt;
-
-  pvParameters
-
-  任务函数接受指向 `void`（`void *`）的类型指针的参数。
-
-  分配给 `pvParameters` 的值是传递给任务的值。
-
-  本书中的一些示例演示了如何使用该参数。&lt;/td&gt;
-
-  &lt;/tr&gt;
-
-  uxPriority
-
-  定义任务执行的优先级。
-
-  可以将优先级从 0（最低优先级）分配给（`configMAX_PRIORITIES - 1`），这是最高优先级。 `configMAX_PRIORITIES` 是用户定义的常量，在
-
-  3.5 节中描述。&lt;/p&gt;
-
-  传递上面的 `uxPriority` 值（`configMAX_PRIORITIES - 1`）将导致分配给任务的优先级被静默限制为最大合法值。
-
-  &lt;/td&gt;
-
-  &lt;/tr&gt;
-
-  pxCreatedTask
-
-  `pxCreatedTask` 可用于传递正在创建的任务的句柄。
-
-  然后，此句柄可用于引用
-
-  API 调用中的任务，例如，更改任务优先级或删除任务。&lt;/p&gt;
-
-  如果您的应用程序没有使用任务句柄，那么 `pxCreatedTask` 可以设置为 `NULL`。
-
-  &lt;/td&gt;
-
-  &lt;/tr&gt;
-
-  返回值
-
-  有两种可能的返回值：
-
-  `pdPASS`：这表明该任务已成功创建。
-
-  `pdFAIL`：这表明该任务尚未创建，因为
-
-  FreeRTOS 可用的堆内存不足，无法分配足够的
-
-  RAM 来保存任务数据结构和堆栈。第
-
-  2 章提供了有关堆内存管理的更多信息。&lt;/li&gt;
-
-  &lt;/ol&gt;
-
-  &lt;/td&gt;
-
-  &lt;/tr&gt;
-
-  &lt;/tbody&gt;
-
-  &lt;/table&gt;\#\#\# 示例 1. 创建任务
+#### 示例 1. 创建任务
 
 此示例演示了创建两个简单任务所需的步骤，然后启动执行的任务。 任务只是定期打印一个字符串，使用粗略的空循环来创建周期延迟。 这两个任务都以相同的优先级创建，除了打印出的字符串外，它们是相同的，参见清单 14 和清单 15 了解它们各自的实现。
 
@@ -499,26 +510,28 @@ void vTaskDelay( TickType_txTicksToDelay );
 
 表 9. `vTaskDelay()` 参数
 
-| 参数名称 | 描述 |
-| :--- | :--- |
-
-
 <table>
   <thead>
     <tr>
-      <th style="text-align:left">xTicksToDelay</th>
-      <th style="text-align:left">
+      <th style="text-align:left">&#x53C2;&#x6570;&#x540D;&#x79F0;</th>
+      <th style="text-align:left">&#x63CF;&#x8FF0;</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:left"><code>xTicksToDelay</code>
+      </td>
+      <td style="text-align:left">
         <p>&#x8C03;&#x7528;&#x4EFB;&#x52A1;&#x5728;&#x8F6C;&#x6362;&#x56DE;&#x5C31;&#x7EEA;&#x72B6;&#x6001;&#x4E4B;&#x524D;&#x5C06;&#x4FDD;&#x6301;&#x5728;&#x963B;&#x585E;&#x72B6;&#x6001;&#x7684;&#x6EF4;&#x7B54;&#x4E2D;&#x65AD;&#x6570;&#x3002;</p>
         <p>&#x4F8B;&#x5982;&#xFF0C;&#x5982;&#x679C;&#x4E00;&#x4E2A;&#x540D;&#x4E3A; <code>vTaskDelay(100)</code> &#x7684;&#x4EFB;&#x52A1;&#x5728;&#x6EF4;&#x7B54;&#x8BA1;&#x6570;&#x4E3A; <code>10,000</code> &#x65F6;&#x7ACB;&#x5373;&#x8FDB;&#x5165;&#x963B;&#x585E;&#x72B6;&#x6001;&#xFF0C;&#x5E76;&#x4FDD;&#x6301;&#x963B;&#x585E;&#x72B6;&#x6001;&#xFF0C;&#x76F4;&#x5230;&#x6EF4;&#x7B54;&#x8BA1;&#x6570;&#x8FBE;&#x5230; <code>10,100</code>&#x3002;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x5B8F; <code>pdMS_TO_TICKS()</code> &#x5C06;&#x4EE5;&#x6BEB;&#x79D2;&#x4E3A;&#x5355;&#x4F4D;&#x7684;&#x65F6;&#x95F4;&#x8F6C;&#x6362;&#x4E3A;&#x4EE5;
           int &#x4E3A;&#x5355;&#x4F4D;&#x7684;&#x65F6;&#x95F4;&#x3002;&#x4F8B;&#x5982;&#xFF0C;&#x8C03;&#x7528; <code>vTaskDelay(pdMS_TO_TICKS(100))</code> &#x5C06;&#x5BFC;&#x81F4;&#x8C03;&#x7528;&#x4EFB;&#x52A1;&#x4FDD;&#x6301;&#x963B;&#x585E;&#x72B6;&#x6001;
           100 &#x6BEB;&#x79D2;&#x3002;</p>
-      </th>
+      </td>
     </tr>
-  </thead>
-  <tbody></tbody>
+  </tbody>
 </table>
 
-```text
+```c
 void vTaskFunction( void *pvParameters ) 
 { 
 char *pcTaskName; 
@@ -545,9 +558,13 @@ const TickType_t xDelay250ms = pdMS_TO_TICKS( 250 );
 
 尽管这两项任务仍在不同的优先级下创建，但现在都将运行。 示例 4 的输出（如图 16 所示）确认了预期的行为。
 
+![&#x56FE;16.&#x6267;&#x884C;&#x793A;&#x4F8B;4&#x65F6;&#x4EA7;&#x751F;&#x7684;&#x8F93;&#x51FA; ](.gitbook/assets/figure16.png)
+
 图 17 中显示的执行顺序解释了为什么两个任务都运行，即使它们是以不同的优先级创建的。 为简单起见，省略了调度程序本身的执行。
 
 在启动调度程序时自动创建空闲任务，以确保始终有至少一个任务能够运行 \(至少一个处于就绪状态的任务\)。第 3.8 节，空闲任务和空闲任务钩子，更详细地描述了空闲任务。
+
+![&#x56FE;17.  &#x4EFB;&#x52A1;&#x4F7F;&#x7528;vTaskDelay\(\)&#x4EE3;&#x66FF;NULL &#x5FAA;&#x73AF;&#x65F6;&#x7684;&#x6267;&#x884C;&#x987A;&#x5E8F;](.gitbook/assets/figure17.png)
 
 这两个任务的实现发生了变化，没有改变它们的功能。将图 17 与图 12 进行比较，可以清楚地看到，实现此功能的方式要有效得多。
 
@@ -565,7 +582,7 @@ const TickType_t xDelay250ms = pdMS_TO_TICKS( 250 );
 
 相反，`vTaskDelayUntil()` 的参数指定调用任务应该从阻塞状态移动到就绪状态的精确计时计数值。`vTaskDelayUntil()` 是在需要固定执行期间（您希望任务以固定频率定期执行）时应使用的 API 函数，因为调用任务被解除阻塞的时间是绝对的，而不是相对于调用函数时（与 `vTaskDelay()` 的情况一样）。
 
-```text
+```c
 void vTaskDelayUntil( TickType_t* pxPreviousWakeTime, TickType_t xTimeIncrement );
 ```
 
@@ -969,22 +986,24 @@ void vTaskDelete( TaskHandle_t pxTaskToDelete );
 
 表 13. `vTaskDelete()` 参数
 
-| 参数名称/返回值 | 描述 |
-| :--- | :--- |
-
-
 <table>
   <thead>
     <tr>
-      <th style="text-align:left">pxTaskToDelete</th>
-      <th style="text-align:left">
+      <th style="text-align:left">&#x53C2;&#x6570;&#x540D;&#x79F0;/&#x8FD4;&#x56DE;&#x503C;</th>
+      <th style="text-align:left">&#x63CF;&#x8FF0;</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:left"><code>pxTaskToDelete</code>
+      </td>
+      <td style="text-align:left">
         <p>&#x8981;&#x5220;&#x9664;&#x7684;&#x4EFB;&#x52A1;&#x7684;&#x53E5;&#x67C4;&#xFF08;&#x4E3B;&#x9898;&#x4EFB;&#x52A1;&#xFF09;&#x2014;&#x2014;
           &#x8BF7;&#x53C2;&#x9605; <code>xTaskCreate()</code>API &#x51FD;&#x6570;&#x7684;<code>pxCreatedTask</code> &#x53C2;&#x6570;&#xFF0C;&#x4EE5;&#x83B7;&#x53D6;&#x6709;&#x5173;&#x83B7;&#x53D6;&#x4EFB;&#x52A1;&#x53E5;&#x67C4;&#x7684;&#x4FE1;&#x606F;&#x3002;</p>
         <p>&#x4EFB;&#x52A1;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x5728;&#x6709;&#x6548;&#x7684;&#x4EFB;&#x52A1;&#x53E5;&#x67C4;&#x5904;&#x4F20;&#x9012; <code>NULL</code> &#x6765;&#x5220;&#x9664;&#x81EA;&#x5DF1;&#x3002;</p>
-      </th>
+      </td>
     </tr>
-  </thead>
-  <tbody></tbody>
+  </tbody>
 </table>
 
 这是一个非常简单的示例，其行为如下。
@@ -1091,8 +1110,8 @@ void vTask2( void *pvParameters )
 
 | 常量 | 值 |
 | :---: | :---: |
-| configUSE\_PREEMPTION | 1 |
-| configUSE\_TIME\_SLICING | 1 |
+| `configUSE_PREEMPTION` | 1 |
+| `configUSE_TIME_SLICING` | 1 |
 
 表 15. 用于描述调度策略的术语的解释
 
@@ -1141,8 +1160,8 @@ void vTask2( void *pvParameters )
 
 | 常量 | 值 |
 | :---: | :---: |
-| configUSE\_PREEMPTION | 1 |
-| configUSE\_TIME\_SLICING | 0 |
+| `configUSE_PREEMPTION` | 1 |
+| `configUSE_TIME_SLICING` | 0 |
 
 如图 27 所示，如果使用时间分片，并且有多个能够运行的最高优先级的就绪状态任务，那么调度程序将选择一个新任务以在每个 RTOS 节拍中断期间进入运行状态 （标记时间片结束的滴答中断）。 如果未使用时间分片，则调度程序将仅选择新任务以在以下任一情况下进入运行状态：
 
@@ -1167,8 +1186,8 @@ void vTask2( void *pvParameters )
 
 | 常量 | 值 |
 | :---: | :---: |
-| configUSE\_PREEMPTION | 0 |
-| configUSE\_TIME\_SLICING | 任何值 |
+| `configUSE_PREEMPTION` | 0 |
+| `configUSE_TIME_SLICING` | 任何值 |
 
 当使用协作式调度程序时，只有在运行状态任务进入阻塞状态，或者运行状态任务通过调用 `taskYIELD()` 显式地产生（手动请求重新调度）时，才会发生上下文的切换。 任务永远不会被抢占，因此不能使用时间切片。
 
