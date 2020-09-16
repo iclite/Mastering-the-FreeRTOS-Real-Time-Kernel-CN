@@ -590,8 +590,6 @@ void vTaskDelayUntil( TickType_t* pxPreviousWakeTime, TickType_t xTimeIncrement 
 
 表 10. `vTaskDelayUntil()` 的参数
 
-
-
 | 参数名称 | 描述 |
 | :--- | :--- |
 
@@ -865,25 +863,7 @@ UBaseType_t uxTaskPriorityGet( TaskHandle_t pxTask );
   </tbody>
 </table>
 
-      
-
-* &lt;/p&gt;
-
-
-
-  &lt;/td&gt;
-
-  &lt;/tr&gt;
-
-  返回值
-
-
-
-  &lt;/tr&gt;
-
-  &lt;/tbody&gt;
-
-  &lt;/table&gt;示例 8. 改变任务优先级
+### 示例 8. 改变任务优先级
 
 调度程序将始终选择最高就绪状态任务作为进入运行状态的任务。示例 8 通过使用 `vTaskPrioritySet()` API 函数来更改两个任务相对于彼此的优先级来证明这一点。
 
@@ -1033,6 +1013,8 @@ void vTaskDelete( TaskHandle_t pxTaskToDelete );
     </tr>
   </tbody>
 </table>
+
+### 示例9. 删除任务
 
 这是一个非常简单的示例，其行为如下。
 
