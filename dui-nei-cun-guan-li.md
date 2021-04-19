@@ -78,7 +78,7 @@ FreeRTOS 现在将内存分配视为可移植层的一部分（而不是核心�
 
 ### Heap\_2
 
-`heap_2` 保留在 FreeRTOS 发行版中以实现向后兼容，但不建议将其用于新设计。 考虑使用 `heap_4` 而不是`heap_2`，因为 `heap_4` 提供了增强的功能。
+`heap_2` 保留在 FreeRTOS 发行版中以实现向后兼容，但不建议将其用于新设计。 请优先考虑使用 `heap_4` 而不是`heap_2`，因为 `heap_4` 提供了增强的功能。
 
 `heap_2.c` 也可以通过细分由 `configTOTAL_HEAP_SIZE` 标注的数组来工作。 它使用最合适的算法来分配内存，与 `heap_1` 不同，它允许释放内存。 同样，数组是静态声明的，因此即使在分配了阵列中的任何内存之前，也会使应用程序看起来消耗大量 RAM。
 
@@ -119,7 +119,7 @@ FreeRTOS 现在将内存分配视为可移植层的一部分（而不是核心�
 * 堆包含三个可用内存块，它们按照它们在数组中出现的顺序分别为 5 个字节，200 个字节和 100 个字节。
 * 调用 `pvPortMalloc()` 来请求 20 个字节的 RAM。
 
-请求的字节数适合的第一个RAM块是 200 字节块，因此 `pvPortMalloc()` 将 200 字节块拆分为一个 20 字节的块，以及一个块 180 个字节，然后返回指向 20 的字节块。 新的 180 字节块仍可用于将来调用 `pvPortMalloc()`。
+请求的字节数适合的第一个RAM块是 200 字节块，因此 `pvPortMalloc()` 将 200 字节块拆分为一个 20 字节的块，以及一个 180 字节的块，然后返回指向 20 的字节块。 新的 180 字节块仍可用于将来调用 `pvPortMalloc()`。
 
 `heap_4` 将相邻空闲块的（合并）组合成一个更大的块，最大限度地降低了碎片的风险，并使其适用于重复分配和释放不同大小的 RAM 块的应用程序。
 
@@ -134,7 +134,7 @@ FreeRTOS 现在将内存分配视为可移植层的一部分（而不是核心�
 5. E 显示队列被删除后的情况，这会自动释放已分配给已删除队列的内存。现在，用户分配块的任一侧都有可用内存。
 6. F 显示用户分配的内存已被释放后的情况。用户分配的块使用的内存已与任意一侧的空闲内存组合，创建一个更大的单个空闲块。
 
-`heap_4` 不是确定性的，但比 `malloc()` 和 `free()` 的大多数标准库实现更快。
+`heap_4` 不是具有确定性的，但比 `malloc()` 和 `free()` 的大多数标准库实现更快。
 
 ### 设置 Heap\_4 使用的数组的起始地址
 
@@ -184,10 +184,10 @@ void vPortDefineHeapRegions( const HeapRegion_t * const pxHeapRegions );
 ```c
 typedef struct HeapRegion
 {
-    /* The start address of a block of memory that will be part of the heap.*/
+    /* 将成为堆一部分的内存块的起始地址。 */
     uint8_t *pucStartAddress;
 
-    /* The size of the block of memoryin bytes. */
+    /* 内存块的大小（字节）。 */
     size_t xSizeInBytes;
 } HeapRegion_t;
 ```
