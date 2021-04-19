@@ -298,7 +298,7 @@ const HeapRegion_t xHeapRegions[] =
 3. 分配给 `heap_5` 的 RAM 不可能与链接器放入 RAM1 的数据重叠。
 4. 如果 `ucHeap` 太大，应用程序将不会链接。
 
-## 堆相关的实用功能
+## 堆相关的实用函数
 
 ### xPortGetFreeHeapSize\(\) API函数
 
