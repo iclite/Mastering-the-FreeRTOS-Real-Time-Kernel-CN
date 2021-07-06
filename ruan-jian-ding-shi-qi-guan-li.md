@@ -13,7 +13,7 @@
 1. 将FreeRTOS源文件`FreeRTOS/Source/timers.c`构建为项目的一部分 
 2. 在`FreeRTOSConfig.h`中将`configUSE_TIMERS`设置为1。
 
-### **范围** 
+### **范围**
 
 本章旨在让读者更好地了解以下内容：
 
@@ -41,7 +41,7 @@ void ATimerCallback( TimerHandle_t xTimer );
 
 ## 软件计时器的属性和状态
 
-### **软件计时器的周期** 
+### **软件计时器的周期**
 
 软件计时器的‘周期’是软件计时器启动和软件计时器的回调函数执行之间的时间
 
@@ -61,7 +61,7 @@ void ATimerCallback( TimerHandle_t xTimer );
 * 计时器1 定时器1是具有6个滴答周期的一次性定时器。它在时间t1启动，因此它的回调函数在6个刻度之后，即时间t7执行。由于定时器1是一次性定时器，其回调函数不会再次执行。
 * 计时器2 定时器2是具有5个滴答周期的自动重新加载定时器。它在时间t1启动，因此它的回调函数在时间t1之后每5个节拍执行一次。在图38中，这是时间t6、t11和t16。
 
-### **软件计时器状态** 
+### **软件计时器状态**
 
 软件计时器可以处于以下两种状态之一：
 
@@ -131,7 +131,7 @@ _\[1\]. 该任务过去被称为“计时器服务任务”，因为最初它只
 
 ### **xTimerCreate\(\)API函数**
 
- FreeRTOS V9.0.0还包括`xTimerCreateStatic()`函数，该函数分配在编译时静态创建计时器所需的内存：软件计时器必须先显式创建，然后才能使用。
+FreeRTOS V9.0.0还包括`xTimerCreateStatic()`函数，该函数分配在编译时静态创建计时器所需的内存：软件计时器必须先显式创建，然后才能使用。
 
 软件计时器由`TimerHandle_t`类型的变量引用。`xTimerCreate()`用于创建软件计时器，并返回`TimerHandle_t`以引用其创建的软件计时器。软件计时器在休眠状态下创建。
 
@@ -173,7 +173,6 @@ TimerHandle_t xTimerCreate( const char * const pcTimerName,
       <td style="text-align:left">pvTimerID</td>
       <td style="text-align:left">
         <p>&#x6BCF;&#x4E2A;&#x8F6F;&#x4EF6;&#x5B9A;&#x65F6;&#x5668;&#x90FD;&#x6709;&#x4E00;&#x4E2A;ID&#x503C;&#x3002;ID&#x662F;&#x4E00;&#x4E2A;&#x7A7A;&#x6307;&#x9488;&#xFF0C;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x7F16;&#x5199;&#x5668;&#x53EF;&#x4EE5;&#x5C06;&#x5176;&#x7528;&#x4E8E;&#x4EFB;&#x4F55;&#x76EE;&#x7684;&#x3002;&#x5F53;&#x591A;&#x4E2A;&#x8F6F;&#x4EF6;&#x8BA1;&#x65F6;&#x5668;&#x4F7F;&#x7528;&#x76F8;&#x540C;&#x7684;&#x56DE;&#x8C03;&#x51FD;&#x6570;&#x65F6;&#xFF0C;ID&#x7279;&#x522B;&#x6709;&#x7528;&#xFF0C;&#x56E0;&#x4E3A;&#x5B83;&#x53EF;&#x7528;&#x4E8E;&#x63D0;&#x4F9B;&#x7279;&#x5B9A;&#x4E8E;&#x8BA1;&#x65F6;&#x5668;&#x7684;&#x5B58;&#x50A8;&#x3002;</p>
-        <p></p>
         <p>&#x672C;&#x7AE0;&#x4E2D;&#x7684;&#x4E00;&#x4E2A;&#x793A;&#x4F8B;&#x6F14;&#x793A;&#x4E86;&#x8BA1;&#x65F6;&#x5668;ID&#x7684;&#x4F7F;&#x7528;&#x3002;
           pvTimerID&#x8BBE;&#x7F6E;&#x6B63;&#x5728;&#x521B;&#x5EFA;&#x7684;&#x4EFB;&#x52A1;&#x7684;ID&#x7684;&#x521D;&#x59CB;&#x503C;&#x3002;</p>
       </td>
@@ -186,7 +185,6 @@ TimerHandle_t xTimerCreate( const char * const pcTimerName,
       <td style="text-align:left">&#x8FD4;&#x56DE;&#x503C;</td>
       <td style="text-align:left">
         <p>&#x5982;&#x679C;&#x8FD4;&#x56DE;NULL&#xFF0C;&#x5219;&#x65E0;&#x6CD5;&#x521B;&#x5EFA;&#x8F6F;&#x4EF6;&#x8BA1;&#x65F6;&#x5668;&#xFF0C;&#x56E0;&#x4E3A;FreeRTOS&#x6CA1;&#x6709;&#x8DB3;&#x591F;&#x7684;&#x5806;&#x5185;&#x5B58;&#x6765;&#x5206;&#x914D;&#x5FC5;&#x8981;&#x7684;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x3002;</p>
-        <p></p>
         <p>&#x8FD4;&#x56DE;&#x7684;&#x975E;NULL&#x503C;&#x8868;&#x793A;&#x8F6F;&#x4EF6;&#x8BA1;&#x65F6;&#x5668;&#x5DF2;&#x6210;&#x529F;&#x521B;&#x5EFA;&#x3002;&#x8FD4;&#x56DE;&#x503C;&#x662F;&#x521B;&#x5EFA;&#x7684;&#x8BA1;&#x65F6;&#x5668;&#x7684;&#x53E5;&#x67C4;&#x3002;
           &#x7B2C;2&#x7AE0;&#x63D0;&#x4F9B;&#x4E86;&#x6709;&#x5173;&#x5806;&#x5185;&#x5B58;&#x7BA1;&#x7406;&#x7684;&#x66F4;&#x591A;&#x4FE1;&#x606F;&#x3002;</p>
       </td>
@@ -228,7 +226,6 @@ BaseType_t xTimerStart( TimerHandle_t xTimer, TickType_t xTicksToWait );
       <td style="text-align:left">xTicksToWait</td>
       <td style="text-align:left">
         <p><code>xTimerStart()</code>&#x4F7F;&#x7528;&#x8BA1;&#x65F6;&#x5668;&#x547D;&#x4EE4;&#x961F;&#x5217;&#x5411;&#x5B88;&#x62A4;&#x7A0B;&#x5E8F;&#x4EFB;&#x52A1;&#x53D1;&#x9001;&#x201C;&#x542F;&#x52A8;&#x8BA1;&#x65F6;&#x5668;&#x201D;&#x547D;&#x4EE4;&#x3002;</p>
-        <p></p>
         <p><code>xTicksToWait</code>&#x6307;&#x5B9A;&#x5982;&#x679C;&#x961F;&#x5217;&#x5DF2;&#x6EE1;&#xFF0C;&#x8C03;&#x7528;&#x4EFB;&#x52A1;&#x5E94;&#x4FDD;&#x6301;&#x5728;&#x963B;&#x585E;&#x72B6;&#x6001;&#x4EE5;&#x7B49;&#x5F85;&#x8BA1;&#x65F6;&#x5668;&#x547D;&#x4EE4;&#x961F;&#x5217;&#x4E0A;&#x7684;&#x7A7A;&#x95F4;&#x53D8;&#x4E3A;&#x53EF;&#x7528;&#x7684;&#x6700;&#x957F;&#x65F6;&#x95F4;&#x3002;</p>
         <p><b><br /></b>&#x5982;&#x679C;<code>xTicksToWait</code>&#x4E3A;&#x96F6;&#x4E14;&#x8BA1;&#x65F6;&#x5668;&#x547D;&#x4EE4;&#x961F;&#x5217;&#x5DF2;&#x6EE1;&#xFF0C;&#x5219;<code>xTimerStart()</code>&#x5C06;&#x7ACB;&#x5373;&#x8FD4;&#x56DE;&#x3002;</p>
         <p>
@@ -258,7 +255,6 @@ BaseType_t xTimerStart( TimerHandle_t xTimer, TickType_t xTicksToWait );
           />
         </p>
         <p>&#x5982;&#x679C;&#x6307;&#x5B9A;&#x4E86;&#x963B;&#x585E;&#x65F6;&#x95F4;(<code>xTicksToWait</code>&#x4E0D;&#x662F;&#x96F6;)&#xFF0C;&#x5219;&#x5728;&#x51FD;&#x6570;&#x8FD4;&#x56DE;&#x4E4B;&#x524D;&#xFF0C;&#x8C03;&#x7528;&#x4EFB;&#x52A1;&#x53EF;&#x80FD;&#x88AB;&#x7F6E;&#x4E8E;&#x963B;&#x585E;&#x72B6;&#x6001;&#xFF0C;&#x4EE5;&#x7B49;&#x5F85;&#x8BA1;&#x65F6;&#x5668;&#x547D;&#x4EE4;&#x961F;&#x5217;&#x4E2D;&#x7684;&#x7A7A;&#x95F4;&#x53D8;&#x4E3A;&#x53EF;&#x7528;&#xFF0C;&#x4F46;&#x5728;&#x5757;&#x65F6;&#x95F4;&#x5230;&#x671F;&#x4E4B;&#x524D;&#xFF0C;&#x6570;&#x636E;&#x5DF2;&#x6210;&#x529F;&#x5199;&#x5165;&#x8BA1;&#x65F6;&#x5668;&#x547D;&#x4EE4;&#x961F;&#x5217;&#x3002;</p>
-        <p></p>
         <p>2.pdFALSE
           <br />
           <br />&#x5982;&#x679C;&#x7531;&#x4E8E;&#x961F;&#x5217;&#x5DF2;&#x6EE1;&#x800C;&#x65E0;&#x6CD5;&#x5C06;&#x201C;&#x542F;&#x52A8;&#x5B9A;&#x65F6;&#x5668;&#x201D;&#x547D;&#x4EE4;&#x5199;&#x5165;&#x5B9A;&#x65F6;&#x5668;&#x547D;&#x4EE4;&#x961F;&#x5217;&#xFF0C;&#x5219;&#x5C06;&#x8FD4;&#x56DE;pdFALSE&#x3002;
@@ -539,13 +535,10 @@ BaseType_t xTimerChangePeriod( TimerHandle_t xTimer,
           <br />
         </p>
         <p>&#x53EA;&#x6709;&#x5F53;&#x6570;&#x636E;&#x6210;&#x529F;&#x53D1;&#x9001;&#x5230;&#x8BA1;&#x65F6;&#x5668;&#x547D;&#x4EE4;&#x961F;&#x5217;&#x65F6;&#xFF0C;&#x624D;&#x4F1A;&#x8FD4;&#x56DE;pdPASS&#x3002;</p>
-        <p></p>
         <p>&#x5982;&#x679C;&#x6307;&#x5B9A;&#x4E86;&#x963B;&#x585E;&#x65F6;&#x95F4;(<code>xTicksToWait</code>&#x4E0D;&#x662F;&#x96F6;)&#xFF0C;&#x5219;&#x5728;&#x51FD;&#x6570;&#x8FD4;&#x56DE;&#x4E4B;&#x524D;&#xFF0C;&#x8C03;&#x7528;&#x4EFB;&#x52A1;&#x53EF;&#x80FD;&#x88AB;&#x7F6E;&#x4E8E;&#x963B;&#x585E;&#x72B6;&#x6001;&#xFF0C;&#x4EE5;&#x7B49;&#x5F85;&#x8BA1;&#x65F6;&#x5668;&#x547D;&#x4EE4;&#x961F;&#x5217;&#x4E2D;&#x7684;&#x7A7A;&#x95F4;&#x53D8;&#x4E3A;&#x53EF;&#x7528;&#xFF0C;&#x4F46;&#x5728;&#x963B;&#x585E;&#x65F6;&#x95F4;&#x5230;&#x671F;&#x4E4B;&#x524D;&#xFF0C;&#x6570;&#x636E;&#x5DF2;&#x6210;&#x529F;&#x5199;&#x5165;&#x8BA1;&#x65F6;&#x5668;&#x547D;&#x4EE4;&#x961F;&#x5217;&#x3002;</p>
-        <p></p>
         <p>2.pdFALSE</p>
         <p>&#x5982;&#x679C;&#x7531;&#x4E8E;&#x961F;&#x5217;&#x5DF2;&#x6EE1;&#x800C;&#x65E0;&#x6CD5;&#x5C06;&#x2018;Change
           Period&#x2019;&#x547D;&#x4EE4;&#x5199;&#x5165;&#x8BA1;&#x65F6;&#x5668;&#x547D;&#x4EE4;&#x961F;&#x5217;&#xFF0C;&#x5219;&#x5C06;&#x8FD4;&#x56DE;pdFALSE&#x3002;</p>
-        <p></p>
         <p>&#x5982;&#x679C;&#x6307;&#x5B9A;&#x4E86;&#x963B;&#x585E;&#x65F6;&#x95F4;(<code>xTicksToWait</code>&#x4E0D;&#x662F;&#x96F6;)&#xFF0C;&#x5219;&#x8C03;&#x7528;&#x4EFB;&#x52A1;&#x5C06;&#x88AB;&#x7F6E;&#x4E8E;&#x963B;&#x585E;&#x72B6;&#x6001;&#xFF0C;&#x4EE5;&#x7B49;&#x5F85;&#x5B88;&#x62A4;&#x8FDB;&#x7A0B;&#x4EFB;&#x52A1;&#x5728;&#x961F;&#x5217;&#x4E2D;&#x817E;&#x51FA;&#x7A7A;&#x95F4;&#xFF0C;&#x4F46;&#x6307;&#x5B9A;&#x7684;&#x963B;&#x585E;&#x65F6;&#x95F4;&#x5728;&#x6B64;&#x4E4B;&#x524D;&#x5DF2;&#x8FC7;&#x671F;&#x3002;</p>
       </td>
     </tr>
@@ -594,8 +587,6 @@ static BaseType_t xErrorDetected = pdFALSE;
 
 ![&#x56FE;46. &#x542F;&#x52A8;&#x548C;&#x91CD;&#x7F6E;&#x5468;&#x671F;&#x4E3A;6&#x4E2A;&#x6EF4;&#x7B54;&#x7684;&#x8F6F;&#x4EF6;&#x8BA1;&#x65F6;&#x5668;](.gitbook/assets/figure46.png)
 
-
-
 参考图46：
 
 * 定时器1在时间t1启动。它的周期为6，因此它执行回调函数的时间最初计算为T7，即启动后的6个滴答。
@@ -641,9 +632,7 @@ BaseType_t xTimerReset( TimerHandle_t xTimer, TickType_t xTicksToWait );
       <td style="text-align:left">xTicksToWait</td>
       <td style="text-align:left">
         <p><code>xTimerChangePeriod()</code>&#x4F7F;&#x7528;&#x8BA1;&#x65F6;&#x5668;&#x547D;&#x4EE4;&#x961F;&#x5217;&#x5411;&#x5B88;&#x62A4;&#x7A0B;&#x5E8F;&#x4EFB;&#x52A1;&#x53D1;&#x9001;&#x201C;&#x91CD;&#x7F6E;&#x201D;&#x547D;&#x4EE4;&#x3002;<code>xTicksToWait</code>&#x6307;&#x5B9A;&#x5982;&#x679C;&#x961F;&#x5217;&#x5DF2;&#x6EE1;&#xFF0C;&#x8C03;&#x7528;&#x4EFB;&#x52A1;&#x5E94;&#x4FDD;&#x6301;&#x5728;&#x963B;&#x585E;&#x72B6;&#x6001;&#x4EE5;&#x7B49;&#x5F85;&#x8BA1;&#x65F6;&#x5668;&#x547D;&#x4EE4;&#x961F;&#x5217;&#x4E0A;&#x7684;&#x7A7A;&#x95F4;&#x53D8;&#x4E3A;&#x53EF;&#x7528;&#x7684;&#x6700;&#x957F;&#x65F6;&#x95F4;&#x3002;</p>
-        <p></p>
         <p>&#x5982;&#x679C;xTicksToWait&#x4E3A;&#x96F6;&#x4E14;&#x8BA1;&#x65F6;&#x5668;&#x547D;&#x4EE4;&#x961F;&#x5217;&#x5DF2;&#x6EE1;&#xFF0C;&#x5219;<code>xTimerReset()</code>&#x5C06;&#x7ACB;&#x5373;&#x8FD4;&#x56DE;&#x3002;</p>
-        <p></p>
         <p>&#x5982;&#x679C;<code>FreeRTOSConfig.h</code>&#x4E2D;&#x7684;<code>include_vTaskSuspend</code>&#x8BBE;&#x7F6E;&#x4E3A;1&#xFF0C;&#x5219;&#x5C06;<code>xTicksToWait</code>&#x8BBE;&#x7F6E;&#x4E3A;<code>portMAX_DELAY</code>&#x5C06;&#x5BFC;&#x81F4;&#x8C03;&#x7528;&#x4EFB;&#x52A1;&#x65E0;&#x9650;&#x671F;&#x5730;&#x4FDD;&#x6301;&#x963B;&#x585E;&#x72B6;&#x6001;(&#x6CA1;&#x6709;&#x8D85;&#x65F6;)&#xFF0C;&#x4EE5;&#x7B49;&#x5F85;&#x8BA1;&#x65F6;&#x5668;&#x547D;&#x4EE4;&#x961F;&#x5217;&#x4E2D;&#x7684;&#x7A7A;&#x95F4;&#x53D8;&#x5F97;&#x53EF;&#x7528;&#x3002;</p>
       </td>
     </tr>
@@ -651,14 +640,10 @@ BaseType_t xTimerReset( TimerHandle_t xTimer, TickType_t xTicksToWait );
       <td style="text-align:left">&#x8FD4;&#x56DE;&#x503C;</td>
       <td style="text-align:left">
         <p>&#x6709;&#x4E24;&#x79CD;&#x53EF;&#x80FD;&#x7684;&#x8FD4;&#x56DE;&#x503C;&#xFF1A;</p>
-        <p></p>
         <p>1. pdPASS</p>
-        <p></p>
         <p>&#x53EA;&#x6709;&#x5F53;&#x6570;&#x636E;&#x6210;&#x529F;&#x53D1;&#x9001;&#x5230;&#x8BA1;&#x65F6;&#x5668;&#x547D;&#x4EE4;&#x961F;&#x5217;&#x65F6;&#xFF0C;&#x624D;&#x4F1A;&#x8FD4;&#x56DE;pdPASS&#x3002;
           &#x5982;&#x679C;&#x6307;&#x5B9A;&#x4E86;&#x963B;&#x585E;&#x65F6;&#x95F4;(<code>xTicksToWait</code>&#x4E0D;&#x662F;&#x96F6;)&#xFF0C;&#x5219;&#x5728;&#x51FD;&#x6570;&#x8FD4;&#x56DE;&#x4E4B;&#x524D;&#xFF0C;&#x8C03;&#x7528;&#x4EFB;&#x52A1;&#x53EF;&#x80FD;&#x88AB;&#x7F6E;&#x4E8E;&#x963B;&#x585E;&#x72B6;&#x6001;&#xFF0C;&#x4EE5;&#x7B49;&#x5F85;&#x8BA1;&#x65F6;&#x5668;&#x547D;&#x4EE4;&#x961F;&#x5217;&#x4E2D;&#x7684;&#x7A7A;&#x95F4;&#x53D8;&#x4E3A;&#x53EF;&#x7528;&#xFF0C;&#x4F46;&#x5728;&#x963B;&#x585E;&#x65F6;&#x95F4;&#x5230;&#x671F;&#x4E4B;&#x524D;&#xFF0C;&#x6570;&#x636E;&#x5DF2;&#x6210;&#x529F;&#x5199;&#x5165;&#x8BA1;&#x65F6;&#x5668;&#x547D;&#x4EE4;&#x961F;&#x5217;&#x3002;</p>
-        <p></p>
         <p>2. pdFALSE</p>
-        <p></p>
         <p>&#x5982;&#x679C;&#x7531;&#x4E8E;&#x961F;&#x5217;&#x5DF2;&#x6EE1;&#x800C;&#x65E0;&#x6CD5;&#x5C06;&#x2018;RESET&#x2019;&#x547D;&#x4EE4;&#x5199;&#x5165;&#x5B9A;&#x65F6;&#x5668;&#x547D;&#x4EE4;&#x961F;&#x5217;&#xFF0C;&#x5219;&#x5C06;&#x8FD4;&#x56DE;pdFALSE&#x3002;
           &#x5982;&#x679C;&#x6307;&#x5B9A;&#x4E86;&#x963B;&#x585E;&#x65F6;&#x95F4;(<code>xTicksToWait</code>&#x4E0D;&#x662F;&#x96F6;)&#xFF0C;&#x5219;&#x8C03;&#x7528;&#x4EFB;&#x52A1;&#x5C06;&#x88AB;&#x7F6E;&#x4E8E;&#x963B;&#x585E;&#x72B6;&#x6001;&#xFF0C;&#x4EE5;&#x7B49;&#x5F85;&#x5B88;&#x62A4;&#x8FDB;&#x7A0B;&#x4EFB;&#x52A1;&#x5728;&#x961F;&#x5217;&#x4E2D;&#x817E;&#x51FA;&#x7A7A;&#x95F4;&#xFF0C;&#x4F46;&#x6307;&#x5B9A;&#x7684;&#x963B;&#x585E;&#x65F6;&#x95F4;&#x5728;&#x6B64;&#x4E4B;&#x524D;&#x5DF2;&#x8FC7;&#x671F;&#x3002;</p>
       </td>
