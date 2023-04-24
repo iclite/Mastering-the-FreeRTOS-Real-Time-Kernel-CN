@@ -74,7 +74,7 @@ FreeRTOS 现在将内存分配视为可移植层的一部分（而不是核心�
 * B 显示了在创建一个任务之后的数组。
 * C 显示了子啊船舰了三个任务之后的数组。
 
-![&#x56FE;5. &#x6BCF;&#x6B21;&#x521B;&#x5EFA;&#x4EFB;&#x52A1;&#x65F6;&#x4ECE; heap\_1 &#x9635;&#x5217;&#x5206;&#x914D;&#x7684; RAM](.gitbook/assets/wei-xin-jie-tu-20190904140941.png)
+![图5. 每次创建任务时从 heap\_1 阵列分配的 RAM](.gitbook/assets/微信截图\_20190904140941.png)
 
 ### Heap\_2
 
@@ -91,15 +91,14 @@ FreeRTOS 现在将内存分配视为可移植层的一部分（而不是核心�
 
 与 `heap_4` 不同，`heap_2` 不会将相邻的空闲块组合成一个更大的块，因此更容易出现碎片。 但是，如果分配并随后释放的块总是大小相同，则碎片不是问题。 `heap_2` 适用于重复创建和删除任务的应用程序，前提是分配给创建的任务的堆栈大小不会更改。
 
-![&#x56FE; 6. &#x5728;&#x521B;&#x5EFA;&#x548C;&#x5220;&#x9664;&#x4EFB;&#x52A1;&#x65F6;&#xFF0C;&#x6B63;&#x5728;&#x5206;&#x914D;&#x548C;&#x91CA;&#x653E;&#x6765;&#x81EA; heap\_2 &#x6570;&#x7EC4;&#x7684; RAM](.gitbook/assets/wei-xin-jie-tu-20190904142156.png)
+![图 6. 在创建和删除任务时，正在分配和释放来自 heap\_2 数组的 RAM](.gitbook/assets/微信截图\_20190904142156.png)
 
 图 6 展示了创建，删除然后再创建任务时最佳拟合算法的工作原理。 参考图6：
 
 1. A 显示了创建了三个任务之后的数组。一个大的自由块仍在数组顶部。
-2. B 显示了一个任务被删除之后的数组。数组顶部的大型自由块仍然存在。 现在还有两个较小的空闲块
+2.  B 显示了一个任务被删除之后的数组。数组顶部的大型自由块仍然存在。 现在还有两个较小的空闲块
 
-   ，这是先前已分配给 TCB 和栈的任务，而现在已被删除。
-
+    ，这是先前已分配给 TCB 和栈的任务，而现在已被删除。
 3. C 显示了在创建另一个任务后的情况。 创建任务导致两次调用 `pvPortMalloc()`，一次分配新 TCB，另一次分配任务堆栈。使用 `xTaskCreate()` API 函数创建任务，如 3.4 节所述。 对 `pvPortMalloc()` 的调用在 `xTaskCreate()`内部发生。每个 TCB 的大小完全相同，因此最合适的算法确保先前分配给已删除任务的 TCB 的 RAM 块被重用以分配新任务的 TCB。分配给新创建的任务的堆栈大小与分配给先前删除的相同，因此最合适的算法确保先前分配给已删除任务堆栈的 RAM 块被重用以分配新任务的堆栈。数组顶部较大的未分配块保持不变。
 
 `heap_2` 不是确定性的，但比 `malloc()` 和 `free()` 的大多数标准库实现更快。
@@ -123,7 +122,7 @@ FreeRTOS 现在将内存分配视为可移植层的一部分（而不是核心�
 
 `heap_4` 将相邻空闲块的（合并）组合成一个更大的块，最大限度地降低了碎片的风险，并使其适用于重复分配和释放不同大小的 RAM 块的应用程序。
 
-![&#x56FE; 7. &#x6B63;&#x5728;&#x5206;&#x914D;&#x5E76;&#x4ECE; heap\_4 &#x6570;&#x7EC4;&#x4E2D;&#x91CA;&#x653E;&#x7684; RAM](.gitbook/assets/wei-xin-jie-tu-20190904144813.png)
+![图 7. 正在分配并从 heap\_4 数组中释放的 RAM](.gitbook/assets/微信截图\_20190904144813.png)
 
 图 7 演示了如何分配和释放具有内存合并工作的 heap\_4 首次拟合算法。 参考图 7：
 
@@ -169,7 +168,7 @@ uint8_t ucHeap[ configTOTAL_HEAP_SIZE ] @ 0x20000000;
 
 在编写本文时，`heap_5` 是唯一提供的内存分配方案，必须在调用 `pvPortMalloc()` 之前显式初始化。 使用 `vPortDefineHeapRegions()` API函数初始化 `Heap_5`。 当使用 `heap_5` 时，必须先调用 `vPortDefineHeapRegions()`，然后才能创建任何内核对象（任务，队列，信号量等）。
 
-### vPortDefineHeapRegions\(\) API函数
+### vPortDefineHeapRegions() API函数
 
 `vPortDefineHeapRegions()` 用于指定每个单独的内存区域的起始地址和大小，它们共同构成 `heap_5` 使用的总内存。
 
@@ -197,26 +196,12 @@ typedef struct HeapRegion
 表 5. `vPortDefineHeapRegions()` 参数
 
 | 参数名称/返回值 | 描述 |
-| :--- | :--- |
+| -------- | -- |
 
+| pxHeapRegions | <p>指向 <code>HeapRegion_t</code> 结构数组开头的指针。 数组中的每个结构都描述了使用 <code>heap_5</code> 时将成为堆的一部分的内存区域的起始地址和长度。</p><p>数组中的 <code>HeapRegion_t</code> 结构必须按起始地址排序; 描述具有最低起始地址的存储区域的 <code>HeapRegion_t</code> 结构必须是数组中的第一个结构，并且描述具有最高起始地址的存储区域的 <code>HeapRegion_t</code> 结构必须是数组中的最后一个结构。</p><p>数组的末尾由 <code>HeapRegion_t</code> 结构标记，该结构的 <code>pucStartAddress</code> 成员设置为 <code>NULL</code>。</p> |
+| ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 
-<table>
-  <thead>
-    <tr>
-      <th style="text-align:left">pxHeapRegions</th>
-      <th style="text-align:left">
-        <p>&#x6307;&#x5411; <code>HeapRegion_t</code> &#x7ED3;&#x6784;&#x6570;&#x7EC4;&#x5F00;&#x5934;&#x7684;&#x6307;&#x9488;&#x3002;
-          &#x6570;&#x7EC4;&#x4E2D;&#x7684;&#x6BCF;&#x4E2A;&#x7ED3;&#x6784;&#x90FD;&#x63CF;&#x8FF0;&#x4E86;&#x4F7F;&#x7528; <code>heap_5</code> &#x65F6;&#x5C06;&#x6210;&#x4E3A;&#x5806;&#x7684;&#x4E00;&#x90E8;&#x5206;&#x7684;&#x5185;&#x5B58;&#x533A;&#x57DF;&#x7684;&#x8D77;&#x59CB;&#x5730;&#x5740;&#x548C;&#x957F;&#x5EA6;&#x3002;</p>
-        <p>&#x6570;&#x7EC4;&#x4E2D;&#x7684; <code>HeapRegion_t</code> &#x7ED3;&#x6784;&#x5FC5;&#x987B;&#x6309;&#x8D77;&#x59CB;&#x5730;&#x5740;&#x6392;&#x5E8F;;
-          &#x63CF;&#x8FF0;&#x5177;&#x6709;&#x6700;&#x4F4E;&#x8D77;&#x59CB;&#x5730;&#x5740;&#x7684;&#x5B58;&#x50A8;&#x533A;&#x57DF;&#x7684; <code>HeapRegion_t</code> &#x7ED3;&#x6784;&#x5FC5;&#x987B;&#x662F;&#x6570;&#x7EC4;&#x4E2D;&#x7684;&#x7B2C;&#x4E00;&#x4E2A;&#x7ED3;&#x6784;&#xFF0C;&#x5E76;&#x4E14;&#x63CF;&#x8FF0;&#x5177;&#x6709;&#x6700;&#x9AD8;&#x8D77;&#x59CB;&#x5730;&#x5740;&#x7684;&#x5B58;&#x50A8;&#x533A;&#x57DF;&#x7684; <code>HeapRegion_t</code> &#x7ED3;&#x6784;&#x5FC5;&#x987B;&#x662F;&#x6570;&#x7EC4;&#x4E2D;&#x7684;&#x6700;&#x540E;&#x4E00;&#x4E2A;&#x7ED3;&#x6784;&#x3002;</p>
-        <p>&#x6570;&#x7EC4;&#x7684;&#x672B;&#x5C3E;&#x7531; <code>HeapRegion_t</code> &#x7ED3;&#x6784;&#x6807;&#x8BB0;&#xFF0C;&#x8BE5;&#x7ED3;&#x6784;&#x7684; <code>pucStartAddress</code> &#x6210;&#x5458;&#x8BBE;&#x7F6E;&#x4E3A; <code>NULL</code>&#x3002;</p>
-      </th>
-    </tr>
-  </thead>
-  <tbody></tbody>
-</table>
-
-![&#x56FE; 8. &#x5185;&#x5B58;&#x6620;&#x5C04;](.gitbook/assets/wei-xin-jie-tu-20190904152410.png)
+![图 8. 内存映射](.gitbook/assets/微信截图\_20190904152410.png)
 
 清单 6 显示了一个 `HeapRegion_t` 结构数组，它们共同描述了三个 RAM 块。
 
@@ -300,7 +285,7 @@ const HeapRegion_t xHeapRegions[] =
 
 ## 堆相关的实用函数
 
-### xPortGetFreeHeapSize\(\) API函数
+### xPortGetFreeHeapSize() API函数
 
 `xPortGetFreeHeapSize()` API 函数在调用函数时返回堆中的空闲字节数。它可用于优化堆大小。 例如，如果 `xPortGetFreeHeapSize()` 在创建了所有内核对象后返回 2000，那么 `configTOTAL_HEAP_SIZE` 的值可以减少 2000。
 
@@ -314,11 +299,11 @@ size_t xPortGetFreeHeapSize( void );
 
 表 6. `xPortGetFreeHeapSize()` 返回值
 
-| 参数名称/返回值 | 描述 |
-| :--- | :--- |
-| 返回值 | 调用 `xPortGetFreeHeapSize()` 时在堆中保持未分配的字节数。 |
+| 参数名称/返回值 | 描述                                         |
+| -------- | ------------------------------------------ |
+| 返回值      | 调用 `xPortGetFreeHeapSize()` 时在堆中保持未分配的字节数。 |
 
-### xPortGetMinimumEverFreeHeapSize\(\) API函数
+### xPortGetMinimumEverFreeHeapSize() API函数
 
 `xPortGetMinimumEverFreeHeapSize()` API 函数返回自 FreeRTOS 应用程序开始执行以来堆中曾存在的最小未分配字节数。
 
@@ -334,9 +319,9 @@ size_t xPortGetMinimumEverFreeHeapSize( void );
 
 表 7. `xPortGetMinimumEverFreeHeapSize()`返回值
 
-| 参数名称/返回值 | 描述 |
-| :--- | :--- |
-| 返回值 | 自 FreeRTOS 应用程序开始执行以来堆中已存在的最小未分配字节数。 |
+| 参数名称/返回值 | 描述                                   |
+| -------- | ------------------------------------ |
+| 返回值      | 自 FreeRTOS 应用程序开始执行以来堆中已存在的最小未分配字节数。 |
 
 ### malloc 失败的钩子函数
 
@@ -353,4 +338,3 @@ void vApplicationMallocFailedHook( void );
 ```
 
 清单 10. malloc 失败的钩子函数名和原型。
-
